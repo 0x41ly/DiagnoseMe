@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "Core.Shared"
+		},
+		{
+			"path": "Core.Api"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,240 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj": {}
+  },
+  "projects": {
+    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj",
+        "projectName": "Core.Api",
+        "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj",
+        "packagesPath": "/home/0x41ly/.nuget/packages/",
+        "outputPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/0x41ly/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj": {
+                "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj"
+              },
+              "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
+                "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            },
+            "autoMapper": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/0x41ly/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj",
+        "projectName": "JwtAuthenticationServices",
+        "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj",
+        "packagesPath": "/home/0x41ly/.nuget/packages/",
+        "outputPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/0x41ly/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "Microsoft.AspNet.Identity.Core": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.22.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/0x41ly/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj",
+        "projectName": "Core.Shared",
+        "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj",
+        "packagesPath": "/home/0x41ly/.nuget/packages/",
+        "outputPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/0x41ly/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "CommonGenericClasses": {
+              "target": "Package",
+              "version": "[7.1.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/0x41ly/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
