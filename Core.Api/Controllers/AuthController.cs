@@ -7,43 +7,67 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
- 
+using Core.Shared.Entities;
+using Core.Shared.Dtos;
+using Microsoft.AspNetCore.Identity;
+
+
 namespace Core.Api.Controllers;
 
 
 [ApiController]
 [Route("[controller]/[action]")]
 [Authorize(AuthenticationSchemes = "Bearer")]
-public class AuthController<TUser, TUserDto> : ControllerBase
-where TUser : IdentityUser
+public class AuthController : ControllerBase
 {
-    private readonly IAuthentication<TUser> _auth;
+    private readonly IAuthentication<ApplicationUser> _auth;
     private readonly IMapper _mapper;
     private readonly Serilog.ILogger _logger;
     private readonly IServer _server;
-    public AuthController(IAuthentication<TUser> auth, IMapper mapper, Serilog.ILogger logger, IServer server)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public AuthController(UserManager<ApplicationUser> userManager,IAuthentication<ApplicationUser> auth, IMapper mapper, Serilog.ILogger logger, IServer server)
     {
         _auth = auth;
         _mapper = mapper;
         _logger = logger;
         _server = server;
-        
+        _userManager = userManager;
     }
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> Register(TUserDto userDto, string password)
+    public async Task<IActionResult> Register(ApplicationUserDto userDto, string password)
     {
-        var user = _mapper.Map<TUser>(userDto);
+        var user = _mapper.Map<ApplicationUser>(userDto);
         var result = await _auth.RegisterAsync(user, password, GetDomainName());
         if (!result.IsSuccess)
             return BadRequest(result);
+        user.LastConfirmationSentDate = DateTime.Now;
         return Ok(result);
     }
 
     
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<IActionResult> ResendEmailConfirmation(string username)
+    {
+        var user = await _userManager.FindByNameAsync(username);
+        if((user.LastConfirmationSentDate).Subtract(DateTime.Now).TotalMinutes > 1){
+            var result = await _auth.ResendEmailConfirmationAsync(username,GetDomainName());
+            if (!result.IsSuccess)
+                return BadRequest(result);
+            return Ok(result);
+        }
+        else
+        {
+            var result = new AuthenticationResults
+            {
+                Message = "Wait atleast one minute to resend the Email confirmation."
+            };
+            return BadRequest(result);
+        }
+    }
 
     [AllowAnonymous]
     [HttpPost]
@@ -106,12 +130,21 @@ where TUser : IdentityUser
     public async Task<IActionResult> ChangeEmail(string newEmail)
     {
         var username = User.Identity.Name;
-
-        var results = await _auth.ChangeEmailAsync(username, newEmail, GetDomainName());
-        
-        if (!results.IsSuccess)
-            return BadRequest(results);
-        return Ok(results);
+        var user = await _userManager.FindByNameAsync(username);
+        if((user.LastConfirmationSentDate).Subtract(DateTime.Now).TotalDays > 30){
+            var results = await _auth.ChangeEmailAsync(username, newEmail, GetDomainName());
+            
+            if (!results.IsSuccess)
+                return BadRequest(results);
+            return Ok(results);
+        }
+        else
+        {
+            var result = new AuthenticationResults{
+                Message = "Wait atleast 30 days to change you email."
+            };
+            return BadRequest(result);
+        }
     }
 
     [Authorize]
@@ -153,7 +186,7 @@ where TUser : IdentityUser
         var results = _auth.GetAllUsers();
         if (results == null)
             return BadRequest(results);
-        return Ok(results.Select(u => _mapper.Map<TUserDto>(u)));
+        return Ok(results.Select(u => _mapper.Map<ApplicationUserDto>(u)));
     }
     [Authorize(Roles = Roles.Admin)]
     [HttpGet]
@@ -164,7 +197,7 @@ where TUser : IdentityUser
             var results = await _auth.GetUsersInRoleAsync(role);
             if (results == null)
                 return BadRequest(results);
-            return Ok(results.Select(u => _mapper.Map<TUserDto>(u)));
+            return Ok(results.Select(u => _mapper.Map<ApplicationUserDto>(u)));
         }
         catch (Exception ex)
         {

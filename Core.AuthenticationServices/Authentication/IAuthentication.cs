@@ -19,6 +19,6 @@ namespace Core.AuthenticationServices.Authentication
         Task<AuthenticationResults> ChangeEmailAsync(string username, string newEmail, string url);
         Task<AuthenticationResults> ChangeNameAsync(string username, string newName);
         Task<AuthenticationResults> ConfirmEmailChangeAsync(string username, string email, string token);
-
+        Task<AuthenticationResults> ResendEmailConfirmationAsync(string username, string url);
     }
 }

@@ -33,9 +33,15 @@ namespace Core.AuthenticationServices.Authentication
                     Message = String.Join(" , ", errorMessages),
                 };
             await _userManager.AddToRoleAsync(user, Roles.User);
+            return await SendEmailAsync(url, user);
+        }
+
+        private async Task<AuthenticationResults> SendEmailAsync(string url, TUser user)
+        {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             token = HttpUtility.UrlEncode(token);
-            try {
+            try
+            {
                 await Smtp.SendEmailAsync(user.Email, "Email verification", $"Please verify your E-mail by clicking this link: {"\n"} {url}/api/Auth/ConfirmEmail?username={user.UserName}&token={token}");
                 return new AuthenticationResults
                 {
@@ -45,7 +51,8 @@ namespace Core.AuthenticationServices.Authentication
                     Roles = new List<string>() { Roles.User },
                 };
             }
-            catch{
+            catch
+            {
                 return new AuthenticationResults
                 {
                     IsSuccess = false,
