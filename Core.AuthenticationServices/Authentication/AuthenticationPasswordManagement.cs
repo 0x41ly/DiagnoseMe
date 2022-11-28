@@ -1,14 +1,17 @@
 using System.Web;
 using Core.AuthenticationServices.Models;
 using EmailSender;
-using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Core.Shared.Settings;
+using System.Net.Mail;
+
 namespace Core.AuthenticationServices.Authentication
 {
     public partial class Authentication<TUser> where TUser : IdentityUser
     {
-        public virtual async Task<AuthenticationResults> ForgotPasswordAsync(string username, string url = null!)
+        public virtual async Task<AuthenticationResults> ForgotPasswordAsync(string username , MailSettings mailSettings)
         {
             var results = new AuthenticationResults();
             var user = await _userManager.FindByNameAsync(username);
@@ -23,7 +26,12 @@ namespace Core.AuthenticationServices.Authentication
             
             try
             {
-                await Smtp.SendEmailAsync(user.Email, "Reset Password", $"Please reset your password by visiting this link: {"\n"} {url}/Auth/ResetPassword?username={username}&token={token}");
+                await Smtp.SendEmailAsync(
+                    new MailAddress(user.Email,user.UserName),
+                    "Reset Password",
+                     $"Please reset your password by visiting this link: {"\n"} https://{DomainSettings.DomainName}/Auth/ResetPassword?username={username}&token={token}",
+                     mailSettings
+                     );
                 results.Message = "Email sent successfully";
                 results.IsSuccess = true;
                 results.Username = username;

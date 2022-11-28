@@ -1,18 +1,20 @@
 using Core.AuthenticationServices.Helpers;
 using Core.AuthenticationServices.Models;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmailSender;
 using System.Web;
+using Microsoft.AspNetCore.Identity;
+using Core.Shared.Settings;
+using System.Net.Mail;
 
 namespace Core.AuthenticationServices.Authentication
 {
     public partial class Authentication<TUser> where TUser : IdentityUser
     {
-        public virtual async Task<AuthenticationResults> RegisterAsync(TUser applicationUserDto, string password, string url)
+        public virtual async Task<AuthenticationResults> RegisterAsync(TUser applicationUserDto, string password, MailSettings mailSettings)
         {
             if (await _userManager.FindByEmailAsync(applicationUserDto.Email) != null)
                 return new AuthenticationResults
@@ -33,16 +35,21 @@ namespace Core.AuthenticationServices.Authentication
                     Message = String.Join(" , ", errorMessages),
                 };
             await _userManager.AddToRoleAsync(user, Roles.User);
-            return await SendEmailAsync(url, user);
+            return await SendEmailAsync(user, mailSettings);
         }
 
-        private async Task<AuthenticationResults> SendEmailAsync(string url, TUser user)
+        private async Task<AuthenticationResults> SendEmailAsync(TUser user,MailSettings mailSettings)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             token = HttpUtility.UrlEncode(token);
             try
             {
-                await Smtp.SendEmailAsync(user.Email, "Email verification", $"Please verify your E-mail by clicking this link: {"\n"} {url}/api/Auth/ConfirmEmail?username={user.UserName}&token={token}");
+                await Smtp.SendEmailAsync(
+                    new MailAddress(user.Email,user.UserName),
+                    "Email verification",
+                    $"Please verify your E-mail by clicking this link: {"\n"} https://{DomainSettings.DomainName}/api/Auth/ConfirmEmail?username={user.UserName}&token={token}",
+                    mailSettings
+                    );
                 return new AuthenticationResults
                 {
                     IsSuccess = true,

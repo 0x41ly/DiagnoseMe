@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj": {}
+    "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj": {}
   },
   "projects": {
-    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
+    "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj",
+        "projectUniqueName": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj",
         "projectName": "Core.Shared",
-        "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj",
-        "packagesPath": "/home/0x41ly/.nuget/packages/",
-        "outputPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/obj/",
+        "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj",
+        "packagesPath": "/home/x41ly/.nuget/packages/",
+        "outputPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/0x41ly/.nuget/NuGet/NuGet.Config"
+          "/home/x41ly/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -40,11 +40,41 @@
           "dependencies": {
             "CommonGenericClasses": {
               "target": "Package",
-              "version": "[7.1.2, )"
+              "version": "[7.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.22.1, )"
+            },
+            "SystemTextJsonPatch.AspNet": {
+              "target": "Package",
+              "version": "[0.0.1, )"
+            },
+            "kevain.Extensions.Swagger": {
+              "target": "Package",
+              "version": "[1.0.1, )"
             }
           },
           "imports": [
@@ -53,7 +83,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -62,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/0x41ly/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.403/RuntimeIdentifierGraph.json"
         }
       }
     }

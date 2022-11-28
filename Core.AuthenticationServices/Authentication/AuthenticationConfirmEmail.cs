@@ -14,6 +14,7 @@ namespace Core.AuthenticationServices.Authentication
         public virtual async Task<AuthenticationResults> ConfirmEmailAsync(string username, string token)
         {
             var results = new AuthenticationResults{};
+            
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
             {

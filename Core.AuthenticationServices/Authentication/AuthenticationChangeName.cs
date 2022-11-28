@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
-using System.Web;
 using Core.AuthenticationServices.Helpers;
 using Core.AuthenticationServices.Models;
-using EmailSender;
 using Microsoft.AspNetCore.Identity;
 
 namespace Core.AuthenticationServices.Authentication

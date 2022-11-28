@@ -8,11 +8,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Core.Shared.Entities;
 using Core.Shared.Dtos;
 using Microsoft.AspNetCore.Identity;
-
+using Core.Shared.Settings;
 
 namespace Core.Api.Controllers;
 
@@ -20,6 +19,7 @@ namespace Core.Api.Controllers;
 [ApiController]
 [Route("[controller]/[action]")]
 [Authorize(AuthenticationSchemes = "Bearer")]
+[AutoValidateAntiforgeryToken]
 public class AuthController : ControllerBase
 {
     private readonly IAuthentication<ApplicationUser> _auth;
@@ -27,20 +27,35 @@ public class AuthController : ControllerBase
     private readonly Serilog.ILogger _logger;
     private readonly IServer _server;
     private readonly UserManager<ApplicationUser> _userManager;
-    public AuthController(UserManager<ApplicationUser> userManager,IAuthentication<ApplicationUser> auth, IMapper mapper, Serilog.ILogger logger, IServer server)
+    private readonly MailSettings _mailSettings;
+    public AuthController(
+        UserManager<ApplicationUser> userManager,
+        IAuthentication<ApplicationUser> auth,
+        IMapper mapper,
+        Serilog.ILogger logger,
+        IServer server,
+        IConfiguration configuration
+    )
     {
         _auth = auth;
         _mapper = mapper;
         _logger = logger;
         _server = server;
         _userManager = userManager;
+        _mailSettings = new MailSettings{
+            Mail = configuration["smtpMail"],
+            Password = configuration["smtpPassword"]
+        };
+        Console.WriteLine(configuration.GetValue<string>("smtpMail"));
+
+    
     }
     [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Register(ApplicationUserDto userDto, string password)
     {
         var user = _mapper.Map<ApplicationUser>(userDto);
-        var result = await _auth.RegisterAsync(user, password, GetDomainName());
+        var result = await _auth.RegisterAsync(user, password,_mailSettings);
         if (!result.IsSuccess)
             return BadRequest(result);
         user.LastConfirmationSentDate = DateTime.Now;
@@ -54,7 +69,7 @@ public class AuthController : ControllerBase
     {
         var user = await _userManager.FindByNameAsync(username);
         if((user.LastConfirmationSentDate).Subtract(DateTime.Now).TotalMinutes > 1){
-            var result = await _auth.ResendEmailConfirmationAsync(username,GetDomainName());
+            var result = await _auth.ResendEmailConfirmationAsync(username,_mailSettings);
             if (!result.IsSuccess)
                 return BadRequest(result);
             return Ok(result);
@@ -83,7 +98,7 @@ public class AuthController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> ForgotPassword([FromQuery] string username)
     {
-        var results = await _auth.ForgotPasswordAsync(username, GetDomainName());
+        var results = await _auth.ForgotPasswordAsync(username,_mailSettings);
         
         if (!results.IsSuccess)
             return BadRequest(results);
@@ -119,7 +134,7 @@ public class AuthController : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<IActionResult> SignOut()
+    public new async Task<IActionResult> SignOut()
     {
         await _auth.SignOutAsync();
         return Ok();
@@ -129,10 +144,10 @@ public class AuthController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> ChangeEmail(string newEmail)
     {
-        var username = User.Identity.Name;
+        var username = User.Identity!.Name;
         var user = await _userManager.FindByNameAsync(username);
         if((user.LastConfirmationSentDate).Subtract(DateTime.Now).TotalDays > 30){
-            var results = await _auth.ChangeEmailAsync(username, newEmail, GetDomainName());
+            var results = await _auth.ChangeEmailAsync(username!, newEmail,_mailSettings);
             
             if (!results.IsSuccess)
                 return BadRequest(results);
@@ -141,7 +156,7 @@ public class AuthController : ControllerBase
         else
         {
             var result = new AuthenticationResults{
-                Message = "Wait atleast 30 days to change you email."
+                Message = "Wait atleast 30 days to change your email."
             };
             return BadRequest(result);
         }
@@ -151,9 +166,9 @@ public class AuthController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> ChangeName(string newName)
     {
-        var username = User.Identity.Name;
+        var username = User.Identity!.Name;
 
-        var results = await _auth.ChangeNameAsync(username, newName);
+        var results = await _auth.ChangeNameAsync(username!, newName);
         
         if (!results.IsSuccess)
             return BadRequest(results);
@@ -205,20 +220,4 @@ public class AuthController : ControllerBase
         }
     }
 
-    private string GetDomainName()
-    {
-        string domainName = "";
-        string jsonText = System.IO.File.ReadAllText("Properties/launchSettings.json");  
-        dynamic data = JObject.Parse(jsonText);
-        try{        
-            domainName = data.DomainName; 
-        }
-        catch
-        {
-            var addresses = _server.Features.Get<IServerAddressesFeature>().Addresses;
-            domainName = string.Join(", ", addresses).Split(',').ToList()[0];
-        }
-        return domainName;
-        
-    }
 }

@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Identity;
 
 namespace Core.Shared.Entities;
@@ -11,4 +12,5 @@ public class ApplicationUser : IdentityUser
     public DateTime DAteOfBirth {get; set;} 
     public string BloodType {get; set;}  = string.Empty;
     public bool IsDoctor {get; set;}
+    public string ProfilePic {get; set;} = string.Empty;
 }

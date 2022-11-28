@@ -4,11 +4,24 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>b100e398-0b19-4b0b-9676-a586c75ef9df</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommonGenericClasses" Version="7.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="kevain.Extensions.Swagger" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="CommonGenericClasses" Version="7.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
+    <PackageReference Include="SystemTextJsonPatch.AspNet" Version="0.0.1" />
+  </ItemGroup>
+   <ItemGroup>
   </ItemGroup>
 
 </Project>

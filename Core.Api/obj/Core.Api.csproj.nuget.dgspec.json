@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj": {}
+    "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Api/Core.Api.csproj": {}
   },
   "projects": {
-    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj": {
+    "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Api/Core.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj",
+        "projectUniqueName": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Api/Core.Api.csproj",
         "projectName": "Core.Api",
-        "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/Core.Api.csproj",
-        "packagesPath": "/home/0x41ly/.nuget/packages/",
-        "outputPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Api/obj/",
+        "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Api/Core.Api.csproj",
+        "packagesPath": "/home/x41ly/.nuget/packages/",
+        "outputPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/0x41ly/.nuget/NuGet/NuGet.Config"
+          "/home/x41ly/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -26,11 +26,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj": {
-                "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj"
+              "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj": {
+                "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj"
               },
-              "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
-                "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj"
+              "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
+                "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj"
               }
             }
           }
@@ -45,6 +45,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Analyzers": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -60,7 +68,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -72,21 +81,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/0x41ly/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.403/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj": {
-      "version": "1.0.0",
+    "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj": {
+      "version": "0.0.5",
       "restore": {
-        "projectUniqueName": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj",
+        "projectUniqueName": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj",
         "projectName": "JwtAuthenticationServices",
-        "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj",
-        "packagesPath": "/home/0x41ly/.nuget/packages/",
-        "outputPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.AuthenticationServices/obj/",
+        "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.AuthenticationServices/Core.AuthenticationServices.csproj",
+        "packagesPath": "/home/x41ly/.nuget/packages/",
+        "outputPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.AuthenticationServices/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/0x41ly/.nuget/NuGet/NuGet.Config"
+          "/home/x41ly/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -112,11 +121,7 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[12.0.0, )"
-            },
-            "Microsoft.AspNet.Identity.Core": {
-              "target": "Package",
-              "version": "[2.2.3, )"
+              "version": "[11.0.1, )"
             },
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",
@@ -124,7 +129,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -137,10 +142,6 @@
             "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
               "version": "[6.0.0, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.1, )"
             },
             "RabbitMQ.Client": {
               "target": "Package",
@@ -161,7 +162,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -170,21 +172,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/0x41ly/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.403/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
+    "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj",
+        "projectUniqueName": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj",
         "projectName": "Core.Shared",
-        "projectPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/Core.Shared.csproj",
-        "packagesPath": "/home/0x41ly/.nuget/packages/",
-        "outputPath": "/home/0x41ly/Desktop/dotnetProjects/DiagnoseMe/Core.Shared/obj/",
+        "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/Core.Shared.csproj",
+        "packagesPath": "/home/x41ly/.nuget/packages/",
+        "outputPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe/Core.Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/0x41ly/.nuget/NuGet/NuGet.Config"
+          "/home/x41ly/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -210,11 +212,41 @@
           "dependencies": {
             "CommonGenericClasses": {
               "target": "Package",
-              "version": "[7.1.2, )"
+              "version": "[7.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.22.1, )"
+            },
+            "SystemTextJsonPatch.AspNet": {
+              "target": "Package",
+              "version": "[0.0.1, )"
+            },
+            "kevain.Extensions.Swagger": {
+              "target": "Package",
+              "version": "[1.0.1, )"
             }
           },
           "imports": [
@@ -223,7 +255,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -232,7 +265,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/0x41ly/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.403/RuntimeIdentifierGraph.json"
         }
       }
     }
