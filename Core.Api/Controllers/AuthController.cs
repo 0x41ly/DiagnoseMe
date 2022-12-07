@@ -43,8 +43,8 @@ public class AuthController : ControllerBase
         _server = server;
         _userManager = userManager;
         _mailSettings = new MailSettings{
-            Mail = configuration["smtpMail"],
-            Password = configuration["smtpPassword"]
+            Mail = configuration["smtpMail"]!,
+            Password = configuration["smtpPassword"]!
         };
         Console.WriteLine(configuration.GetValue<string>("smtpMail"));
 
