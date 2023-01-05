@@ -34,8 +34,7 @@ public class AuthController : ApiController
 
 
     [AllowAnonymous]
-    [HttpPost]
-    [Route("register")]
+    [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
         
@@ -52,11 +51,10 @@ public class AuthController : ApiController
     }
 
     [AllowAnonymous]
-    [HttpPost]
-    [Route("email/confirmation/resend")]
-    public async Task<IActionResult> ResendEmailConfirmation(string email)
+    [HttpPost("email/confirmation/resend")]
+    public async Task<IActionResult> ResendEmailConfirmation(ResendEmailConfirmationRequest request)
     {
-        var command = new ResendEmailConfirmationCommand(email);
+        var command = new ResendEmailConfirmationCommand(request.Email);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -64,8 +62,7 @@ public class AuthController : ApiController
     }
 
     [AllowAnonymous]
-    [HttpPost]
-    [Route("login")]
+    [HttpPost("login")]
     public async Task<IActionResult> GetToken(LoginRequest request)
     {
         var query = new GetTokenQuery(
@@ -78,11 +75,10 @@ public class AuthController : ApiController
     }
 
     [AllowAnonymous]
-    [HttpPost]
-    [Route("password/forget")]
-    public async Task<IActionResult> ForgotPassword(string email)
+    [HttpPost("password/forget")]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
     {
-        var command = new ForgotPasswordCommand(email);        
+        var command = new ForgotPasswordCommand(request.Email);        
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -90,8 +86,7 @@ public class AuthController : ApiController
     }
     
     [AllowAnonymous]
-    [HttpPost]
-    [Route("password/reset")]
+    [HttpPost("password/reset")]
     public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
     {
         var command = new ResetPasswordCommand(
@@ -103,12 +98,11 @@ public class AuthController : ApiController
             errors => Problem(errors));
     }
     [AllowAnonymous]
-    [HttpPost]
-    [Route("email/confirm")]
+    [HttpPost("email/confirm")]
 
-    public async Task<IActionResult> ConfirmEmail(string Id)
+    public async Task<IActionResult> ConfirmEmail(ConfirmEmailRequest request)
     {
-        var command = new ConfirmEmailCommand(Id);
+        var command = new ConfirmEmailCommand(request.Id);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -116,12 +110,13 @@ public class AuthController : ApiController
     }
 
     [Authorize]
-    [HttpPost]
-    [Route("email/change/confirm")]
+    [HttpPost("email/change/confirm")]
 
-    public async Task<IActionResult> ConfirmEmailChange(string newEmail, string id)
+    public async Task<IActionResult> ConfirmEmailChange(ConfirmEmailChangeRequest request)
     {
-        var command = new ConfirmEmailChangeCommand(newEmail,id);
+        var command = new ConfirmEmailChangeCommand(
+            request.NewEmail,
+            request.Id);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -129,8 +124,7 @@ public class AuthController : ApiController
     }
 
     [Authorize]
-    [HttpGet]
-    [Route("signout")]
+    [HttpGet("signout")]
     public new async Task<IActionResult> SignOut()
     {
         var command = new SignOutCommand();
@@ -139,14 +133,13 @@ public class AuthController : ApiController
     }
 
     [Authorize]
-    [HttpPost]
-    [Route("email/change")]
-    public async Task<IActionResult> ChangeEmail(string newEmail)
+    [HttpPost("email/change")]
+    public async Task<IActionResult> ChangeEmail(ChangeEmailRequest request)
     {
         var username = User.Identity!.Name;
         var command = new ChangeEmailCommand(
             username!,
-            newEmail);
+            request.NewEmail);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -154,25 +147,25 @@ public class AuthController : ApiController
     }
 
     [Authorize]
-    [HttpPost]
-    [Route("name/change")]
-    public async Task<IActionResult> ChangeName(string newName)
+    [HttpPost("name/change")]
+    public async Task<IActionResult> ChangeName(ChangeNameRequest request)
     {
         var username = User.Identity!.Name;
         var command = new ChangeNameCommand(
             username!,
-            newName);
+            request.NewName);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
         errors => Problem(errors));
     }
     [Authorize(Roles = Roles.Admin)]
-    [HttpPost]
-    [Route("user/role/add")]
-    public async Task<IActionResult> AddUserToRole(string username, string role)
+    [HttpPost("user/{role}/add")]
+    public async Task<IActionResult> AddUserToRole(AddUserToRoleRequest request, string role)
     {
-        var command = new AddUserToRoleCommand(username,role);
+        var command = new AddUserToRoleCommand(
+            request.UserName,
+            role);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -180,11 +173,12 @@ public class AuthController : ApiController
     }
     
     [Authorize(Roles = Roles.Admin)]
-    [HttpDelete]
-    [Route("user/role/remove")]
-    public async Task<IActionResult> RemoveUserFromRole(string username, string role)
+    [HttpDelete("user/{role}/remove")]
+    public async Task<IActionResult> RemoveUserFromRole(RemoveUserToRoleRequest request, string role)
     {
-        var command = new RemoveUserFromRoleCommand(username,role);
+        var command = new RemoveUserFromRoleCommand(
+            request.UserName,
+            role);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -192,8 +186,7 @@ public class AuthController : ApiController
     }
 
     [Authorize(Roles = Roles.Admin)]
-    [HttpGet]
-    [Route("user/getall")]
+    [HttpGet("users/get")]
     public async Task<IActionResult> GetUsers()
     {
         var query = new GetAllUsersQuery();
@@ -203,8 +196,7 @@ public class AuthController : ApiController
     }
 
     [Authorize(Roles = Roles.Admin)]
-    [HttpPost]
-    [Route("user/getusersinrole")]
+    [HttpGet("users/{role}/get")]
     public async Task<IActionResult> GetUsersInRoles(string role)
     {
         var query = new GetUsersInRoleQuery(role);
@@ -214,12 +206,12 @@ public class AuthController : ApiController
         errors => Problem(errors));
     }
 
-   [HttpPost]
+   [HttpPost("pin/verify")]
    [AllowAnonymous]
-   [Route("pin/verify")]
-   public async  Task<IActionResult> VerifyPin(string pinCode)
+
+   public async  Task<IActionResult> VerifyPin(VerifyPinRequest request)
    {
-    var command = new VerifyPinCommand(pinCode);
+    var command = new VerifyPinCommand(request.PinCode);
     var result = await _mediator.Send(command);
         return result.Match(
         authResult => Ok(authResult),

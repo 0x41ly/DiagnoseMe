@@ -18,7 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
         .AddInfrastrucure(builder.Configuration);
     builder.Services.AddControllers();
     builder.Services.AddSingleton<ProblemDetailsFactory,CoreProblemDetailsFactory>();
-    
 }
 
 var app = builder.Build();
@@ -33,6 +32,9 @@ var app = builder.Build();
         context.Database.Migrate();
 
     }
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
     app.UseExceptionHandler("/error");
     app.UseAuthentication();
     app.UseAuthorization();

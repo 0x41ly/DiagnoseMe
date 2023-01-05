@@ -39,7 +39,7 @@ public class RegisterCommandHandler :
         var errorMessages = result.Errors.Select(e => e.Description);
         if (!result.Succeeded)
             return Errors.CustomError(String.Join(" , ", errorMessages));
-        await _userManager.AddToRoleAsync(user, Roles.User);
+        // await _userManager.AddToRoleAsync(user, Roles.User);
 
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         var pinCode =GenerateRandomPin();

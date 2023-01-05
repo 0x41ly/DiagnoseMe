@@ -1,0 +1,7 @@
+@host=https://localhost:7095
+
+POST {{host}}/auth/pin/verify HTTP/1.1
+
+{
+    "pinCode": "fFtAbJpRRu"
+}

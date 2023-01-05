@@ -12,6 +12,7 @@ public static class DependencyInjection
         ConfigurationManager configuration
         )
     {
+        services.AddSwaggerGenConfiguration(configuration);
         services.AddSingleton<IMemoryCache,MemoryCache>();
         services.AddMediatR(typeof(DependencyInjection).Assembly);
         return services;
