@@ -26,10 +26,13 @@ public class ChangeNameCommandHandler :
         if (!setUserNameResult.Succeeded)
             return Errors.User.Name.ChangeFail;
             
-        var userClaims = await GetUserClaims(user);
-        return new AuthenticationResults{
-            Message= "Successfully changed your username",
-            Token =  new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator.GenerateJwtTokenAsync(user.Id, user.UserName ,userClaims)),
+        return new AuthenticationResults
+        {
+            Message = "Successfully changed your username",
+            Token = new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator.GenerateJwtTokenAsync(
+                user.Id,
+                user.UserName,
+                await GetUserClaims(user))),
             Username = user.UserName
         };
         

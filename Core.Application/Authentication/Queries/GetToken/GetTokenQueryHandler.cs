@@ -19,10 +19,14 @@ public class GetTokenQueryHandler:
         var user = await _userManager.FindByEmailAsync(query.Email);
         if (user == null || !await _userManager.CheckPasswordAsync(user, query.Password))
             return Errors.User.Credential.Invalid;
-        
-        var userRoles = await _userManager.GetRolesAsync(user) as List<string>;
-        var userClaims = await GetUserClaims(user);
-        var token = _jwtTokenGenerator.GenerateJwtTokenAsync(user.Id, user.UserName ,userClaims);
+ 
+        if (!user.EmailConfirmed)
+            return Errors.User.Email.NotConfirmed;
+            
+        var token = _jwtTokenGenerator.GenerateJwtTokenAsync(
+            user.Id,
+            user.UserName,
+            await GetUserClaims(user));
         results.Message = "Signed in successfully";
         results.Username = user.UserName;
         results.Token = new JwtSecurityTokenHandler().WriteToken(token);
