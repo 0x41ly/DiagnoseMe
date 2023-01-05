@@ -21,20 +21,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Api.Controllers;
 
-public class AuthenticationController : ApiController
+[Route("auth")]
+public class AuthController : ApiController
 {
     private readonly ISender _mediator;
 
-    public AuthenticationController(ISender  mediator)
+    public AuthController(ISender  mediator)
     {
 
         _mediator = mediator;
     }
 
+
     [AllowAnonymous]
     [HttpPost]
+    [Route("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
+        
         var command = new RegisterCommand(
             request.FirstName,
             request.LastName,
@@ -49,6 +53,7 @@ public class AuthenticationController : ApiController
 
     [AllowAnonymous]
     [HttpPost]
+    [Route("email/confirmation/resend")]
     public async Task<IActionResult> ResendEmailConfirmation(string email)
     {
         var command = new ResendEmailConfirmationCommand(email);
@@ -60,6 +65,7 @@ public class AuthenticationController : ApiController
 
     [AllowAnonymous]
     [HttpPost]
+    [Route("login")]
     public async Task<IActionResult> GetToken(LoginRequest request)
     {
         var query = new GetTokenQuery(
@@ -73,6 +79,7 @@ public class AuthenticationController : ApiController
 
     [AllowAnonymous]
     [HttpPost]
+    [Route("password/forget")]
     public async Task<IActionResult> ForgotPassword(string email)
     {
         var command = new ForgotPasswordCommand(email);        
@@ -84,6 +91,7 @@ public class AuthenticationController : ApiController
     
     [AllowAnonymous]
     [HttpPost]
+    [Route("password/reset")]
     public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
     {
         var command = new ResetPasswordCommand(
@@ -96,6 +104,8 @@ public class AuthenticationController : ApiController
     }
     [AllowAnonymous]
     [HttpPost]
+    [Route("email/confirm")]
+
     public async Task<IActionResult> ConfirmEmail(string Id)
     {
         var command = new ConfirmEmailCommand(Id);
@@ -107,6 +117,8 @@ public class AuthenticationController : ApiController
 
     [Authorize]
     [HttpPost]
+    [Route("email/change/confirm")]
+
     public async Task<IActionResult> ConfirmEmailChange(string newEmail, string id)
     {
         var command = new ConfirmEmailChangeCommand(newEmail,id);
@@ -118,6 +130,7 @@ public class AuthenticationController : ApiController
 
     [Authorize]
     [HttpGet]
+    [Route("signout")]
     public new async Task<IActionResult> SignOut()
     {
         var command = new SignOutCommand();
@@ -127,6 +140,7 @@ public class AuthenticationController : ApiController
 
     [Authorize]
     [HttpPost]
+    [Route("email/change")]
     public async Task<IActionResult> ChangeEmail(string newEmail)
     {
         var username = User.Identity!.Name;
@@ -141,6 +155,7 @@ public class AuthenticationController : ApiController
 
     [Authorize]
     [HttpPost]
+    [Route("name/change")]
     public async Task<IActionResult> ChangeName(string newName)
     {
         var username = User.Identity!.Name;
@@ -154,6 +169,7 @@ public class AuthenticationController : ApiController
     }
     [Authorize(Roles = Roles.Admin)]
     [HttpPost]
+    [Route("user/role/add")]
     public async Task<IActionResult> AddUserToRole(string username, string role)
     {
         var command = new AddUserToRoleCommand(username,role);
@@ -165,6 +181,7 @@ public class AuthenticationController : ApiController
     
     [Authorize(Roles = Roles.Admin)]
     [HttpDelete]
+    [Route("user/role/remove")]
     public async Task<IActionResult> RemoveUserFromRole(string username, string role)
     {
         var command = new RemoveUserFromRoleCommand(username,role);
@@ -176,7 +193,8 @@ public class AuthenticationController : ApiController
 
     [Authorize(Roles = Roles.Admin)]
     [HttpGet]
-    public async Task<IActionResult> GetUsersAsync()
+    [Route("user/getall")]
+    public async Task<IActionResult> GetUsers()
     {
         var query = new GetAllUsersQuery();
         var result = await _mediator.Send(query);
@@ -186,6 +204,7 @@ public class AuthenticationController : ApiController
 
     [Authorize(Roles = Roles.Admin)]
     [HttpPost]
+    [Route("user/getusersinrole")]
     public async Task<IActionResult> GetUsersInRoles(string role)
     {
         var query = new GetUsersInRoleQuery(role);
@@ -197,6 +216,7 @@ public class AuthenticationController : ApiController
 
    [HttpPost]
    [AllowAnonymous]
+   [Route("pin/verify")]
    public async  Task<IActionResult> VerifyPin(string pinCode)
    {
     var command = new VerifyPinCommand(pinCode);
@@ -204,6 +224,5 @@ public class AuthenticationController : ApiController
         return result.Match(
         authResult => Ok(authResult),
         errors => Problem(errors));
-
    }
 }

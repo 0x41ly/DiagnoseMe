@@ -1,6 +1,6 @@
 @host=https://localhost:7095
 
-POST {{host}}/auth/login HTTP/1.1
+POST {{host}}/Authentication/GetToken HTTP/1.1
 Content-Type: application/json
 
 {

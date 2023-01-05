@@ -7,9 +7,7 @@ namespace Core.Api.Controllers;
 
 
 [ApiController]
-[Route("[controller]/[action]")]
 [Authorize(AuthenticationSchemes = "Bearer")]
-[AutoValidateAntiforgeryToken]
 public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
