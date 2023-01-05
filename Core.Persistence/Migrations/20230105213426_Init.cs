@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -43,7 +44,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NationalID = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastConfirmationSentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 269, DateTimeKind.Local).AddTicks(2117)),
+                    LastConfirmationSentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 870, DateTimeKind.Local).AddTicks(8912)),
                     Gender = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DAteOfBirth = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -92,7 +93,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Address = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 309, DateTimeKind.Local).AddTicks(2206))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 874, DateTimeKind.Local).AddTicks(5198))
                 },
                 constraints: table =>
                 {
@@ -107,7 +108,7 @@ namespace Core.Persistence.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     QuestionString = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 319, DateTimeKind.Local).AddTicks(7203))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 878, DateTimeKind.Local).AddTicks(2675))
                 },
                 constraints: table =>
                 {
@@ -251,7 +252,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Height = table.Column<float>(type: "float", nullable: false),
                     Weight = table.Column<float>(type: "float", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 317, DateTimeKind.Local).AddTicks(7532))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 877, DateTimeKind.Local).AddTicks(5971))
                 },
                 constraints: table =>
                 {
@@ -273,7 +274,7 @@ namespace Core.Persistence.Migrations
                     PhoneNumber = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 310, DateTimeKind.Local).AddTicks(2100))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 874, DateTimeKind.Local).AddTicks(8752))
                 },
                 constraints: table =>
                 {
@@ -304,7 +305,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsLicenseVerified = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ClinicId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 313, DateTimeKind.Local).AddTicks(8424))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 876, DateTimeKind.Local).AddTicks(1383))
                 },
                 constraints: table =>
                 {
@@ -333,7 +334,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     QuestionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 268, DateTimeKind.Local).AddTicks(4854))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 870, DateTimeKind.Local).AddTicks(6036))
                 },
                 constraints: table =>
                 {
@@ -361,7 +362,7 @@ namespace Core.Persistence.Migrations
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 280, DateTimeKind.Local).AddTicks(7403))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 871, DateTimeKind.Local).AddTicks(1601))
                 },
                 constraints: table =>
                 {
@@ -388,7 +389,7 @@ namespace Core.Persistence.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 308, DateTimeKind.Local).AddTicks(5))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 874, DateTimeKind.Local).AddTicks(761))
                 },
                 constraints: table =>
                 {
@@ -441,7 +442,7 @@ namespace Core.Persistence.Migrations
                     Rate = table.Column<int>(type: "int", nullable: false),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 314, DateTimeKind.Local).AddTicks(8688))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 876, DateTimeKind.Local).AddTicks(4964))
                 },
                 constraints: table =>
                 {
@@ -472,7 +473,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 315, DateTimeKind.Local).AddTicks(3733))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 876, DateTimeKind.Local).AddTicks(6803))
                 },
                 constraints: table =>
                 {
@@ -527,7 +528,7 @@ namespace Core.Persistence.Migrations
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 318, DateTimeKind.Local).AddTicks(9492))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 878, DateTimeKind.Local).AddTicks(19))
                 },
                 constraints: table =>
                 {
@@ -549,7 +550,7 @@ namespace Core.Persistence.Migrations
                     IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     AnswerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 319, DateTimeKind.Local).AddTicks(9467))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 878, DateTimeKind.Local).AddTicks(3503))
                 },
                 constraints: table =>
                 {
@@ -585,7 +586,7 @@ namespace Core.Persistence.Migrations
                     MessageType = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ChatRoomId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 283, DateTimeKind.Local).AddTicks(3508))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 871, DateTimeKind.Local).AddTicks(6283))
                 },
                 constraints: table =>
                 {
@@ -625,7 +626,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Report = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 308, DateTimeKind.Local).AddTicks(6897))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 874, DateTimeKind.Local).AddTicks(3298))
                 },
                 constraints: table =>
                 {
@@ -653,7 +654,7 @@ namespace Core.Persistence.Migrations
                     Type = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MedicalRecordId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 317, DateTimeKind.Local).AddTicks(4322))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 877, DateTimeKind.Local).AddTicks(4909))
                 },
                 constraints: table =>
                 {
@@ -677,7 +678,7 @@ namespace Core.Persistence.Migrations
                     PostId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 311, DateTimeKind.Local).AddTicks(7720))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 875, DateTimeKind.Local).AddTicks(4200))
                 },
                 constraints: table =>
                 {
@@ -712,7 +713,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     PostId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 319, DateTimeKind.Local).AddTicks(4415))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 878, DateTimeKind.Local).AddTicks(1825))
                 },
                 constraints: table =>
                 {
@@ -740,7 +741,7 @@ namespace Core.Persistence.Migrations
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     CommentId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 3, 0, 30, 25, 310, DateTimeKind.Local).AddTicks(4517))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 5, 23, 34, 25, 874, DateTimeKind.Local).AddTicks(9552))
                 },
                 constraints: table =>
                 {
@@ -759,6 +760,26 @@ namespace Core.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "-1860265423", "a87c4a55-684f-4339-a44f-a7fd1ae31140", "User", "User" },
+                    { "2110775583", "3aae6e07-70a4-4c8d-9f70-7b46c357b143", "Admin", "Admin" },
+                    { "942513055", "062e0da0-4b79-4ac3-a789-bc0cf919c2df", "Doctor", "Doctor" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "BloodType", "ConcurrencyStamp", "DAteOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "IsDoctor", "LastName", "LockoutEnabled", "LockoutEnd", "NationalID", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePic", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "2110775583", 0, "", "76dcba16-aee4-4a13-a77e-5fd021721c18", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "alykhaled@diagnoseme.local", true, "Aly", "", false, "Khaled", false, null, "", null, null, "AQAAAAEAACcQAAAAEA8iGLZgpG8bj58C0VfRkU0pTJlbYxtq7C7PAXa22VZYk+3hWFI2xDahKhg8TOSEzw==", null, true, "", "f2b5633c-b8fe-4c3c-b9d4-eb4918d39b7e", false, "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2110775583", "2110775583" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnswerAgreements_AnswerId",
