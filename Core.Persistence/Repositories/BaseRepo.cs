@@ -9,31 +9,30 @@ public abstract class BaseRepo<TEntity> : IDisposable, IBaseRepo<TEntity> where 
 
     public BaseRepo(DbContext db)
     {
-    this.db = db;
-    this.table = db.Set<TEntity>();
+        this.db = db;
+        this.table = db.Set<TEntity>();
     }
     public virtual async Task<TEntity> AddAsync(TEntity entity)
     {
-    await table.AddAsync(entity);
-
-    return entity;
+        await table.AddAsync(entity);
+        return entity;
     }
     public virtual TEntity Remove(TEntity entity)
     {
-    table.Remove(entity);
-    return entity;
+        table.Remove(entity);
+        return entity;
     }
     public virtual async Task<IEnumerable<TEntity>> RemoveRangeAsync(Expression<Func<TEntity, bool>> predicate)
     {
-    IEnumerable<TEntity> entities = (await Get(predicate));
-    table.RemoveRange(entities);
-    return entities;
+        IEnumerable<TEntity> entities = (await Get(predicate));
+        table.RemoveRange(entities);
+        return entities;
     }
     public virtual async Task<TEntity> RemoveAsync(Expression<Func<TEntity, bool>> predicate)
     {
-    TEntity entityToRemove = (await Get(predicate)).FirstOrDefault();
-    table.Remove(entityToRemove);
-    return entityToRemove;
+        TEntity entityToRemove = (await Get(predicate)).FirstOrDefault();
+        table.Remove(entityToRemove);
+        return entityToRemove;  
     }
     public virtual async Task<IEnumerable<TEntity>> Get(
         Expression<Func<TEntity, bool>> predicate = null,

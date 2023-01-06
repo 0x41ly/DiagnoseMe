@@ -1,7 +1,7 @@
 namespace Core.Application.Authentication.Commands.ChangeEmail;
 
 public class ChangeEmailCommandHandeler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<ChangeEmailCommand, ErrorOr<AuthenticationResults>>
 {
     private readonly ISmtp _smtp;

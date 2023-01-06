@@ -1,7 +1,7 @@
 namespace Core.Application.Authentication.Queries.GetUsersInRole;
 
 public class GetUsersInRoleQueryHandler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<GetUsersInRoleQuery, ErrorOr<List<ApplicationUser>>>
 {
     public GetUsersInRoleQueryHandler(

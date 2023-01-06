@@ -1,4 +1,5 @@
 using Core.Domain.Common;
+using ErrorOr;
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
@@ -6,7 +7,7 @@ using Newtonsoft.Json;
 namespace Core.Application.Authentication.Commands.Register;
 
 public class RegisterCommandHandler : 
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResults>>
 {
 
@@ -29,17 +30,14 @@ public class RegisterCommandHandler :
             UserName = command.UserName,
             Email = command.Email
         };
-
-        if (await _userManager.FindByEmailAsync(user.Email) != null)
-            return Errors.User.Email.Exist;
-        if (await _userManager.FindByNameAsync(user.UserName) != null)
-            return Errors.User.Name.Exist;
             
         var result = await _userManager.CreateAsync(user, command.Password);
-        var errorMessages = result.Errors.Select(e => e.Description);
-        if (!result.Succeeded)
-            return Errors.CustomError(String.Join(" , ", errorMessages));
-        // await _userManager.AddToRoleAsync(user, Roles.User);
+        if(!result.Succeeded)
+            return Errors.User.MapIdentityError(result.Errors.ToList());
+        
+        result = await _userManager.AddToRoleAsync(user, Roles.User);
+        if(!result.Succeeded)
+            return Errors.User.MapIdentityError(result.Errors.ToList());
 
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         var pinCode =GenerateRandomPin();

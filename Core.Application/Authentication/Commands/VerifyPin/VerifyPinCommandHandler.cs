@@ -2,7 +2,7 @@
 namespace Core.Application.Authentication.Commands.VerifyPin;
 
 public class VerifyPinCommandHandler:
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<VerifyPinCommand, ErrorOr<string>>
 {
 

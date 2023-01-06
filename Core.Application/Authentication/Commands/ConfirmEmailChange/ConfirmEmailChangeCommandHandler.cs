@@ -3,7 +3,7 @@
 namespace Core.Application.Authentication.Commands.ConfirmEmailChange;
 
 public class ConfirmEmailChangeCommandHandler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<ConfirmEmailChangeCommand, ErrorOr<AuthenticationResults>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;

@@ -5,7 +5,7 @@ namespace Core.Application.Authentication.Commands.ForgotPassword;
 
 
 public class ForgotPasswordCommandHandler:
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<ForgotPasswordCommand, ErrorOr<AuthenticationResults>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;

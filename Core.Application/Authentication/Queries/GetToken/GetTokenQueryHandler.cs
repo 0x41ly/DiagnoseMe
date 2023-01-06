@@ -1,7 +1,7 @@
 namespace Core.Application.Authentication.Queries.GetToken;
 
 public class GetTokenQueryHandler: 
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<GetTokenQuery, ErrorOr<AuthenticationResults>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;

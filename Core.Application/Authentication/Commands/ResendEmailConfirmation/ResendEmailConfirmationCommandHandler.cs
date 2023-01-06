@@ -4,7 +4,7 @@
 namespace Core.Application.Authentication.Commands.ResendEmailConfirmation;
 
 public class ResendEmailConfirmationCommandHandler:
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<ResendEmailConfirmationCommand, ErrorOr<AuthenticationResults>>
 {
 

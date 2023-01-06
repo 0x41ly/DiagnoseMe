@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Core.Api.Common.Http;
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -90,10 +91,10 @@ public class CoreProblemDetailsFactory : ProblemDetailsFactory
         {
             problemDetails.Extensions["traceId"] = traceId;
         }
-        var errors = httpContext?.Items["Errors"] as List<Error>;
+        var errors = httpContext?.Items[HttpContextItemKeys.Errors] as List<Error>;
         if (errors != null)
         {
-            problemDetails.Extensions.Add("errorsCodes", errors.Select(e => e.Code));
+            problemDetails.Extensions.Add("detail", errors.Select(e => e.Description));
         }
     }
 }

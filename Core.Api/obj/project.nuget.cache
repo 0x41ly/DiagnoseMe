@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mpIl+YlHL88SGWLYcNL8yYVsTHDOC8eK3IExRQhPSj1lbf4nt0k+NW0HD+WYS0nIU5SvcMj0Bp9hFPUCKjpibw==",
+  "dgSpecHash": "kEx/yw0F/dIpkNh2SFdV8KZa8q0AJGbPc8FJG4mCB6Sx59OgvlkQtZx94p39vtF7tKCrN74UcqduqglsH///KQ==",
   "success": true,
   "projectFilePath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.DDD/DiagnoseMe/Core.Api/Core.Api.csproj",
   "expectedPackageFiles": [
+    "/home/x41ly/.nuget/packages/aspnetcoreratelimit/5.0.0/aspnetcoreratelimit.5.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/automapper/12.0.0/automapper.12.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512",
     "/home/x41ly/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
@@ -47,7 +48,7 @@
     "/home/x41ly/.nuget/packages/microsoft.extensions.identity.core/6.0.12/microsoft.extensions.identity.core.6.0.12.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.extensions.identity.stores/6.0.12/microsoft.extensions.identity.stores.6.0.12.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.extensions.logging/6.0.0/microsoft.extensions.logging.6.0.0.nupkg.sha512",
-    "/home/x41ly/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.3/microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.extensions.objectpool/2.2.0/microsoft.extensions.objectpool.2.2.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.extensions.options.configurationextensions/7.0.0/microsoft.extensions.options.configurationextensions.7.0.0.nupkg.sha512",

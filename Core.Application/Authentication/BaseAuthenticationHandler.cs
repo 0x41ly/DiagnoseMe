@@ -4,11 +4,11 @@ using System.Security.Cryptography;
 namespace Core.Application.Authentication;
 
 
-public class BaseHandler
+public class BaseAuthenticationHandler
 {
     protected readonly UserManager<ApplicationUser> _userManager;
 
-    protected BaseHandler(
+    protected BaseAuthenticationHandler(
         UserManager<ApplicationUser> userManager
     )
     {

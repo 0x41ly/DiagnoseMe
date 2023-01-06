@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Core.Api.Common.Errors;
 using Core.Application;
 using Core.Application.Settings;
@@ -34,7 +35,7 @@ var app = builder.Build();
     }
     app.UseSwagger();
     app.UseSwaggerUI();
-
+    app.UseIpRateLimiting();
     app.UseExceptionHandler("/error");
     app.UseAuthentication();
     app.UseAuthorization();

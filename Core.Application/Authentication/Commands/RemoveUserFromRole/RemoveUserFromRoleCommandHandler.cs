@@ -2,7 +2,7 @@
 namespace Core.Application.Authentication.Commands.RemoveUserFromRole;
 
 public class RemoveUserFromRoleCommandHandler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<RemoveUserFromRoleCommand, ErrorOr<AuthenticationResults>>
 {
     public RemoveUserFromRoleCommandHandler(
@@ -19,10 +19,9 @@ public class RemoveUserFromRoleCommandHandler :
         if (user == null)
             return Errors.User.Name.NotExist;
         
-
         var result = await _userManager.RemoveFromRoleAsync(user, command.Role);
-        if (!result.Succeeded)
-            return Errors.Role.FialToRemove;
+        if(!result.Succeeded)
+            return Errors.User.MapIdentityError(result.Errors.ToList());
         
         results.Message = "User removed from role successfully";
         return results;

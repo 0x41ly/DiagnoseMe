@@ -1,7 +1,7 @@
 namespace Core.Application.Authentication.Commands.ConfirmEmail;
 
 public class ConfirmEmailCommandHandler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<ConfirmEmailCommand, ErrorOr<AuthenticationResults>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;

@@ -1,5 +1,4 @@
-using MediatR;
-using Microsoft.Extensions.Caching.Memory;
+using Core.Application.Middleware;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +14,7 @@ public static class DependencyInjection
         services.AddSwaggerGenConfiguration(configuration);
         services.AddSingleton<IMemoryCache,MemoryCache>();
         services.AddMediatR(typeof(DependencyInjection).Assembly);
+        services.AddMidddlewares(configuration);
         return services;
     }
 }

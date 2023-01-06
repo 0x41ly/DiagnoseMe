@@ -1,7 +1,7 @@
 namespace Core.Application.Authentication.Queries.GetAllUsers;
 
 public class GetAllUsersQueryHandler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<GetAllUsersQuery, List<ApplicationUser>>
 {
     public GetAllUsersQueryHandler(

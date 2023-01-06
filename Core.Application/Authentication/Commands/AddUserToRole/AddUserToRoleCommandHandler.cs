@@ -1,7 +1,7 @@
 namespace Core.Application.Authentication.Commands.AddUserToRole;
 
 public class AddUserToRoleCommandHandler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<AddUserToRoleCommand, ErrorOr<AuthenticationResults>>
 {
     public AddUserToRoleCommandHandler(
@@ -19,8 +19,8 @@ public class AddUserToRoleCommandHandler :
             return Errors.User.Name.NotExist;
 
         var result = await _userManager.AddToRoleAsync(user, command.Role);
-        if (!result.Succeeded)
-            return Errors.Role.FialToAdd;
+        if(!result.Succeeded)
+            return Errors.User.MapIdentityError(result.Errors.ToList());
 
         results.Message = "User added to role successfully";
         return results;

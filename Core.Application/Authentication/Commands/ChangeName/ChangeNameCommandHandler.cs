@@ -1,7 +1,7 @@
 namespace Core.Application.Authentication.Commands.ChangeName;
 
 public class ChangeNameCommandHandler :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<ChangeNameCommand, ErrorOr<AuthenticationResults>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;

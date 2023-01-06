@@ -2,7 +2,7 @@
 namespace Core.Application.Authentication.Commands.ResetPassword;
 
 public class ResetPasswordCommandHandle :
-    BaseHandler,
+    BaseAuthenticationHandler,
     IRequestHandler<ResetPasswordCommand, ErrorOr<AuthenticationResults>>
 {
 
