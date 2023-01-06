@@ -35,9 +35,9 @@ public class ConfirmEmailChangeCommandHandler :
         var user = await _userManager.FindByNameAsync(username);
         var result = await _userManager.ChangeEmailAsync(user, command.NewEmail, pin.Token);
         if (!result.Succeeded)
-        {
             return Errors.User.Pin.Invalid;
-        }
+        
+        _memoryCache.Remove(command.Id);
         return new AuthenticationResults{
             Message = "Email confirmed successfully",
             Token =  new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator.GenerateJwtTokenAsync(

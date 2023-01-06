@@ -1,12 +1,11 @@
 using System.Diagnostics;
-using System.Text.Encodings.Web;
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 
-namespace Core.Api.Errors;
+namespace Core.Api.Common.Errors;
 
 public class CoreProblemDetailsFactory : ProblemDetailsFactory
 {

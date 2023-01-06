@@ -1,4 +1,4 @@
-using Core.Api.Errors;
+using Core.Api.Common.Errors;
 using Core.Application;
 using Core.Application.Settings;
 using Core.Infrastructue;

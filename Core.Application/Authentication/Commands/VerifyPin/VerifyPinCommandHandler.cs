@@ -28,7 +28,7 @@ public class VerifyPinCommandHandler:
         if(jsonPin == null)
             return Task.FromResult<ErrorOr<string>>(Errors.User.Pin.Expired);
 
-        var pin = JsonConvert.DeserializeObject<Pin>(jsonPin);
+        var pin = JsonConvert.DeserializeObject<Pin>(jsonPin);  
         _memoryCache.Remove(command.Pincode);
         jsonPin = JsonConvert.SerializeObject(pin);
         var cacheEntryOptions = new MemoryCacheEntryOptions()
