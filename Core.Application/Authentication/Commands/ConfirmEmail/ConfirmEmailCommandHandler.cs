@@ -27,7 +27,7 @@ public class ConfirmEmailCommandHandler :
             return Errors.User.Pin.Expired;
 
         var pin = JsonConvert.DeserializeObject<Pin>(jsonPin);
-        if(pin.Type != Pins.Types.Email.Confirm)
+        if(pin!.Type != Pins.Types.Email.Confirm)
             return Errors.User.AreYouKidding;
         
         var username = pin.UserName;

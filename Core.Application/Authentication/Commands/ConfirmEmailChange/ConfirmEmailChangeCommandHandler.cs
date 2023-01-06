@@ -29,7 +29,7 @@ public class ConfirmEmailChangeCommandHandler :
             return Errors.User.Pin.Expired;
         
         var pin = JsonConvert.DeserializeObject<Pin>(jsonPin);
-        if(pin.Type != Pins.Types.Email.Change)
+        if(pin!.Type != Pins.Types.Email.Change)
             return Errors.User.AreYouKidding;
         var username = pin.UserName;
         var user = await _userManager.FindByNameAsync(username);

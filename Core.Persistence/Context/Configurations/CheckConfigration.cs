@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Core.Persistence.Context.Configuration;
+namespace Core.Persistence.Context.Configurations;
 
 public class CheckConfigration :  BaseConfiguration<Check>
 

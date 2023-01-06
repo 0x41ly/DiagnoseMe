@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Core.Persistence.Context.Configuration;
+namespace Core.Persistence.Context.Configurations;
 
 public class ClinicConfigration : BaseConfiguration<Clinic>
 {

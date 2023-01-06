@@ -33,7 +33,7 @@ public class VerifyPinCommandHandler:
         jsonPin = JsonConvert.SerializeObject(pin);
         var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromMinutes(10));
-        _memoryCache.Set(pin.Id.ToString(), jsonPin, cacheEntryOptions);
+        _memoryCache.Set(pin!.Id.ToString(), jsonPin, cacheEntryOptions);
         return Task.FromResult<ErrorOr<string>>(pin.Id.ToString());
     }
 }

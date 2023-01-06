@@ -1,7 +1,6 @@
 using Core.Persistence.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace Core.Persistence.ServicesConfigrations;
 
 public static class DbContextConfiguration

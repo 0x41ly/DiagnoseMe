@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Core.Persistence.Context.Configuration;

@@ -2,10 +2,9 @@
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Core.Persistence.Context.Configuration
+namespace Core.Persistence.Context.Configurations;
+public class PostsConfigration : BaseConfiguration<Post>
 {
-    public class PostsConfigration : BaseConfiguration<Post>
-    {
         public override void Configure(EntityTypeBuilder<Post> builder=null!)
     {
         builder.ToTable("Posts");
@@ -15,6 +14,5 @@ namespace Core.Persistence.Context.Configuration
         
         builder.HasMany(p => p.PostStateSuggestions).WithOne(ps => ps.Post).HasForeignKey(ps =>ps.PostId);
         
-    }
     }
 }

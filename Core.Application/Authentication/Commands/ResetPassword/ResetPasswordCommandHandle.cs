@@ -26,7 +26,7 @@ public class ResetPasswordCommandHandle :
             return Errors.User.Pin.Expired;
         
         var pin = JsonConvert.DeserializeObject<Pin>(jsonPin);
-        if(pin.Type != Pins.Types.Password.Reset)
+        if(pin!.Type != Pins.Types.Password.Reset)
             return Errors.User.AreYouKidding;
         
         var username = pin.UserName;
