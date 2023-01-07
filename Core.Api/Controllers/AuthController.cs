@@ -9,6 +9,7 @@ using Core.Application.Authentication.Commands.RemoveUserFromRole;
 using Core.Application.Authentication.Commands.ResendEmailConfirmation;
 using Core.Application.Authentication.Commands.ResetPassword;
 using Core.Application.Authentication.Commands.SignOut;
+using Core.Application.Authentication.Commands.UploadProfilePicture;
 using Core.Application.Authentication.Commands.VerifyPin;
 using Core.Application.Authentication.Queries.GetAllUsers;
 using Core.Application.Authentication.Queries.GetToken;
@@ -39,11 +40,15 @@ public class AuthController : ApiController
     {
         
         var command = new RegisterCommand(
-            request.FirstName,
-            request.LastName,
-            request.UserName,
-            request.Email,
-            request.Password);
+                request.FirstName,
+                request.LastName,
+                request.UserName,
+                request.NationalID,
+                request.Gender,
+                request.DateOfBirth,
+                request.BloodType,
+                request.Email,
+                request.Password);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -212,6 +217,18 @@ public class AuthController : ApiController
    public async  Task<IActionResult> VerifyPin(VerifyPinRequest request)
    {
     var command = new VerifyPinCommand(request.PinCode);
+    var result = await _mediator.Send(command);
+        return result.Match(
+        authResult => Ok(authResult),
+        errors => Problem(errors));
+   }
+
+   [HttpPost("profile/picture/upload")]
+   [AllowAnonymous]
+
+   public async  Task<IActionResult> UploadProfilePicture(UploadProfilePictureRequest request)
+   {
+    var command = new UploadProfilePictureCommand(request.Base64EncodedFile);
     var result = await _mediator.Send(command);
         return result.Match(
         authResult => Ok(authResult),

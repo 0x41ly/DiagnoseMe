@@ -22,7 +22,7 @@ public static class DependencyInjection
         services.Configure<DomainSettings>(configuration.GetSection("DomainSettings"));
         services.AddSingleton<ISmtp, Smtp>();
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
-
+        services.AddSingleton<IFileHandler, FileHandler>();
         return services;
     }
 

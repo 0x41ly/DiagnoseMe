@@ -5,7 +5,7 @@ namespace Core.Domain.Common.Errors;
 public static partial class Errors
 {
 
-    public static Error CustomError(string description) => Error.Failure(
-        code: "CustomError",
-        description: description);
+    public static Error UnExpected => Error.Failure(
+        code: "UnExpected",
+        description: " error occured");
 }

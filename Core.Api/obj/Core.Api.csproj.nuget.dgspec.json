@@ -139,6 +139,10 @@
               "target": "Package",
               "version": "[1.2.1, )"
             },
+            "File.TypeChecker": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[11.1.0, )"
@@ -166,10 +170,6 @@
             "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
               "version": "[7.0.0, )"
-            },
-            "MimeKit": {
-              "target": "Package",
-              "version": "[3.4.3, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

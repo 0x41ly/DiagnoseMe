@@ -16,7 +16,7 @@ public class ApplicationUser : IdentityUser
 
     public DateTime LastConfirmationSentDate {get; set;}  
     public string Gender {get; set;}  = string.Empty;
-    public DateTime DAteOfBirth {get; set;} 
+    public DateTime DateOfBirth {get; set;} 
     public string BloodType {get; set;}  = string.Empty;
     public bool IsDoctor {get; set;}
     public string ProfilePic {get; set;} = string.Empty;
