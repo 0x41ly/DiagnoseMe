@@ -39,7 +39,7 @@ public class ResetPasswordCommandHandle :
             return Errors.User.Pin.Invalid;
 
         _memoryCache.Remove(command.Id);
-        results.Message = "Password reset successfully";
+        results.Message = "Password is successfully reset";
         return results; 
     }
 }

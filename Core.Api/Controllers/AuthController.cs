@@ -16,6 +16,8 @@ using Core.Application.Authentication.Queries.GetToken;
 using Core.Application.Authentication.Queries.GetUsersInRole;
 using Core.Contracts.Authentication;
 using Core.Domain.Common.Roles;
+using Core.Domain.Entities;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,29 +28,22 @@ namespace Core.Api.Controllers;
 public class AuthController : ApiController
 {
     private readonly ISender _mediator;
-
-    public AuthController(ISender  mediator)
+    private readonly IMapper _mapper;
+    public AuthController(
+        ISender mediator, 
+        IMapper mapper)
     {
 
         _mediator = mediator;
+        _mapper = mapper;
     }
 
 
     [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
-    {
-        
-        var command = new RegisterCommand(
-                request.FirstName,
-                request.LastName,
-                request.UserName,
-                request.NationalID,
-                request.Gender,
-                request.DateOfBirth,
-                request.BloodType,
-                request.Email,
-                request.Password);
+    { 
+        var command = _mapper.Map<RegisterCommand>(request);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -59,7 +54,7 @@ public class AuthController : ApiController
     [HttpPost("email/confirmation/resend")]
     public async Task<IActionResult> ResendEmailConfirmation(ResendEmailConfirmationRequest request)
     {
-        var command = new ResendEmailConfirmationCommand(request.Email);
+        var command = _mapper.Map<ResendEmailConfirmationCommand>(request);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -70,9 +65,7 @@ public class AuthController : ApiController
     [HttpPost("login")]
     public async Task<IActionResult> GetToken(LoginRequest request)
     {
-        var query = new GetTokenQuery(
-            request.Email,
-            request.Password);
+        var query = _mapper.Map<GetTokenQuery>(request);
         var authResult = await _mediator.Send(query);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -83,7 +76,7 @@ public class AuthController : ApiController
     [HttpPost("password/forget")]
     public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
     {
-        var command = new ForgotPasswordCommand(request.Email);        
+        var command = _mapper.Map<ForgotPasswordCommand>(request);        
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -94,9 +87,7 @@ public class AuthController : ApiController
     [HttpPost("password/reset")]
     public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
     {
-        var command = new ResetPasswordCommand(
-            request.Id,
-            request.NewPassword);
+        var command = _mapper.Map<ResetPasswordCommand>(request);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -107,7 +98,7 @@ public class AuthController : ApiController
 
     public async Task<IActionResult> ConfirmEmail(ConfirmEmailRequest request)
     {
-        var command = new ConfirmEmailCommand(request.Id);
+        var command = _mapper.Map<ConfirmEmailCommand>(request);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
             authResult => Ok(authResult),
@@ -119,9 +110,7 @@ public class AuthController : ApiController
 
     public async Task<IActionResult> ConfirmEmailChange(ConfirmEmailChangeRequest request)
     {
-        var command = new ConfirmEmailChangeCommand(
-            request.NewEmail,
-            request.Id);
+        var command = _mapper.Map<ConfirmEmailChangeCommand>(request);
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -141,10 +130,7 @@ public class AuthController : ApiController
     [HttpPost("email/change")]
     public async Task<IActionResult> ChangeEmail(ChangeEmailRequest request)
     {
-        var username = User.Identity!.Name;
-        var command = new ChangeEmailCommand(
-            username!,
-            request.NewEmail);
+        var command = _mapper.Map<ChangeEmailCommand>((request,User.Identity!.Name!));
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -155,10 +141,7 @@ public class AuthController : ApiController
     [HttpPost("name/change")]
     public async Task<IActionResult> ChangeName(ChangeNameRequest request)
     {
-        var username = User.Identity!.Name;
-        var command = new ChangeNameCommand(
-            username!,
-            request.NewName);
+        var command = _mapper.Map<ChangeNameCommand>((request, User.Identity!.Name!));
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -168,9 +151,7 @@ public class AuthController : ApiController
     [HttpPost("user/{role}/add")]
     public async Task<IActionResult> AddUserToRole(AddUserToRoleRequest request, string role)
     {
-        var command = new AddUserToRoleCommand(
-            request.UserName,
-            role);
+        var command = _mapper.Map<AddUserToRoleCommand>((request, role));
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -181,9 +162,7 @@ public class AuthController : ApiController
     [HttpDelete("user/{role}/remove")]
     public async Task<IActionResult> RemoveUserFromRole(RemoveUserToRoleRequest request, string role)
     {
-        var command = new RemoveUserFromRoleCommand(
-            request.UserName,
-            role);
+        var command = _mapper.Map<RemoveUserFromRoleCommand>((request, role));
         var authResult = await _mediator.Send(command);
         return authResult.Match(
         authResult => Ok(authResult),
@@ -195,9 +174,8 @@ public class AuthController : ApiController
     public async Task<IActionResult> GetUsers()
     {
         var query = new GetAllUsersQuery();
-        var result = await _mediator.Send(query);
+        var result = _mapper.Map<List<ApplicationUserResponse>>((await _mediator.Send(query)));
         return Ok(result);
-
     }
 
     [Authorize(Roles = Roles.Admin)]
@@ -207,7 +185,7 @@ public class AuthController : ApiController
         var query = new GetUsersInRoleQuery(role);
         var result = await _mediator.Send(query);
         return result.Match(
-        authResult => Ok(authResult),
+        authResult => Ok(_mapper.Map<List<ApplicationUserResponse>>(authResult)),
         errors => Problem(errors));
     }
 
@@ -216,7 +194,7 @@ public class AuthController : ApiController
 
    public async  Task<IActionResult> VerifyPin(VerifyPinRequest request)
    {
-    var command = new VerifyPinCommand(request.PinCode);
+    var command = _mapper.Map<VerifyPinCommand>(request);
     var result = await _mediator.Send(command);
         return result.Match(
         authResult => Ok(authResult),
@@ -224,14 +202,14 @@ public class AuthController : ApiController
    }
 
    [HttpPost("profile/picture/upload")]
-   [AllowAnonymous]
+   [Authorize]
 
    public async  Task<IActionResult> UploadProfilePicture(UploadProfilePictureRequest request)
    {
-    var command = new UploadProfilePictureCommand(request.Base64EncodedFile);
+    var command = _mapper.Map<UploadProfilePictureCommand>((request, User.Identity!.Name!)); 
     var result = await _mediator.Send(command);
         return result.Match(
         authResult => Ok(authResult),
         errors => Problem(errors));
-   }
+   }   
 }

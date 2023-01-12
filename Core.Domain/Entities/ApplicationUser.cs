@@ -1,3 +1,4 @@
+using System;
 
 
 
@@ -14,9 +15,10 @@ public class ApplicationUser : IdentityUser
     public string LastName {get; set;} = string.Empty;
     public string NationalID {get; set;} = string.Empty;
 
-    public DateTime LastConfirmationSentDate {get; set;}  
+    public DateTime LastEmailChangeDate {get; set;}  
+    public DateTime LastConfirmationSentDate {get; set;}
     public string Gender {get; set;}  = string.Empty;
-    public DateTime DateOfBirth {get; set;} 
+    public DateOnly DateOfBirth {get; set;} 
     public string BloodType {get; set;}  = string.Empty;
     public bool IsDoctor {get; set;}
     public string ProfilePic {get; set;} = string.Empty;

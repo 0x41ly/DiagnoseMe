@@ -9,7 +9,11 @@ public class GetAllUsersQueryHandler :
     ): base(userManager){}
     public Task<List<ApplicationUser>> Handle(GetAllUsersQuery query, CancellationToken cancellationToken)
     {
-        return Task.FromResult<List<ApplicationUser>>(_userManager.Users.AsParallel().ToList());
+        var users = _userManager.
+                    Users.
+                    AsParallel().
+                    ToList();
+        return Task.FromResult<List<ApplicationUser>>(users);
     }
     
 }

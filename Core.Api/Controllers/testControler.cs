@@ -9,20 +9,15 @@ namespace Core.Api.Controllers;
 [Route("test")]
 public class testControler : ControllerBase
 {
-    private readonly MailSettings _mailSettings;
 
-    public testControler(
-        IOptions<MailSettings> mailSettings
-    )
-    {
-        _mailSettings = mailSettings.Value;
-    }
+    public testControler()
+    {}
 
     [HttpPost]
     [Route("get")]
     public IActionResult get(LoginRequest request){
 
-        return Ok(request);
+        return Ok(DateOnly.ParseExact("31 Dec 2000", "dd MMM yyyy").ToString());
     }
 
 }

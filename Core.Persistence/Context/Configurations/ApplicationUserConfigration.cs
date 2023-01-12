@@ -12,8 +12,9 @@ public class ApplicationUserConfigration :  IEntityTypeConfiguration<Application
         builder.Property(au => au.Gender).IsRequired().HasMaxLength(50);
         builder.Property(au => au.BloodType).IsRequired().HasMaxLength(5);
         builder.Property(au => au.DateOfBirth).IsRequired();
-        builder.Property(au => au.NationalID).IsRequired().HasMaxLength(15);
         builder.Property(au => au.LastConfirmationSentDate).HasDefaultValue(DateTime.Now);
+        builder.Property(au => au.NationalID).IsRequired().HasMaxLength(15);
+        builder.Property(au => au.LastEmailChangeDate).HasDefaultValue(DateTime.Now);
         builder.Property(au => au.IsDoctor).IsRequired();
         builder.HasOne(au => au.Doctor).WithOne(d => d.User).HasForeignKey<Doctor>(d => d.UserId);
         builder.HasOne(au => au.Patient).WithOne(p => p.User).HasForeignKey<Patient>(p => p.UserId);

@@ -36,13 +36,10 @@ public class ConfirmEmailCommandHandler :
         if (!result.Succeeded)
             return Errors.User.Pin.Invalid;
 
+        // user.La
         _memoryCache.Remove(command.Id);
         return new AuthenticationResults{
-            Message = "Email confirmed successfully",
-            Token =  new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator.GenerateJwtTokenAsync(
-                user.Id,
-                user.UserName,
-                await GetUserClaims(user))),
+            Message = "Email is successfully confirmed",
             Username = user.UserName
         };
     }

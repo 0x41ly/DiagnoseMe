@@ -1,4 +1,7 @@
+using System.Reflection;
+using Core.Application.Common.Behaviors;
 using Core.Application.Middleware;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +17,10 @@ public static class DependencyInjection
         services.AddSwaggerGenConfiguration(configuration);
         services.AddSingleton<IMemoryCache,MemoryCache>();
         services.AddMediatR(typeof(DependencyInjection).Assembly);
+        services.AddScoped(
+            typeof(IPipelineBehavior<,>), 
+            typeof(ValidationBehavior<,>));
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMidddlewares(configuration);
         return services;
     }

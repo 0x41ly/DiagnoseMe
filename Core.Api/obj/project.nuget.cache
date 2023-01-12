@@ -1,14 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "KejwTb4x1obEjiTmH4f0byTxu8JHMBznXv1QWg8BccHAIFs+2TMgtPCfTv8QNG1Zn4lp1VbJ8QQ3Bxkf/BFlQQ==",
+  "dgSpecHash": "YQRheLX+JIPIi+ULPK66MzBa5J+gIZfcj1ds67Nq0Z/NkjnezLfPS30EFUK34oCGTU+X6r52vK5ahXWFNQ589w==",
   "success": true,
   "projectFilePath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.DDD/DiagnoseMe/Core.Api/Core.Api.csproj",
   "expectedPackageFiles": [
     "/home/x41ly/.nuget/packages/aspnetcoreratelimit/5.0.0/aspnetcoreratelimit.5.0.0.nupkg.sha512",
-    "/home/x41ly/.nuget/packages/automapper/12.0.0/automapper.12.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512",
     "/home/x41ly/.nuget/packages/file.typechecker/3.0.0/file.typechecker.3.0.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/fluentvalidation/11.4.0/fluentvalidation.11.4.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/fluentvalidation.aspnetcore/11.2.2/fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.2.1/fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "/home/x41ly/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/mapster/7.3.0/mapster.7.3.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/mapster.core/1.2.0/mapster.core.1.2.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/mapster.dependencyinjection/1.0.0/mapster.dependencyinjection.1.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/mediatr/11.1.0/mediatr.11.1.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512",
     "/home/x41ly/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/11.0.0/mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
@@ -30,7 +35,7 @@
     "/home/x41ly/.nuget/packages/microsoft.aspnetcore.identity/2.2.0/microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/6.0.12/microsoft.aspnetcore.identity.entityframeworkcore.6.0.12.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
-    "/home/x41ly/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.entityframeworkcore/6.0.12/microsoft.entityframeworkcore.6.0.12.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.12/microsoft.entityframeworkcore.abstractions.6.0.12.nupkg.sha512",
     "/home/x41ly/.nuget/packages/microsoft.entityframeworkcore.analyzers/6.0.12/microsoft.entityframeworkcore.analyzers.6.0.12.nupkg.sha512",
@@ -79,6 +84,11 @@
     "/home/x41ly/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/system.identitymodel.tokens.jwt/6.25.1/system.identitymodel.tokens.jwt.6.25.1.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/system.io/4.3.0/system.io.4.3.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/system.reflection/4.3.0/system.reflection.4.3.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/system.reflection.emit/4.3.0/system.reflection.emit.4.3.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/system.reflection.emit.ilgeneration/4.3.0/system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/system.reflection.primitives/4.3.0/system.reflection.primitives.4.3.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/system.security.accesscontrol/4.5.0/system.security.accesscontrol.4.5.0.nupkg.sha512",
@@ -89,7 +99,8 @@
     "/home/x41ly/.nuget/packages/system.security.principal.windows/4.5.0/system.security.principal.windows.4.5.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/home/x41ly/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512",
-    "/home/x41ly/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512"
+    "/home/x41ly/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512",
+    "/home/x41ly/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

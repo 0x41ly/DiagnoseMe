@@ -44,10 +44,11 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NationalID = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastConfirmationSentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 520, DateTimeKind.Local).AddTicks(2176)),
+                    LastEmailChangeDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 709, DateTimeKind.Local).AddTicks(6765)),
+                    LastConfirmationSentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 709, DateTimeKind.Local).AddTicks(6147)),
                     Gender = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
                     BloodType = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDoctor = table.Column<bool>(type: "tinyint(1)", nullable: false),
@@ -93,7 +94,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Address = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 527, DateTimeKind.Local).AddTicks(4662)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 718, DateTimeKind.Local).AddTicks(6974)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -110,7 +111,7 @@ namespace Core.Persistence.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     QuestionString = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 533, DateTimeKind.Local).AddTicks(4996)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 726, DateTimeKind.Local).AddTicks(7959)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -256,7 +257,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Height = table.Column<float>(type: "float", nullable: false),
                     Weight = table.Column<float>(type: "float", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 532, DateTimeKind.Local).AddTicks(3650)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 725, DateTimeKind.Local).AddTicks(1196)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -280,7 +281,7 @@ namespace Core.Persistence.Migrations
                     PhoneNumber = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 528, DateTimeKind.Local).AddTicks(373)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 719, DateTimeKind.Local).AddTicks(4072)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -313,7 +314,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsLicenseVerified = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ClinicId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 530, DateTimeKind.Local).AddTicks(1121)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 722, DateTimeKind.Local).AddTicks(1049)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -344,7 +345,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     QuestionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 521, DateTimeKind.Local).AddTicks(978)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 710, DateTimeKind.Local).AddTicks(7399)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -374,7 +375,7 @@ namespace Core.Persistence.Migrations
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 521, DateTimeKind.Local).AddTicks(5091)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 711, DateTimeKind.Local).AddTicks(2316)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -403,7 +404,7 @@ namespace Core.Persistence.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 526, DateTimeKind.Local).AddTicks(7312)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 717, DateTimeKind.Local).AddTicks(7686)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -458,7 +459,7 @@ namespace Core.Persistence.Migrations
                     Rate = table.Column<int>(type: "int", nullable: false),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 530, DateTimeKind.Local).AddTicks(6906)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 722, DateTimeKind.Local).AddTicks(9860)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -491,7 +492,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 530, DateTimeKind.Local).AddTicks(9958)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 723, DateTimeKind.Local).AddTicks(3622)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -550,7 +551,7 @@ namespace Core.Persistence.Migrations
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 533, DateTimeKind.Local).AddTicks(536)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 726, DateTimeKind.Local).AddTicks(2272)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -574,7 +575,7 @@ namespace Core.Persistence.Migrations
                     IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     AnswerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 520, DateTimeKind.Local).AddTicks(6795)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 710, DateTimeKind.Local).AddTicks(2273)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -612,7 +613,7 @@ namespace Core.Persistence.Migrations
                     MessageType = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ChatRoomId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 522, DateTimeKind.Local).AddTicks(2395)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 712, DateTimeKind.Local).AddTicks(1378)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -654,7 +655,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Report = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 527, DateTimeKind.Local).AddTicks(1570)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 718, DateTimeKind.Local).AddTicks(3037)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -684,7 +685,7 @@ namespace Core.Persistence.Migrations
                     Type = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MedicalRecordId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 532, DateTimeKind.Local).AddTicks(1828)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 724, DateTimeKind.Local).AddTicks(9014)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -710,7 +711,7 @@ namespace Core.Persistence.Migrations
                     PostId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 528, DateTimeKind.Local).AddTicks(9144)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 720, DateTimeKind.Local).AddTicks(4837)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -747,7 +748,7 @@ namespace Core.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     PostId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 533, DateTimeKind.Local).AddTicks(3280)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 726, DateTimeKind.Local).AddTicks(6208)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -777,7 +778,7 @@ namespace Core.Persistence.Migrations
                     DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     CommentId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 7, 23, 2, 53, 528, DateTimeKind.Local).AddTicks(1699)),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 12, 19, 23, 5, 719, DateTimeKind.Local).AddTicks(5855)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -804,20 +805,20 @@ namespace Core.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "-1404022151", "c7854923-21a0-4891-8afc-ae56fd6a2f4a", "Admin", "Admin" },
-                    { "1829343192", "dae67b92-8e84-487a-a89d-f8c45b54b40d", "Doctor", "Doctor" },
-                    { "975664806", "134e58f0-cd70-4e3f-bdf4-a04fe29f2803", "User", "User" }
+                    { "-1571834175", "6ec9fa19-a761-4001-8d83-a1d9f52160fd", "Admin", "Admin" },
+                    { "1851316533", "e3ffe25b-9468-4349-89dc-055007ab608b", "User", "User" },
+                    { "46394259", "0f57cf3e-876e-4a98-94ef-9fe26892d606", "Doctor", "Doctor" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "BloodType", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "IsDoctor", "LastName", "LockoutEnabled", "LockoutEnd", "NationalID", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePic", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "-1404022151", 0, "", "a6b89298-82f2-4ad9-a281-491e156ca109", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "alykhaled@diagnoseme.local", true, "Aly", "", false, "Khaled", false, null, "", "alykhaled@diagnoseme.local", "0x41ly", "AQAAAAEAACcQAAAAEH0MMQTbhifFm3u/14OoFDyl5NdN07cyATPUvE7yso7CRQP6g1fh4ahUzYWyXQUgCw==", null, true, "", "1bd2c22b-87c3-4135-b67d-d8692d96f62e", false, "Admin" });
+                values: new object[] { "-1571834175", 0, "", "4b3577f1-58de-4df5-9b83-f17954a81f76", new DateOnly(1, 1, 1), "alykhaled@diagnoseme.local", true, "Aly", "", false, "Khaled", false, null, "", "alykhaled@diagnoseme.local", "0x41ly", "AQAAAAEAACcQAAAAELotQSdswFZtsW+gR9BGEroS1ZIbIdaD5eO9Et/VjiozpO3qIxwSYhP524Ah3oMRig==", null, true, "", "dc65abd0-eb70-4b5d-9cde-9175c2a32798", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "-1404022151", "-1404022151" });
+                values: new object[] { "-1571834175", "-1571834175" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnswerAgreements_AnswerId",

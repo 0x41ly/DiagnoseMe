@@ -22,7 +22,7 @@ public class AddUserToRoleCommandHandler :
         if(!result.Succeeded)
             return Errors.User.MapIdentityError(result.Errors.ToList());
 
-        results.Message = "User added to role successfully";
+        results.Message = $"User is successfully added to {command.Role}role";
         return results;
     }
 }

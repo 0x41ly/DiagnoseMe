@@ -12,7 +12,10 @@ public class GetUsersInRoleQueryHandler :
         if (!Roles.AvailableRoles.Contains(query.Role))
             return Errors.Role.RoleNotExist;
         
-        var users = await _userManager.GetUsersInRoleAsync(query.Role);
-        return users.AsParallel().ToList();
+        var users = (await _userManager.
+                    GetUsersInRoleAsync(query.Role)).
+                    AsParallel().
+                    ToList();
+        return  users;
     }
 }

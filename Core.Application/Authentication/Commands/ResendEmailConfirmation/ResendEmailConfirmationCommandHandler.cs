@@ -25,7 +25,11 @@ public class ResendEmailConfirmationCommandHandler:
         var user = await _userManager.FindByEmailAsync(command.Email);
         if(user.EmailConfirmed)
             return Errors.User.Email.AlreadyConfirmed;
-
+        
+        var lastSentSince = (int) (user.LastConfirmationSentDate).Subtract(DateTime.Now).TotalSeconds;
+        if(lastSentSince < 60)
+            return Errors.User.Email.WaitToSend(60 - lastSentSince);
+            
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         var pinCode =GenerateRandomPin();
         Pin pin = new(){

@@ -8,12 +8,10 @@ public static partial class Errors
     public static partial class User
     {
         public static List<Error> MapIdentityError(List<IdentityError> errors){
-            List<Error> resErrors = new List<Error>();
-            foreach (var error in errors){
-                resErrors.Add(Error.Validation(
-                code: $"User.IdentityError.{error.Code}",
-                description: error.Description));
-            }
+            
+            var resErrors = errors.ConvertAll(
+                error => Error.Validation(
+                    error.Code, error.Description));
             return resErrors;
         }
     }

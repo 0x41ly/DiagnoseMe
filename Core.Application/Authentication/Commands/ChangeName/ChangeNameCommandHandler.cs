@@ -28,7 +28,7 @@ public class ChangeNameCommandHandler :
             
         return new AuthenticationResults
         {
-            Message = "Successfully changed your username",
+            Message = "Your username is successfully changed",
             Token = new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator.GenerateJwtTokenAsync(
                 user.Id,
                 user.UserName,

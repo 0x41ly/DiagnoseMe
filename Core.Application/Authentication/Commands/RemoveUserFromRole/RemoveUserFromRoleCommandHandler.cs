@@ -23,7 +23,7 @@ public class RemoveUserFromRoleCommandHandler :
         if(!result.Succeeded)
             return Errors.User.MapIdentityError(result.Errors.ToList());
         
-        results.Message = "User removed from role successfully";
+        results.Message = $"User is successfully removed from {command.Role}role";
         return results;
     }
 }

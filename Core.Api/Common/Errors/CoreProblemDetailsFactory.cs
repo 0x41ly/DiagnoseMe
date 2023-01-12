@@ -94,7 +94,14 @@ public class CoreProblemDetailsFactory : ProblemDetailsFactory
         var errors = httpContext?.Items[HttpContextItemKeys.Errors] as List<Error>;
         if (errors != null)
         {
-            problemDetails.Extensions.Add("detail", errors.Select(e => e.Description));
+            var modelStateDictionary = new ModelStateDictionary();
+            foreach (var error in errors)
+            {
+                modelStateDictionary.AddModelError(
+                error.Code,
+                error.Description);
+            }
+            problemDetails.Extensions.Add("errors", modelStateDictionary);
         }
     }
 }

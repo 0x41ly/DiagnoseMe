@@ -1,5 +1,4 @@
 namespace Core.Contracts.Authentication;
 
 public record UploadProfilePictureRequest(
-    string Base64EncodedFile
-);
+    string Base64EncodedFile);

@@ -7,7 +7,9 @@ namespace Core.Persistence.ServicesConfigrations;
 
 public static class IdentityConfiguration
 {
-    public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection AddIdentityConfiguration(
+        this IServiceCollection services,
+        ConfigurationManager configuration)
         {
             
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

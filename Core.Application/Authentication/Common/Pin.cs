@@ -1,9 +1,10 @@
+using System;
 namespace Core.Application.Authentication.Common;
 
 
 public class Pin
 {
-    public Guid Id {get;} = Guid.NewGuid();
+    public String Id {get;} = Guid.NewGuid().ToString();
     public string? PinCode {get; set;}
     public string? Type {get; set;}
     public string? Token {get; set;}

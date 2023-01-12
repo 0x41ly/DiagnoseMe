@@ -1,11 +1,10 @@
 using AspNetCoreRateLimit;
-using Core.Api.Common.Errors;
+using Core.Api;
 using Core.Application;
 using Core.Application.Settings;
 using Core.Infrastructue;
 using Core.Persistence;
 using Core.Persistence.Context;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,11 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
     builder.Services
+        .AddPresentation()
         .AddApplication(builder.Configuration)
         .AddPersistence(builder.Configuration)
         .AddInfrastrucure(builder.Configuration);
-    builder.Services.AddControllers();
-    builder.Services.AddSingleton<ProblemDetailsFactory,CoreProblemDetailsFactory>();
 }
 
 var app = builder.Build();

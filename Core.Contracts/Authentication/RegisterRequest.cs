@@ -12,6 +12,5 @@ public record RegisterRequest(
     string DateOfBirth,
     string BloodType,
     string Email,
-    string Password
-);
+    string Password);
 

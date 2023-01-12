@@ -20,20 +20,20 @@ public class VerifyPinCommandHandler:
 
     public Task<ErrorOr<string>> Handle(VerifyPinCommand command, CancellationToken cancellationToken)
     {
-        if(command.Pincode == null)
+        if(command.PinCode == null)
             return Task.FromResult<ErrorOr<string>>(Errors.User.Pin.PinCode.Null);
 
-        var jsonPin = _memoryCache.Get<string>(command.Pincode);
+        var jsonPin = _memoryCache.Get<string>(command.PinCode);
 
         if(jsonPin == null)
             return Task.FromResult<ErrorOr<string>>(Errors.User.Pin.Expired);
 
         var pin = JsonConvert.DeserializeObject<Pin>(jsonPin);  
-        _memoryCache.Remove(command.Pincode);
+        _memoryCache.Remove(command.PinCode);
         jsonPin = JsonConvert.SerializeObject(pin);
         var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromMinutes(10));
-        _memoryCache.Set(pin!.Id.ToString(), jsonPin, cacheEntryOptions);
-        return Task.FromResult<ErrorOr<string>>(pin.Id.ToString());
+        _memoryCache.Set(pin!.Id, jsonPin, cacheEntryOptions);
+        return Task.FromResult<ErrorOr<string>>(pin.Id);
     }
 }

@@ -27,6 +27,11 @@ public static partial class Errors
                 code: "User.Email.WaitToChange",
                 description: $"You have to wait {days} days for next change"
             );
+
+            public static Error WaitToSend(int seconds) => Error.Validation(
+                code: "User.Email.WaitToSend",
+                description: $"You have to wait {seconds} days for next confirmation email send"
+            );
         }
     }
 }

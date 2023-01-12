@@ -3,6 +3,7 @@ using Core.Domain.Common.Errors;
 using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Core.Api.Controllers;
 
@@ -13,14 +14,22 @@ public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
     {
+        if (errors.Count is 0)
+            return Problem();
+        if (errors.All(error => error.Type == ErrorType.Validation))
+            return ValidationProblem(errors);
+        
         HttpContext.Items[HttpContextItemKeys.Errors] = errors;
-        var firstError = errors[0];
+        return Problem(errors[0]);
+    }
 
+    private IActionResult Problem(Error firstError)
+    {
         var statusCode = firstError switch
         {
-            Error error when 
+            Error error when
                 error == Errors.User.Credential.Invalid ||
-                error == Errors.User.AreYouKidding ||  
+                error == Errors.User.AreYouKidding ||
                 error == Errors.User.Email.NotConfirmed => StatusCodes.Status403Forbidden,
             _ => firstError.Type switch
             {
@@ -32,6 +41,18 @@ public class ApiController : ControllerBase
         };
         return Problem(
             statusCode: statusCode,
-            title: "One or more error has been occured");
+            title: "An error has been occured");
+    }
+
+    private IActionResult ValidationProblem(List<Error> errors)
+    {
+        var modelStateDictionary = new ModelStateDictionary();
+        foreach (var error in errors)
+        {
+            modelStateDictionary.AddModelError(
+              error.Code,
+              error.Description);
+        }
+        return ValidationProblem(modelStateDictionary);
     }
 }

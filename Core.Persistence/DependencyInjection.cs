@@ -13,6 +13,7 @@ public static class DependencyInjection
     {
         services.AddDbContextConfiguration(configuration);
         services.AddIdentityConfiguration(configuration);
+        services.AddRepositories();
         return services;
     }
 

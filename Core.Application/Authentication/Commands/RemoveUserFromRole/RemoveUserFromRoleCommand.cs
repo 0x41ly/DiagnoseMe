@@ -1,4 +1,3 @@
-using MediatR;
 
 namespace Core.Application.Authentication.Commands.RemoveUserFromRole;
 

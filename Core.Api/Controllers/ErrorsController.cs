@@ -1,4 +1,3 @@
-using Core.Application.Common.Errors;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +15,6 @@ public class ErrorsController : ControllerBase
 
         var (statusCode, message) = exception switch
         {
-            IServiceException serviceException => ((int) serviceException.statusCode, serviceException.ErrorMessage),
             _ => (StatusCodes.Status500InternalServerError ,"An unexpected error occurred")
         };
         return Problem(
