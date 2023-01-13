@@ -36,7 +36,11 @@ public class ConfirmEmailCommandHandler :
         if (!result.Succeeded)
             return Errors.User.Pin.Invalid;
 
-        // user.La
+        user.LastEmailChangeDate = DateTime.Now;
+        var updateResult = await _userManager.UpdateAsync(user);
+        if(!updateResult.Succeeded)
+            return Errors.User.MapIdentityError(updateResult.Errors.ToList());
+            
         _memoryCache.Remove(command.Id);
         return new AuthenticationResults{
             Message = "Email is successfully confirmed",

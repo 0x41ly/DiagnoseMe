@@ -18,6 +18,10 @@ public class ChangeNameCommandHandler :
 
         if(!user.EmailConfirmed)
             return Errors.User.Email.NotConfirmed;
+
+        var lastChanges = (int) user.LastUserNameChangeDate.Subtract(DateTime.Now).TotalDays;
+        if(lastChanges < 30)
+            return Errors.User.Name.WaitToChange(30 - lastChanges);
         
         if (await _userManager.FindByNameAsync(command.NewUserName) != null)
             return Errors.User.Name.Exist;

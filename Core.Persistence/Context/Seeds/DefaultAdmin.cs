@@ -15,6 +15,7 @@ public class DefaultAdmin
             UserName = "Admin",
             FirstName = "Aly",
             LastName = "Khaled",
+            DateOfBirth = new DateOnly(2000,4,26),
             EmailConfirmed = true,
             PhoneNumberConfirmed = true,
             Email = "alykhaled@diagnoseme.local",

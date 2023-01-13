@@ -53,6 +53,11 @@ public class ForgotPasswordCommandHandler:
                 "Reset Password",
                 $"Here Is your confirmation token: {pinCode} \n The pin code is only valid for only 1 hour"
                 );
+            user.LastConfirmationSentDate = DateTime.Now;
+            var updateResult = await _userManager.UpdateAsync(user);
+            if(!updateResult.Succeeded)
+                return Errors.User.MapIdentityError(updateResult.Errors.ToList());
+                
             results.Message = "Email sent successfully";
             results.Username = user.UserName;
             return results;

@@ -36,7 +36,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 710, DateTimeKind.Local).AddTicks(7399));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 874, DateTimeKind.Local).AddTicks(7370));
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
@@ -69,7 +69,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 710, DateTimeKind.Local).AddTicks(2273));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 874, DateTimeKind.Local).AddTicks(4493));
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
@@ -129,17 +129,22 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("LastConfirmationSentDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 709, DateTimeKind.Local).AddTicks(6147));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 874, DateTimeKind.Local).AddTicks(854));
 
                     b.Property<DateTime>("LastEmailChangeDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 709, DateTimeKind.Local).AddTicks(6765));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 874, DateTimeKind.Local).AddTicks(1224));
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("LastUserNameChangeDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 874, DateTimeKind.Local).AddTicks(1434));
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -197,11 +202,11 @@ namespace Core.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "-1571834175",
+                            Id = "-1821833547",
                             AccessFailedCount = 0,
                             BloodType = "",
-                            ConcurrencyStamp = "4b3577f1-58de-4df5-9b83-f17954a81f76",
-                            DateOfBirth = new DateOnly(1, 1, 1),
+                            ConcurrencyStamp = "19c48476-d37e-4b76-b5cb-4639724ee98e",
+                            DateOfBirth = new DateOnly(2000, 4, 26),
                             Email = "alykhaled@diagnoseme.local",
                             EmailConfirmed = true,
                             FirstName = "Aly",
@@ -210,14 +215,15 @@ namespace Core.Persistence.Migrations
                             LastConfirmationSentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastEmailChangeDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Khaled",
+                            LastUserNameChangeDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LockoutEnabled = false,
                             NationalID = "",
                             NormalizedEmail = "alykhaled@diagnoseme.local",
                             NormalizedUserName = "0x41ly",
-                            PasswordHash = "AQAAAAEAACcQAAAAELotQSdswFZtsW+gR9BGEroS1ZIbIdaD5eO9Et/VjiozpO3qIxwSYhP524Ah3oMRig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKm9mFr5XtQ/XxbWEQWFdWP9+1wufmuUxrLm+wekD7zv01Nih+LaGcePnELqzKW0+g==",
                             PhoneNumberConfirmed = true,
                             ProfilePic = "",
-                            SecurityStamp = "dc65abd0-eb70-4b5d-9cde-9175c2a32798",
+                            SecurityStamp = "7595a9bb-8bef-41b1-aaeb-394dfaa2ab94",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -236,7 +242,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 711, DateTimeKind.Local).AddTicks(2316));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 875, DateTimeKind.Local).AddTicks(237));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
@@ -268,7 +274,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 712, DateTimeKind.Local).AddTicks(1378));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 875, DateTimeKind.Local).AddTicks(5700));
 
                     b.Property<bool>("IsDelivered")
                         .HasColumnType("tinyint(1)");
@@ -319,7 +325,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 717, DateTimeKind.Local).AddTicks(7686));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 878, DateTimeKind.Local).AddTicks(1796));
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
@@ -349,7 +355,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 718, DateTimeKind.Local).AddTicks(3037));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 878, DateTimeKind.Local).AddTicks(4677));
 
                     b.Property<string>("Data")
                         .IsRequired()
@@ -398,7 +404,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 718, DateTimeKind.Local).AddTicks(6974));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 878, DateTimeKind.Local).AddTicks(6715));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -431,7 +437,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 719, DateTimeKind.Local).AddTicks(4072));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 879, DateTimeKind.Local).AddTicks(506));
 
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -458,7 +464,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 720, DateTimeKind.Local).AddTicks(4837));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 879, DateTimeKind.Local).AddTicks(6490));
 
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("char(36)");
@@ -493,7 +499,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 719, DateTimeKind.Local).AddTicks(5855));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 879, DateTimeKind.Local).AddTicks(1311));
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
@@ -527,7 +533,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 722, DateTimeKind.Local).AddTicks(1049));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 880, DateTimeKind.Local).AddTicks(4341));
 
                     b.Property<bool>("IsLicenseVerified")
                         .HasColumnType("tinyint(1)");
@@ -575,7 +581,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 722, DateTimeKind.Local).AddTicks(9860));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 880, DateTimeKind.Local).AddTicks(8615));
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
@@ -608,7 +614,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 723, DateTimeKind.Local).AddTicks(3622));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 881, DateTimeKind.Local).AddTicks(555));
 
                     b.Property<string>("Diagnoses")
                         .IsRequired()
@@ -652,7 +658,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 724, DateTimeKind.Local).AddTicks(9014));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 882, DateTimeKind.Local).AddTicks(1644));
 
                     b.Property<string>("Dose")
                         .IsRequired()
@@ -692,7 +698,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 725, DateTimeKind.Local).AddTicks(1196));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 882, DateTimeKind.Local).AddTicks(3430));
 
                     b.Property<float>("Height")
                         .HasColumnType("float");
@@ -755,7 +761,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 726, DateTimeKind.Local).AddTicks(2272));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 883, DateTimeKind.Local).AddTicks(899));
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
@@ -780,7 +786,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 726, DateTimeKind.Local).AddTicks(6208));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 883, DateTimeKind.Local).AddTicks(3793));
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
@@ -815,7 +821,7 @@ namespace Core.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 12, 19, 23, 5, 726, DateTimeKind.Local).AddTicks(7959));
+                        .HasDefaultValue(new DateTime(2023, 1, 13, 19, 29, 48, 883, DateTimeKind.Local).AddTicks(5272));
 
                     b.Property<string>("QuestionString")
                         .IsRequired()
@@ -869,22 +875,22 @@ namespace Core.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "-1571834175",
-                            ConcurrencyStamp = "6ec9fa19-a761-4001-8d83-a1d9f52160fd",
+                            Id = "-1821833547",
+                            ConcurrencyStamp = "7c1dc755-aa32-44fc-93a8-d16af4229de0",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "1851316533",
-                            ConcurrencyStamp = "e3ffe25b-9468-4349-89dc-055007ab608b",
+                            Id = "-803375937",
+                            ConcurrencyStamp = "147a250a-dcbe-406e-a885-cf31548cbc5d",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = "46394259",
-                            ConcurrencyStamp = "0f57cf3e-876e-4a98-94ef-9fe26892d606",
+                            Id = "2077590972",
+                            ConcurrencyStamp = "68f126d4-9394-4817-bb6d-1f0c05727196",
                             Name = "Doctor",
                             NormalizedName = "Doctor"
                         });
@@ -975,8 +981,8 @@ namespace Core.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "-1571834175",
-                            RoleId = "-1571834175"
+                            UserId = "-1821833547",
+                            RoleId = "-1821833547"
                         });
                 });
 

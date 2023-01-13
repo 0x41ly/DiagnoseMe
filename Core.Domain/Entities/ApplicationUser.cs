@@ -16,6 +16,7 @@ public class ApplicationUser : IdentityUser
     public string NationalID {get; set;} = string.Empty;
 
     public DateTime LastEmailChangeDate {get; set;}  
+    public DateTime LastUserNameChangeDate {get; set;}  
     public DateTime LastConfirmationSentDate {get; set;}
     public string Gender {get; set;}  = string.Empty;
     public DateOnly DateOfBirth {get; set;} 

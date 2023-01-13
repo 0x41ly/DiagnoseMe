@@ -15,6 +15,7 @@ public class ApplicationUserConfigration :  IEntityTypeConfiguration<Application
         builder.Property(au => au.LastConfirmationSentDate).HasDefaultValue(DateTime.Now);
         builder.Property(au => au.NationalID).IsRequired().HasMaxLength(15);
         builder.Property(au => au.LastEmailChangeDate).HasDefaultValue(DateTime.Now);
+        builder.Property(au => au.LastUserNameChangeDate).HasDefaultValue(DateTime.Now);
         builder.Property(au => au.IsDoctor).IsRequired();
         builder.HasOne(au => au.Doctor).WithOne(d => d.User).HasForeignKey<Doctor>(d => d.UserId);
         builder.HasOne(au => au.Patient).WithOne(p => p.User).HasForeignKey<Patient>(p => p.UserId);
