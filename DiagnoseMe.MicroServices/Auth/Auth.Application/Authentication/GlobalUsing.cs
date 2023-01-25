@@ -1,0 +1,14 @@
+global using Auth.Application.Authentication.Common;
+global using MediatR;
+global using Auth.Domain.Common;
+global using Auth.Domain.Common.Errors;
+global using ErrorOr;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.Extensions.Caching.Memory;
+global using Newtonsoft.Json;
+global using System.Net.Mail;
+global using Auth.Application.Common.Interfaces.Email;
+global using Auth.Domain.Common.Roles;
+global using Auth.Application.Common.Interfaces.Authentication;
+global using System.IdentityModel.Tokens.Jwt;
+global using Auth.Domain.Entities;

@@ -1,0 +1,140 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  diagnosemegateway:
+    container_name: diagnoseme-gateway
+    image: diagnosemegateway
+    hostname: gateway.diagnose.me
+    build:
+      context: .
+      dockerfile: DiagnoseMe.GateWay/Dockerfile
+    ports:
+      - 7199:7199
+    environment:
+      Debug:ShowHost=true
+    networks:
+      - gateway
+    entrypoint: dotnet run 
+  authapi:
+    container_name: auth-api
+    image: auth-api
+    hostname: auth.diagnose.me
+    build:
+      context: .
+      dockerfile: DiagnoseMe.MicroServices/Auth/Auth.Api/Dockerfile
+    ports:
+      - 7095:7095
+    environment:
+      - ConnectionStrings__DefaultConnection="Server=authdb;Database=AuthDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
+      - Debug:ShowHost=true
+    networks:
+      - authapi-authdb
+      - gateway
+    volumes:
+      - ./DiagnoseMe.MicroServices/Auth:/src
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    entrypoint: dotnet run
+  authdb:
+    container_name: auth-db
+    image: mysql:mysql-server:lastest
+    environment:
+      - MYSQL_ROOT_PASSWORD=DiagnoseMe
+      - MYSQL_DATABASE=AuthDb
+      - MYSQL_USER=DiagnoseMe
+      - MYSQL_PASSWORD=DiagnoseMe
+    volumes:
+      - authdbvolume:/var/lib/mysql
+      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+    networks:
+      - authapi-authdb
+    ports:
+      - 3306:3306
+    restart: always
+  medicalblogapi:
+    container_name: medical-blog-api
+    image: medical-blog-api
+    hostname: medical-blog.diagnose.me
+    build:
+      context: .
+      dockerfile: DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api/Dockerfile
+    ports:
+      - 7131:7131
+    environment:
+      - ConnectionStrings__DefaultConnection="Server=medicalblogdb;Database=MedicalBlogDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
+      - Debug:ShowHost=true
+    networks:
+      - gateway
+      - medicalblogapi-medicalblogdb
+    volumes:
+      - ./DiagnoseMe.MicroServices/MedicalBlog:/src
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    entrypoint: dotnet run
+  medicalblogdb:
+    container_name: medical-blog-db
+    image: mysql:mysql-server:lastest
+    environment:
+      - MYSQL_ROOT_PASSWORD=DiagnoseMe
+      - MYSQL_DATABASE=MedicalBlogDb
+      - MYSQL_USER=DiagnoseMe
+      - MYSQL_PASSWORD=DiagnoseMe
+    volumes:
+      - medicalblogdbvolume:/var/lib/mysql
+      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+    networks:
+      - medicalblogapi-medicalblogdb
+    ports:
+      - 3306:3306
+    restart: always
+  blooddonationapi:
+    container_name: blood-donation-api
+    image: blood-donation-api
+    hostname: blood-donation.diagnose.me
+    build:
+      context: .
+      dockerfile: DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api/Dockerfile
+    ports:
+      - 7234:7234
+    environment:
+      - ConnectionStrings__DefaultConnection="Server=blooddonationdb;Database=BloodDonationDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
+      - Debug:ShowHost=true
+    networks:
+      - gateway
+      - blooddonationapi-blooddonationdb
+    volumes:
+      - ./DiagnoseMe.MicroServices/BloodDonation:/src
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    entrypoint: dotnet run
+  blooddonationdb:
+    container_name: blood-donation-db
+    image: mysql:mysql-server:lastest
+    environment:
+      - MYSQL_ROOT_PASSWORD=DiagnoseMe
+      - MYSQL_DATABASE=BloodDonationDb
+      - MYSQL_USER=DiagnoseMe
+      - MYSQL_PASSWORD=DiagnoseMe
+    volumes:
+      - blooddonationdbvolume:/var/lib/mysql
+      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+    networks:
+      - blooddonationapi-blooddonationdb
+    ports:
+      - 3306:3306
+    restart: always
+volumes:
+  authdbvolume:
+    external: true
+  medicalblogdbvolume:
+    external: true
+  blooddonationdbvolume:
+    external: true
+networks:
+  authapi-authdb:
+    driver: bridge
+  gateway:
+    driver: bridge
+  medicalblogapi-medicalblogdb:
+    driver: bridge
+  blooddonationapi-blooddonationdb:
+    driver: bridge

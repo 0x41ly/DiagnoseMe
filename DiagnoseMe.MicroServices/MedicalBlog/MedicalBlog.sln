@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalBlog.Api", "MedicalBlog.Api\MedicalBlog.Api.csproj", "{2F565F8B-0B73-4376-B094-5B6E1BA7E71E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalBlog.Application", "MedicalBlog.Application\MedicalBlog.Application.csproj", "{AD826CFE-B264-4CC3-BD0A-6CD7A86B9BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalBlog.Persistence", "MedicalBlog.Persistence\MedicalBlog.Persistence.csproj", "{58DBFC7F-6F59-45D0-859E-55035F1C00B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalBlog.Contracts", "MedicalBlog.Contracts\MedicalBlog.Contracts.csproj", "{77B97F48-7099-452D-9202-7ECEFDD843AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalBlog.Domain", "MedicalBlog.Domain\MedicalBlog.Domain.csproj", "{F1A4F20C-EE2F-4BA5-ACDA-91AF0AEE8FFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalBlog.Infrastructure", "MedicalBlog.Infrastructure\MedicalBlog.Infrastructure.csproj", "{6BF5A6AC-67AE-4050-A90E-94DD4BE5CB4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F565F8B-0B73-4376-B094-5B6E1BA7E71E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F565F8B-0B73-4376-B094-5B6E1BA7E71E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F565F8B-0B73-4376-B094-5B6E1BA7E71E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F565F8B-0B73-4376-B094-5B6E1BA7E71E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD826CFE-B264-4CC3-BD0A-6CD7A86B9BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD826CFE-B264-4CC3-BD0A-6CD7A86B9BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD826CFE-B264-4CC3-BD0A-6CD7A86B9BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD826CFE-B264-4CC3-BD0A-6CD7A86B9BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58DBFC7F-6F59-45D0-859E-55035F1C00B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58DBFC7F-6F59-45D0-859E-55035F1C00B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58DBFC7F-6F59-45D0-859E-55035F1C00B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58DBFC7F-6F59-45D0-859E-55035F1C00B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B97F48-7099-452D-9202-7ECEFDD843AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B97F48-7099-452D-9202-7ECEFDD843AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B97F48-7099-452D-9202-7ECEFDD843AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B97F48-7099-452D-9202-7ECEFDD843AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A4F20C-EE2F-4BA5-ACDA-91AF0AEE8FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A4F20C-EE2F-4BA5-ACDA-91AF0AEE8FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A4F20C-EE2F-4BA5-ACDA-91AF0AEE8FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A4F20C-EE2F-4BA5-ACDA-91AF0AEE8FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BF5A6AC-67AE-4050-A90E-94DD4BE5CB4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BF5A6AC-67AE-4050-A90E-94DD4BE5CB4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BF5A6AC-67AE-4050-A90E-94DD4BE5CB4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BF5A6AC-67AE-4050-A90E-94DD4BE5CB4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

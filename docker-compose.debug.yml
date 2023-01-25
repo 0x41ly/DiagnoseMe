@@ -1,0 +1,42 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  medicalblogapi:
+    image: medicalblogapi
+    build:
+      context: .
+      dockerfile: DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api/Dockerfile
+    ports:
+      - 7131:7131
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+  authapi:
+    image: authapi
+    build:
+      context: .
+      dockerfile: DiagnoseMe.MicroServices/Auth/Auth.Api/Dockerfile
+    ports:
+      - 7132:7132
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+  dignosemegateway:
+    image: dignosemegateway
+    build:
+      context: .
+      dockerfile: DiagnoseMe.MicroServices/DignoseMeGateway/DignoseMeGateway.Api/Dockerfile
+    ports:
+      - 7133:7133
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+      

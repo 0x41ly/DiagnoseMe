@@ -1,0 +1,31 @@
+project=$1
+dotnet new sln -o $project
+
+cd $project
+dotnet new webapi -o $project.Api
+dotnet new classlib -o $project.Application
+dotnet new classlib -o $project.Infrastructure
+dotnet new classlib -o $project.Persistence 
+dotnet new classlib -o $project.Domain
+dotnet new classlib -o $project.Contracts
+
+rm */Class1.cs  
+rm $project.Api/Controllers/W*
+rm $project.Api/Wea*
+
+for i in $(ls -d *);	
+	do
+		dotnet sln add $i/$i.csproj
+		touch $i/DependencyInjection.cs
+	done
+dotnet add $project.Api reference $project.Application $project.Infrastructure $project.Persistence $project.Contracts
+
+dotnet add $project.Application reference $project.Domain
+
+dotnet add $project.Infrastructure reference $project.Application
+dotnet add $project.Persistence reference $project.Application
+
+mkdir $project.Domain/Entities
+mkdir -p $project.Persistence/Context/Configrations
+mkdir $project.Persistence/Repositories 
+mkdir $project.Docs

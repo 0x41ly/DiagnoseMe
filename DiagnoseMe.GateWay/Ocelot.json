@@ -1,0 +1,34 @@
+{
+    "Routes": [
+        {
+            "UpstreamPathTemplate": "/test",
+            "UpstreamHttpMethod": [ "Get", "Post" ],
+            "DownStreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5128
+                }
+            ],
+            "DownstreamPathTemplate": "/test/get",
+            "RATE_LIMITING_ENABLED": "true",
+            "RateLimitOptions": {
+                "ClientWhitelist": [],
+                "EnableRateLimiting": true,
+                "EnableEndpointRateLimiting": true,
+                "EnableClientRateLimiting": true,
+                "Period": "60s",
+                "PeriodTimespan": 60,
+                "Limit": 20
+            }
+
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:7199",
+        "RATE_LIMITING_ENABLED": "true",
+        "RateLimitOptions": {
+            "DisableRateLimitHeaders": false
+        }
+    }
+}

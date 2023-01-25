@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/DiagnoseMe.MicroServices/Auth/Auth.Api/Auth.Api.csproj",
+                "${workspaceFolder}/Auth/Auth.Api/Auth.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/DiagnoseMe.MicroServices/Auth/Auth.Api/Auth.Api.csproj",
+                "${workspaceFolder}/Auth/Auth.Api/Auth.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/DiagnoseMe.MicroServices/Auth/Auth.Api/Auth.Api.csproj"
+                "${workspaceFolder}/Auth/Auth.Api/Auth.Api.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -46,12 +46,12 @@
             "dockerBuild": {
                 "tag": "diagnosememicroservices:dev",
                 "target": "base",
-                "dockerfile": "${workspaceFolder}/DiagnoseMe.GateWay/Dockerfile",
+                "dockerfile": "${workspaceFolder}/Auth/Auth.Api/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/DiagnoseMe.GateWay/DiagnoseMe.GateWay.csproj"
+                "appProject": "${workspaceFolder}/Auth/Auth.Api/Auth.Api.csproj"
             }
         },
         {
@@ -62,12 +62,12 @@
             ],
             "dockerBuild": {
                 "tag": "diagnosememicroservices:latest",
-                "dockerfile": "${workspaceFolder}/DiagnoseMe.GateWay/Dockerfile",
+                "dockerfile": "${workspaceFolder}/Auth/Auth.Api/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/DiagnoseMe.GateWay/DiagnoseMe.GateWay.csproj"
+                "appProject": "${workspaceFolder}/Auth/Auth.Api/Auth.Api.csproj"
             }
         },
         {
@@ -78,7 +78,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/DiagnoseMe.GateWay/DiagnoseMe.GateWay.csproj",
+                "appProject": "${workspaceFolder}/Auth/Auth.Api/Auth.Api.csproj",
                 "enableDebugging": true
             }
         },
@@ -90,7 +90,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/DiagnoseMe.GateWay/DiagnoseMe.GateWay.csproj"
+                "appProject": "${workspaceFolder}/Auth/Auth.Api/Auth.Api.csproj"
             }
         }
     ]
