@@ -172,7 +172,7 @@ public class AuthController : ApiController
     [HttpGet("users/get/{pageNumber}")]
     public async Task<IActionResult> GetUsers(int pageNumber)
     {
-        var query = new GetAllUsersQuery(pageNumber - 1);
+        var query = new GetAllUsersQuery(pageNumber);
         var result = _mapper.Map<List<ApplicationUserResponse>>((await _mediator.Send(query)));
         return Ok(result);
     }
@@ -181,7 +181,7 @@ public class AuthController : ApiController
     [HttpGet("users/{role}/get/{pageNumber}}")]
     public async Task<IActionResult> GetUsersInRoles(string role, int pageNumber)
     {
-        var query = new GetUsersInRoleQuery(role, pageNumber - 1);
+        var query = new GetUsersInRoleQuery(role, pageNumber);
         var result = await _mediator.Send(query);
         return result.Match(
         authResult => Ok(_mapper.Map<List<ApplicationUserResponse>>(authResult)),

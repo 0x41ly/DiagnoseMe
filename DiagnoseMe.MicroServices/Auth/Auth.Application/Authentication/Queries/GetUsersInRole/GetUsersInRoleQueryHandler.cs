@@ -15,7 +15,7 @@ public class GetUsersInRoleQueryHandler :
         var users = (await _userManager.
                     GetUsersInRoleAsync(query.Role)).
                     OrderBy(u => u.UserName).
-                    Skip(query.pageNumber * 10).
+                    Skip((query.pageNumber -1)* 10).
                     Take(10).
                     AsParallel().
                     ToList();

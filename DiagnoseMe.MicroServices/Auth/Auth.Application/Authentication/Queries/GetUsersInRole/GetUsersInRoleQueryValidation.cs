@@ -10,6 +10,6 @@ public class GetUsersInRoleQueryValidation : AbstractValidator<GetUsersInRoleQue
         RuleFor(x => x.Role)
             .NotEmpty()
             .WithMessage("Role is required");
-        RuleFor(x => x.pageNumber).GreaterThanOrEqualTo(0);
+        RuleFor(x => x.pageNumber).GreaterThan(0);
     }
 }

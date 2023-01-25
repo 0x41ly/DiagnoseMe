@@ -24,6 +24,7 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, List<PostResp
     {
         var posts = (await _postRepository
             .GetAllAsync())
+            .OrderBy(x => x.CreationDate)
             .Skip((query.PageNumber -1)* 10)
             .Take(10)
             .ToList();

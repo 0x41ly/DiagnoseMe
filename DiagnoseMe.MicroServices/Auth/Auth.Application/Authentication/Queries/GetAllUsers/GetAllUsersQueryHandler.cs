@@ -13,7 +13,7 @@ public class GetAllUsersQueryHandler :
                     Users.
                     OrderBy(u => u.UserName).
                     AsParallel().
-                    Skip(query.pageNumber * 10).
+                    Skip((query.pageNumber -1)* 10).
                     Take(10).
                     ToList();
         return Task.FromResult<List<ApplicationUser>>(users);
