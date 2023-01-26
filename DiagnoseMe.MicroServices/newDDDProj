@@ -32,6 +32,14 @@ dotnet add $project.Persistence package Microsoft.Extensions.DependencyInjection
 dotnet add $project.Persistence package Microsoft.Extensions.Configuration
 dotnet add $project.Persistence package Microsoft.Extensions.Options.ConfigurationExtensions
 
+dotnet add $project.Api package Microsoft.EntityFrameworkCore.Design --version 6.0.12
+dotnet add $project.Api package Swashbuckle.AspNetCore
+dotnet add $project.Api package Mapster
+dotnet add $project.Api package ErrorOr
+dotnet add $project.Api package Mapster.DependencyInjection
+
+
+
 mkdir $project.Domain/Entities
 mkdir -p $project.Persistence/Context/Configrations
 mkdir $project.Persistence/Repositories 
