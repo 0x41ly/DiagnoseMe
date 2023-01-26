@@ -14,8 +14,9 @@ public static class Repositories
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
-            services.AddScoped<IPostSuggestionRepository, PostSuggestionRepository>();
-
+            services.AddScoped<IPostRatingRepository, PostRatingRepository>();
+            services.AddScoped<IPostViewRepository, PostViewRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
 }

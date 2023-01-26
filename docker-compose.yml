@@ -13,7 +13,7 @@ services:
     ports:
       - 7199:7199
     environment:
-      Debug:ShowHost=true
+      - Debug:ShowHost=true
     networks:
       - gateway
     entrypoint: dotnet run 
@@ -29,6 +29,14 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection="Server=authdb;Database=AuthDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
       - Debug:ShowHost=true
+    depends_on:
+      - authdb
+    healthcheck:
+      test: ["CMD", "curl","-f","http://authdb:3306"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
     networks:
       - authapi-authdb
       - gateway
@@ -38,7 +46,7 @@ services:
     entrypoint: dotnet run
   authdb:
     container_name: auth-db
-    image: mysql:mysql-server:lastest
+    image: mysql/mysql-server:lastest
     environment:
       - MYSQL_ROOT_PASSWORD=DiagnoseMe
       - MYSQL_DATABASE=AuthDb
@@ -64,6 +72,14 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection="Server=medicalblogdb;Database=MedicalBlogDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
       - Debug:ShowHost=true
+    depends_on:
+      - medicalblogdb
+    healthcheck:
+      test: ["CMD", "curl","-f","http://medicalblogdb:3306"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
     networks:
       - gateway
       - medicalblogapi-medicalblogdb
@@ -73,7 +89,7 @@ services:
     entrypoint: dotnet run
   medicalblogdb:
     container_name: medical-blog-db
-    image: mysql:mysql-server:lastest
+    image: mysql/mysql-server:lastest
     environment:
       - MYSQL_ROOT_PASSWORD=DiagnoseMe
       - MYSQL_DATABASE=MedicalBlogDb
@@ -85,7 +101,7 @@ services:
     networks:
       - medicalblogapi-medicalblogdb
     ports:
-      - 3306:3306
+      - 3306:3307
     restart: always
   blooddonationapi:
     container_name: blood-donation-api
@@ -99,6 +115,14 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection="Server=blooddonationdb;Database=BloodDonationDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
       - Debug:ShowHost=true
+    depends_on:
+      - blooddonationdb
+    healthcheck:
+      test: ["CMD", "curl","-f","http://blooddonationdb:3306"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
     networks:
       - gateway
       - blooddonationapi-blooddonationdb
@@ -108,7 +132,7 @@ services:
     entrypoint: dotnet run
   blooddonationdb:
     container_name: blood-donation-db
-    image: mysql:mysql-server:lastest
+    image: mysql/mysql-server:lastest
     environment:
       - MYSQL_ROOT_PASSWORD=DiagnoseMe
       - MYSQL_DATABASE=BloodDonationDb
@@ -120,7 +144,7 @@ services:
     networks:
       - blooddonationapi-blooddonationdb
     ports:
-      - 3306:3306
+      - 3306:3308
     restart: always
 volumes:
   authdbvolume:

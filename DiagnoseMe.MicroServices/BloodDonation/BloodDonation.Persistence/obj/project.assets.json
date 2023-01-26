@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "BloodDonation.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BloodDonation.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BloodDonation.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BloodDonation.Application.dll": {}
+        }
+      },
+      "BloodDonation.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BloodDonation.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BloodDonation.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "BloodDonation.Application/1.0.0": {
+      "type": "project",
+      "path": "../BloodDonation.Application/BloodDonation.Application.csproj",
+      "msbuildProject": "../BloodDonation.Application/BloodDonation.Application.csproj"
+    },
+    "BloodDonation.Domain/1.0.0": {
+      "type": "project",
+      "path": "../BloodDonation.Domain/BloodDonation.Domain.csproj",
+      "msbuildProject": "../BloodDonation.Domain/BloodDonation.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "BloodDonation.Application >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/home/x41ly/.nuget/packages/": {}
@@ -31,7 +68,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Application/BloodDonation.Application.csproj": {
+              "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Application/BloodDonation.Application.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

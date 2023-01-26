@@ -6,11 +6,14 @@ public class QueryHelper
 {
     public static PostResponse MapPostResponse(
         Post post,
-        List<PostSuggestion> postSuggestion,
-        List<Comment> comments,
+        int postRatingCount,
+        int commentsCount,
         UserData authorData,
-        List<UserData> suggestingUsers,
-        List<CommentResponse>? commentsResponse)
+        List<UserData> ratingUsers,
+        List<CommentResponse>? commentsResponse,
+        int viewsCount,
+        List<UserData> viewingUsers,
+        int avgRating)
     {
         return new PostResponse(
                     post.Title,
@@ -19,10 +22,13 @@ public class QueryHelper
                     post.Tags.Split(',').ToList(),
                     post.CreationDate.ToString(),
                     post.ModifiedOn.ToString(),
-                    comments.Count,
-                    postSuggestion.Count, 
-                    suggestingUsers,
-                    commentsResponse
+                    commentsCount,
+                    postRatingCount, 
+                    ratingUsers,
+                    commentsResponse,
+                    viewsCount,
+                    viewingUsers,
+                    avgRating
                 );
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "u+GOp31iXu7oNihD+mnWvro6F76pJ9O9t6lotbw5Nc2gn6UPYGT0I2KpG+aWvYOzSiPq9txGoycIARQ0lVP+UQ==",
+  "dgSpecHash": "DqbxtxFd7iVV6QWY+mPbtPSHCINggSe8LZaM1IlCUj7g0jqUHYuLIj7zGHY5UZ+xxZ5j5UNZQcB8P6WSJ6q+0w==",
   "success": true,
   "projectFilePath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api/BloodDonation.Api.csproj",
   "expectedPackageFiles": [

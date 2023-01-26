@@ -17,9 +17,7 @@ COPY . .
 WORKDIR "/src/DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api"
 RUN dotnet build "MedicalBlog.Api.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "MedicalBlog.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MedicalBlog.Api.dll"]
+FROM build AS final
+WORKDIR /src/DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api
+COPY --from=build /src/DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api .
+ENTRYPOINT ["dotnet", "run"]

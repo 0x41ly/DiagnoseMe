@@ -178,7 +178,7 @@ public class AuthController : ApiController
     }
 
     [Authorize(Roles = Roles.Admin)]
-    [HttpGet("users/{role}/get/{pageNumber}}")]
+    [HttpGet("users/{role}/get/{pageNumber}")]
     public async Task<IActionResult> GetUsersInRoles(string role, int pageNumber)
     {
         var query = new GetUsersInRoleQuery(role, pageNumber);
@@ -202,7 +202,6 @@ public class AuthController : ApiController
 
    [HttpPost("profile/picture/upload")]
    [Authorize]
-
    public async  Task<IActionResult> UploadProfilePicture(UploadProfilePictureRequest request)
    {
     var command = _mapper.Map<UploadProfilePictureCommand>((request, User.Identity!.Name!)); 

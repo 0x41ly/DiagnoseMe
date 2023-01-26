@@ -9,6 +9,9 @@ public class AnswersConfigration : BaseConfiguration<Answer>
         builder.ToTable("Answers");
         base.Configure(builder);
         builder.Property(c => c.AnswerString).IsRequired();
-        builder.HasOne(c => c.Question).WithMany(q =>q.Answers).HasForeignKey(c => c.QuestionId);          
+        builder.Property(c => c.UserId).IsRequired();
+        builder.Property(c => c.QuestionId).IsRequired();
+        builder.HasOne(c => c.Question).WithMany(q =>q.Answers).HasForeignKey(c => c.QuestionId);
+        builder.HasOne(c => c.User).WithMany(u => u.Answers).HasForeignKey(c => c.UserId);          
     }
 }

@@ -1,1 +1,1 @@
-global  using MedicalBlog.Domain.Entities;
+global using MedicalBlog.Domain.Entities;

@@ -8,7 +8,11 @@ public record PostResponse(
     string CreatedOn,
     string? ModifiedOn,
     int CommentsCount,
-    int SugguestionsCount,
-    List<UserData> SuggestingUsers,
-    List<CommentResponse>? Comments
+    int RatingCount,
+    List<UserData> RatingUsers,
+    List<CommentResponse>? Comments,
+    int ViewsCount,
+    List<UserData> ViewingUsers,
+    int AvgRating
+
 );

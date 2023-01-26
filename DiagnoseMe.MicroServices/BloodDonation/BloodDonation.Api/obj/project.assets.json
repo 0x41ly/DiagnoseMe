@@ -88,6 +88,65 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "BloodDonation.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BloodDonation.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BloodDonation.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BloodDonation.Application.dll": {}
+        }
+      },
+      "BloodDonation.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BloodDonation.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BloodDonation.Contracts.dll": {}
+        }
+      },
+      "BloodDonation.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BloodDonation.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BloodDonation.Domain.dll": {}
+        }
+      },
+      "BloodDonation.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BloodDonation.Application": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BloodDonation.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BloodDonation.Infrastructure.dll": {}
+        }
+      },
+      "BloodDonation.Persistence/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BloodDonation.Application": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BloodDonation.Persistence.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BloodDonation.Persistence.dll": {}
+        }
       }
     }
   },
@@ -216,10 +275,39 @@
         "swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "BloodDonation.Application/1.0.0": {
+      "type": "project",
+      "path": "../BloodDonation.Application/BloodDonation.Application.csproj",
+      "msbuildProject": "../BloodDonation.Application/BloodDonation.Application.csproj"
+    },
+    "BloodDonation.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../BloodDonation.Contracts/BloodDonation.Contracts.csproj",
+      "msbuildProject": "../BloodDonation.Contracts/BloodDonation.Contracts.csproj"
+    },
+    "BloodDonation.Domain/1.0.0": {
+      "type": "project",
+      "path": "../BloodDonation.Domain/BloodDonation.Domain.csproj",
+      "msbuildProject": "../BloodDonation.Domain/BloodDonation.Domain.csproj"
+    },
+    "BloodDonation.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../BloodDonation.Infrastructure/BloodDonation.Infrastructure.csproj",
+      "msbuildProject": "../BloodDonation.Infrastructure/BloodDonation.Infrastructure.csproj"
+    },
+    "BloodDonation.Persistence/1.0.0": {
+      "type": "project",
+      "path": "../BloodDonation.Persistence/BloodDonation.Persistence.csproj",
+      "msbuildProject": "../BloodDonation.Persistence/BloodDonation.Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BloodDonation.Application >= 1.0.0",
+      "BloodDonation.Contracts >= 1.0.0",
+      "BloodDonation.Infrastructure >= 1.0.0",
+      "BloodDonation.Persistence >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -247,7 +335,20 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Application/BloodDonation.Application.csproj": {
+              "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Application/BloodDonation.Application.csproj"
+            },
+            "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Contracts/BloodDonation.Contracts.csproj": {
+              "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Contracts/BloodDonation.Contracts.csproj"
+            },
+            "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Infrastructure/BloodDonation.Infrastructure.csproj": {
+              "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Infrastructure/BloodDonation.Infrastructure.csproj"
+            },
+            "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Persistence/BloodDonation.Persistence.csproj": {
+              "projectPath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Persistence/BloodDonation.Persistence.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

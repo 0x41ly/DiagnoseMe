@@ -14,6 +14,7 @@ public class CommentConfigration : BaseConfiguration<Comment>
         builder.Property(c => c.PostId).IsRequired();
         builder.Property(c => c.ModifiedOn).IsRequired();
         builder.HasOne(c => c.ParentComment).WithMany(cm => cm.ChildComments).HasForeignKey(c => c.ParentId);
-        builder.HasOne(c => c.Post).WithMany(p => p.Comments).HasForeignKey(c => c.Id);        
+        builder.HasOne(c => c.Post).WithMany(p => p.Comments).HasForeignKey(c => c.Id); 
+        builder.HasOne(c => c.Author).WithMany(u => u.Comments).HasForeignKey(c => c.AuthorId);       
     }
 }

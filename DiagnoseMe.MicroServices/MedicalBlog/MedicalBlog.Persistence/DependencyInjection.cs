@@ -11,6 +11,7 @@ public static class DependencyInjection
         ConfigurationManager configuration
         )
     {
+        services.AddRepositories();
         services.AddDbContextConfiguration(configuration);
         return services;
     }

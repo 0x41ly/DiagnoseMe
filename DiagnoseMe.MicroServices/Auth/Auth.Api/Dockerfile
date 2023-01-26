@@ -19,10 +19,7 @@ COPY . .
 WORKDIR "/src/DiagnoseMe.MicroServices/Auth/Auth.Api"
 RUN dotnet build "Auth.Api.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "Auth.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Auth.Api.dll"]
+FROM build AS final
+WORKDIR /src/DiagnoseMe.MicroServices/Auth/Auth.Api
+COPY --from=build /src/DiagnoseMe.MicroServices/Auth/Auth.Api .
+ENTRYPOINT ["dotnet", "run"]

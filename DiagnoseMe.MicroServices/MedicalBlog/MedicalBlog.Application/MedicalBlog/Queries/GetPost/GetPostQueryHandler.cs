@@ -1,24 +1,36 @@
-namespace MedicalBlog.Application.MedicalBlog.Queries.GetPost;
+using System.Collections.Generic;
 using ErrorOr;
 using global::MedicalBlog.Application.Common.Interfaces.Persistence;
 using global::MedicalBlog.Application.MedicalBlog.Common;
 using MediatR;
 using global::MedicalBlog.Domain.Common.Errors;
 using global::MedicalBlog.Application.MedicalBlog.Queries;
+using MapsterMapper;
+namespace MedicalBlog.Application.MedicalBlog.Queries.GetPost;
 
 public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostResponse>>
 {
     private readonly IPostRepository _postRepository;
     private readonly ICommentRepository _commentRepository;
-    private readonly IPostSuggestionRepository _postSuggestionRepository;
+    private readonly IPostRatingRepository _postRatingRepository;
+    private readonly IPostViewRepository _postViewRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
+
     public GetPostQueryHandler(
         IPostRepository postRepository,
         ICommentRepository commentRepository,
-        IPostSuggestionRepository postSuggestionRepository)
+        IPostRatingRepository postRatingRepository,
+        IPostViewRepository postViewRepository,
+        IUserRepository userRepository,
+        IMapper mapper)
     {
         _postRepository = postRepository;
         _commentRepository = commentRepository;
-        _postSuggestionRepository = postSuggestionRepository;
+        _postRatingRepository = postRatingRepository;
+        _postViewRepository = postViewRepository;
+        _userRepository = userRepository;
+        _mapper = mapper;
     }
     public async Task<ErrorOr<PostResponse>> Handle(GetPostQuery query, CancellationToken cancellationToken)
     {
@@ -27,31 +39,44 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
         {
             return Errors.Post.NotFound;
         }
-        var postSuggestion = await _postSuggestionRepository.GetByPostIdAsync(post.Id!);
-        var suggestingUsersId = postSuggestion.Select(x => x.UserId).ToList();
+        var postViews = await _postViewRepository.GetByPostIdAsync(post.Id!);
+        var viewingUsersId = postViews.Select(x => x.UserId).ToList();
+        var postRatings = await _postRatingRepository.GetByPostIdAsync(post.Id!);
+        var ratingUsersId = postRatings.Select(x => x.UserId).ToList();
         var comments = await _commentRepository.GetCommentsByPostIdAsync(post.Id!);
-        var authorData = new UserData("", "", ""); // TODO: Feach user data from Auth service
-        var suggestingUsers = new List<UserData>(); // TODO: Feach users data from Auth service
+        var allUsers = await _userRepository.GetAllAsync();
+        var viewingUsers = _mapper.Map<List<UserData>>(allUsers.Where(x => viewingUsersId.Contains(x.Id!)));
+        var authorData = _mapper.Map<UserData>(allUsers.Where(x => x.Id == post.AuthorId).FirstOrDefault()!);
+        var ratingUsers = _mapper.Map<List<UserData>>(allUsers.Where(x => ratingUsersId.Contains(x.Id!)));
         var commentsResponse = new List<CommentResponse>();
-        var commentUsersId = comments.Select(x => x.AuthorId).ToList();
-        var commentUsers = new List<UserData>(); // TODO: Feach users data from Auth service
-        foreach (var comment in comments)
+        int avgRating = postRatings.Count > 0 ? (int) postRatings.Average(x => x.Rating) : 0;
+        var reponseComments = comments
+            .OrderBy(x => x.CreationDate)
+            .Take(20)
+            .ToList();
+        var commentAuthorsId = reponseComments.Select(x => x.AuthorId).ToList();
+        var commentAuthors = _mapper.Map<List<UserData>>(allUsers.Where(x => commentAuthorsId.Contains(x.Id!)));
+
+        foreach (var comment in reponseComments)
         {
-            var commentUser = commentUsers.Where(x => x.Id == comment.AuthorId).FirstOrDefault();
+            var commentAuthor = commentAuthors.Where(x => x.Id == comment.AuthorId).FirstOrDefault();
             commentsResponse.Add(new CommentResponse(
                 comment.Content,
-                commentUser!,
+                commentAuthor!,
                 comment.CreationDate.ToString(),
                 comment.ModifiedOn.ToString()
             ));
         }
         PostResponse postResponse = QueryHelper.MapPostResponse(
             post,
-            postSuggestion,
-            comments,
+            postRatings.Count,
+            comments.Count,
             authorData,
-            suggestingUsers,
-            commentsResponse);
+            ratingUsers,
+            commentsResponse,
+            postViews.Count,
+            viewingUsers,
+            avgRating);
         return postResponse;
     }
 

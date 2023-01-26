@@ -16,10 +16,8 @@ RUN dotnet restore "DiagnoseMe.GateWay/DiagnoseMe.GateWay.csproj"
 COPY . .
 WORKDIR "/src/DiagnoseMe.GateWay"
 RUN dotnet build "DiagnoseMe.GateWay.csproj" -c Release -o /app/build
-FROM build AS publish
-RUN dotnet publish "DiagnoseMe.GateWay.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DiagnoseMe.GateWay.dll"]
+FROM build AS final
+WORKDIR /src/DiagnoseMe.GateWay
+COPY --from=build /src/DiagnoseMe.GateWay .
+ENTRYPOINT ["dotnet", "run"]
