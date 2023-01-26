@@ -22,9 +22,15 @@ cp ../Auth/.gitignore .
 dotnet add $project.Api reference $project.Application $project.Infrastructure $project.Persistence $project.Contracts
 
 dotnet add $project.Application reference $project.Domain
-
 dotnet add $project.Infrastructure reference $project.Application
 dotnet add $project.Persistence reference $project.Application
+
+dotnet add $project.Persistence package Microsoft.EntityFrameworkCore --version 6.0.12
+dotnet add $project.Persistence package Microsoft.EntityFrameworkCore.Relational --version 6.0.12
+dotnet add $project.Persistence package Pomelo.EntityFrameworkCore.MySql --version 6.0.12
+dotnet add $project.Persistence package Microsoft.Extensions.DependencyInjection.Abstractions
+dotnet add $project.Persistence package Microsoft.Extensions.Configuration
+dotnet add $project.Persistence package Microsoft.Extensions.Options.ConfigurationExtensions
 
 mkdir $project.Domain/Entities
 mkdir -p $project.Persistence/Context/Configrations
