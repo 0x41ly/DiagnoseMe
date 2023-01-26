@@ -1,5 +1,4 @@
 using System.Net;
-using AspNetCoreRateLimit;
 using DiagnoseMe.GateWay;
 using Ocelot.Middleware;
 
