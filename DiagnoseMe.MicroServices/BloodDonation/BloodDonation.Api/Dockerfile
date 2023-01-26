@@ -17,10 +17,7 @@ COPY . .
 WORKDIR "/src/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api"
 RUN dotnet build "BloodDonation.Api.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "BloodDonation.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+FROM build AS final
+WORKDIR /src/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api
+COPY --from=publish /src/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api .
 ENTRYPOINT ["dotnet", "BloodDonation.Api.dll"]
