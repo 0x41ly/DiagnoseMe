@@ -5,6 +5,7 @@ namespace MedicalBlog.Domain.Entities;
 public class User : BaseEntity
 {
     public string Name {get; set;} = string.Empty;
+    public string FullName {get; set;} = string.Empty;
     public string ProfilePictureUrl {get; set;} = string.Empty;
     public virtual ICollection<Answer> Answers {get; set;} = new HashSet<Answer>();
     public virtual ICollection<Comment> Comments {get; set;} = new HashSet<Comment>();
