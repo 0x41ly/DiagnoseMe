@@ -9,4 +9,4 @@ public class Answer : BaseEntity{
     public virtual Question Question  {get; set;} = new();
     public virtual ICollection<AnswerAgreement> AnswerAgreements {get; set;} = new HashSet<AnswerAgreement>();
     public virtual User AnsweringDoctor {get; set;} = new User();    
-}
+} 

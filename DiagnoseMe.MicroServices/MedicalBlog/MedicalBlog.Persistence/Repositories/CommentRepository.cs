@@ -8,6 +8,7 @@ public class CommentRepository : BaseRepo<Comment>, ICommentRepository
     {
         return await table
             .Where(c => c.PostId == postId)
+            .Include(c => c.Author)
             .ToListAsync();
     }
 }

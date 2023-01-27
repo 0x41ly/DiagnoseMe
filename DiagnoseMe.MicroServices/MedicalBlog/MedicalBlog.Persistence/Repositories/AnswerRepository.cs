@@ -9,6 +9,7 @@ public class AnswerRepository : BaseRepo<Answer>, IAnswerRepository
     {
         return await table
             .Where(a => questionsId.Contains(a.QuestionId))
+            .Include(a => a.AnsweringDoctor)
             .ToListAsync();
     }
 }

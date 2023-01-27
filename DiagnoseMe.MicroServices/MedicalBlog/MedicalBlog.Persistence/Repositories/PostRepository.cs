@@ -3,6 +3,24 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
 {
     public PostRepository(DbContext db) : base(db){}
 
+    public async override Task<List<Post>> GetAllAsync()
+    {
+        return await table
+            .Include(x => x.Author)
+            .Include(x => x.Comments)
+            .ThenInclude(c => c.Author)
+            .ToListAsync();
+    }
+    public async override Task<Post> GetByIdAsync(object id)
+    {
+        return (await table
+            .Where(x => x.Id == (string) id)
+            .Include(x => x.Author)
+            .Include(x => x.Comments)
+            .ThenInclude(c => c.Author)
+            .FirstOrDefaultAsync())!;
+    }
+
     public async Task<List<Post>> GetByDocterIdAsync(string authorId)
     {
         return (await GetAllAsync())

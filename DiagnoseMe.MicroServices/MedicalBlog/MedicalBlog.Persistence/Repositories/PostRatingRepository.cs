@@ -8,6 +8,7 @@ public class PostRatingRepository : BaseRepo<PostRating>, IPostRatingRepository
     {
         return await table
             .Where(pss => pss.PostId == postId)
+            .Include(x => x.User)
             .ToListAsync();
     }
 
@@ -15,6 +16,7 @@ public class PostRatingRepository : BaseRepo<PostRating>, IPostRatingRepository
     {
         return await table
             .Where(pss => postsId.Contains(pss.PostId!))
+            .Include(x => x.User)
             .ToListAsync();
     }
 }

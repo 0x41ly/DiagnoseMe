@@ -9,6 +9,7 @@ public class CommentAgreementRepository : BaseRepo<CommentAgreement>, ICommentAg
     {
         return await table
             .Where(x => commentsId.Contains(x.CommentId!))
+            .Include(x => x.User)
             .ToListAsync();
     }
 }
