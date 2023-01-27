@@ -44,7 +44,7 @@ services:
       - authapi-authdb
       - gateway
     volumes:
-      - ./DiagnoseMe.MicroServices/Auth:/src/DiagnoseMe.MicroServices/Auth/Auth.Api
+      - ./DiagnoseMe.MicroServices/Auth:/src/DiagnoseMe.MicroServices/Auth
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     entrypoint: dotnet run
   authdb:
@@ -87,7 +87,7 @@ services:
       - gateway
       - medicalblogapi-medicalblogdb
     volumes:
-      - ./DiagnoseMe.MicroServices/MedicalBlog:/src/DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api
+      - ./DiagnoseMe.MicroServices/MedicalBlog:/src/DiagnoseMe.MicroServices/MedicalBlog
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     entrypoint: dotnet run
   medicalblogdb:
@@ -130,7 +130,7 @@ services:
       - gateway
       - blooddonationapi-blooddonationdb
     volumes:
-      - ./DiagnoseMe.MicroServices/BloodDonation:/src/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api
+      - ./DiagnoseMe.MicroServices/BloodDonation:/src/DiagnoseMe.MicroServices/BloodDonation/
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     entrypoint: dotnet run
   blooddonationdb:
