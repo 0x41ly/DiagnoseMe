@@ -65,12 +65,12 @@ namespace Auth.Persistence.Migrations
                     b.Property<DateTime>("LastConfirmationSentDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 21, 44, 25, 324, DateTimeKind.Local).AddTicks(1901));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 12, 11, 698, DateTimeKind.Local).AddTicks(3603));
 
                     b.Property<DateTime>("LastEmailChangeDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 21, 44, 25, 324, DateTimeKind.Local).AddTicks(2629));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 12, 11, 698, DateTimeKind.Local).AddTicks(4442));
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -80,7 +80,7 @@ namespace Auth.Persistence.Migrations
                     b.Property<DateTime>("LastUserNameChangeDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 21, 44, 25, 324, DateTimeKind.Local).AddTicks(3043));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 12, 11, 698, DateTimeKind.Local).AddTicks(4861));
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -144,7 +144,7 @@ namespace Auth.Persistence.Migrations
                             Id = "00edafe3-b047-5980-d0fa-da10f400c1e5",
                             AccessFailedCount = 0,
                             BloodType = "",
-                            ConcurrencyStamp = "ca3fd884-1043-4335-b5a7-2e81cb24f60d",
+                            ConcurrencyStamp = "11c91d6e-e7d2-477e-9d45-fecb45cfab13",
                             DateOfBirth = new DateOnly(2000, 4, 26),
                             Email = "alykhaled@diagnoseme.local",
                             EmailConfirmed = true,
@@ -159,10 +159,10 @@ namespace Auth.Persistence.Migrations
                             NationalID = "",
                             NormalizedEmail = "alykhaled@diagnoseme.local",
                             NormalizedUserName = "0x41ly",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGS+4j9Y3p2IcjwXRTnfHZfhxUafSPx1w1bsbHsnvI1vPLH/Zkn8eTfmoKuDpdQf6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHjIzz6NDS1t26zXp1y0I/URn5uPCUrfTnYFIJ0pirSlojA7OQ/nkXtAWlevC9ARog==",
                             PhoneNumberConfirmed = true,
                             ProfilePic = "",
-                            SecurityStamp = "4c32ebf3-bc28-478f-a28a-5986af45e7ce",
+                            SecurityStamp = "40e648c2-b39e-4ac2-8981-8d26220360ce",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -188,10 +188,10 @@ namespace Auth.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 21, 44, 25, 342, DateTimeKind.Local).AddTicks(4039));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 12, 11, 717, DateTimeKind.Local).AddTicks(7255));
 
                     b.Property<bool>("IsLicenseVerified")
                         .HasColumnType("tinyint(1)");
@@ -227,10 +227,10 @@ namespace Auth.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 21, 44, 25, 342, DateTimeKind.Local).AddTicks(7834));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 12, 11, 718, DateTimeKind.Local).AddTicks(639));
 
                     b.Property<string>("DoctorId")
                         .IsRequired()
@@ -263,10 +263,10 @@ namespace Auth.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 21, 44, 25, 343, DateTimeKind.Local).AddTicks(6592));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 12, 11, 718, DateTimeKind.Local).AddTicks(8989));
 
                     b.Property<float>("Height")
                         .HasColumnType("float");
@@ -291,7 +291,7 @@ namespace Auth.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Id")
@@ -333,21 +333,21 @@ namespace Auth.Persistence.Migrations
                         new
                         {
                             Id = "00edafe3-b047-5980-d0fa-da10f400c1e5",
-                            ConcurrencyStamp = "31a51dde-edef-4dc3-976a-8791c338eff5",
+                            ConcurrencyStamp = "18e400f1-f26d-4b6b-8c0c-50ca5336c9bb",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "9dfe9b8f-4513-7c23-b3b2-b205864da075",
-                            ConcurrencyStamp = "ac96e40b-5d2a-4519-aeb6-7a7b070bad0b",
+                            ConcurrencyStamp = "22294af1-bde8-42e7-9d2f-1d818b3636f8",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "657cb6cb-abf2-00d1-5d46-939a7b3aff5f",
-                            ConcurrencyStamp = "c2d1433d-e317-4ace-9a85-7e313d0d6b1c",
+                            ConcurrencyStamp = "c10cb6fe-4f76-4b22-9e67-ef7309de791b",
                             Name = "Doctor",
                             NormalizedName = "Doctor"
                         });

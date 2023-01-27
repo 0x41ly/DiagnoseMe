@@ -30,28 +30,31 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("AnsweringDoctorId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 555, DateTimeKind.Local).AddTicks(3050));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 114, DateTimeKind.Local).AddTicks(8696));
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("QuestionId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionId");
+                    b.HasIndex("AnsweringDoctorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Answers", (string)null);
                 });
@@ -67,27 +70,27 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("AnsweringUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 554, DateTimeKind.Local).AddTicks(8105));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 114, DateTimeKind.Local).AddTicks(129));
 
                     b.Property<bool>("IsAgreed")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnswerId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AnsweringUserId");
 
                     b.ToTable("AnswerAgreements", (string)null);
                 });
@@ -111,13 +114,12 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 556, DateTimeKind.Local).AddTicks(4070));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 116, DateTimeKind.Local).AddTicks(7541));
 
                     b.Property<DateTime?>("ModifiedOn")
-                        .IsRequired()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("ParentId")
@@ -152,10 +154,10 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 555, DateTimeKind.Local).AddTicks(7832));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 115, DateTimeKind.Local).AddTicks(6544));
 
                     b.Property<bool>("IsAgreed")
                         .HasColumnType("tinyint(1)");
@@ -190,13 +192,12 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 557, DateTimeKind.Local).AddTicks(3583));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 118, DateTimeKind.Local).AddTicks(7358));
 
                     b.Property<DateTime?>("ModifiedOn")
-                        .IsRequired()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Tags")
@@ -227,10 +228,10 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 557, DateTimeKind.Local).AddTicks(6037));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 119, DateTimeKind.Local).AddTicks(3729));
 
                     b.Property<string>("PostId")
                         .IsRequired()
@@ -264,10 +265,10 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 558, DateTimeKind.Local).AddTicks(715));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 120, DateTimeKind.Local).AddTicks(2546));
 
                     b.Property<string>("PostId")
                         .IsRequired()
@@ -293,26 +294,29 @@ namespace MedicalBlog.Persistence.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("AskingUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 558, DateTimeKind.Local).AddTicks(4789));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 121, DateTimeKind.Local).AddTicks(1315));
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("QuestionString")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AskingUserId");
 
                     b.ToTable("Questions", (string)null);
                 });
@@ -328,10 +332,10 @@ namespace MedicalBlog.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 26, 22, 59, 4, 558, DateTimeKind.Local).AddTicks(7465));
+                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 121, DateTimeKind.Local).AddTicks(6537));
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -352,21 +356,21 @@ namespace MedicalBlog.Persistence.Migrations
 
             modelBuilder.Entity("MedicalBlog.Domain.Entities.Answer", b =>
                 {
+                    b.HasOne("MedicalBlog.Domain.Entities.User", "AnsweringDoctor")
+                        .WithMany("Answers")
+                        .HasForeignKey("AnsweringDoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MedicalBlog.Domain.Entities.Question", "Question")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MedicalBlog.Domain.Entities.User", "User")
-                        .WithMany("Answers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("AnsweringDoctor");
 
                     b.Navigation("Question");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MedicalBlog.Domain.Entities.AnswerAgreement", b =>
@@ -377,15 +381,15 @@ namespace MedicalBlog.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MedicalBlog.Domain.Entities.User", "User")
+                    b.HasOne("MedicalBlog.Domain.Entities.User", "AnsweringUser")
                         .WithMany("AnswerAgreements")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AnsweringUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Answer");
 
-                    b.Navigation("User");
+                    b.Navigation("AnsweringUser");
                 });
 
             modelBuilder.Entity("MedicalBlog.Domain.Entities.Comment", b =>
@@ -485,13 +489,13 @@ namespace MedicalBlog.Persistence.Migrations
 
             modelBuilder.Entity("MedicalBlog.Domain.Entities.Question", b =>
                 {
-                    b.HasOne("MedicalBlog.Domain.Entities.User", "User")
+                    b.HasOne("MedicalBlog.Domain.Entities.User", "AskingUser")
                         .WithMany("Questions")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AskingUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("AskingUser");
                 });
 
             modelBuilder.Entity("MedicalBlog.Domain.Entities.Answer", b =>
