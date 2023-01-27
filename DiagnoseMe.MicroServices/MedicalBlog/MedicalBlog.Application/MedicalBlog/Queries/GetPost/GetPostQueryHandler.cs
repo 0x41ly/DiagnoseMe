@@ -9,7 +9,6 @@ namespace MedicalBlog.Application.MedicalBlog.Queries.GetPost;
 public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostResponse>>
 {
     private readonly IPostRepository _postRepository;
-    private readonly ICommentAgreementRepository _commentAgreementRepository;
     private readonly IPostRatingRepository _postRatingRepository;
     private readonly IPostViewRepository _postViewRepository;
     private readonly IMapper _mapper;
@@ -22,7 +21,6 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
         IMapper mapper)
     {
         _postRepository = postRepository;
-        _commentAgreementRepository = commentAgreementRepository;
         _postRatingRepository = postRatingRepository;
         _postViewRepository = postViewRepository;
         _mapper = mapper;
@@ -37,8 +35,6 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
         var postViews = await _postViewRepository.GetByPostIdAsync(post.Id!);
         var postRatings = await _postRatingRepository.GetByPostIdAsync(post.Id!);
         var comments = post.Comments.ToList();
-        var commentsId = comments.Select(x => x.Id).ToList();
-        var commentsAgreements = await _commentAgreementRepository.GetCommentAgreementsByCommentsIdAsync(commentsId!);
         var viewingUsers = _mapper.Map<List<UserData>>(postViews.Select(x => x.User)); 
         var authorData = _mapper.Map<UserData>(post.Author);
         var ratingUsers = _mapper.Map<List<UserData>>(postRatings.Select(x => x.User));
@@ -52,8 +48,8 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
 
         foreach (var comment in reponseComments)
         {
-            var commentAgreementCount = commentsAgreements.Select(x => x.CommentId).Count();
-            var commentAgreementUsers = _mapper.Map<List<UserData>>(commentsAgreements.Select(x => x.User));
+            var commentAgreementCount = comment.CommentAgreements.Count();
+            var commentAgreementUsers = _mapper.Map<List<UserData>>(comment.CommentAgreements.Select(x => x.User));
             var commentAuthor = _mapper.Map<UserData>(comment.Author);
             commentsResponse.Add(new CommentResponse(
                 comment.Id!,

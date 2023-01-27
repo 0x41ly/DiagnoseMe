@@ -1,4 +1,4 @@
-namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostByTags;
+namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostsByTags;
 using ErrorOr;
 using global::MedicalBlog.Application.MedicalBlog.Common;
 using MediatR;

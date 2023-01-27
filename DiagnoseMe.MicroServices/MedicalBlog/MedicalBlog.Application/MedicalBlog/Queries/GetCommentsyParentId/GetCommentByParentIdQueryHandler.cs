@@ -1,12 +1,12 @@
 using ErrorOr;
+using MapsterMapper;
+using MediatR;
 using MedicalBlog.Application.Common.Interfaces.Persistence;
 using MedicalBlog.Application.MedicalBlog.Common;
-using MediatR;
-using MapsterMapper;
 
-namespace MedicalBlog.Application.MedicalBlog.Queries.GetCommentsByPostId;
+namespace MedicalBlog.Application.MedicalBlog.Queries.GetCommentsyParentId;
 
-public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentsByPostIdQuery, ErrorOr<List<CommentResponse>>>
+public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentByParentIdQuery, ErrorOr<List<CommentResponse>>>
 {
     private readonly ICommentRepository _commentRepository;
     private readonly IMapper _mapper;
@@ -17,10 +17,10 @@ public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentsByPost
         _commentRepository = commentRepository;
         _mapper = mapper;
     }
-    public async Task<ErrorOr<List<CommentResponse>>> Handle(GetCommentsByPostIdQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<CommentResponse>>> Handle(GetCommentByParentIdQuery query, CancellationToken cancellationToken)
     {
         var comments = (await _commentRepository
-            .GetByPostIdAsync(query.PostId))
+            .GetByParentIdAsync(query.ParentId))
             .Skip((query.PageNumber - 1) * 20)
             .Take(20);
         var commentsResponse = new List<CommentResponse>();

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostByTags;
+namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostsByTags;
 
 public class GetPostsByTagQueryValidator : AbstractValidator<GetPostsByTagQuery>
 {

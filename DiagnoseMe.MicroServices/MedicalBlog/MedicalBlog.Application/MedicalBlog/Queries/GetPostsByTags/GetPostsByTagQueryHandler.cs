@@ -4,7 +4,7 @@ using MedicalBlog.Application.Common.Interfaces.Persistence;
 using MedicalBlog.Application.MedicalBlog.Common;
 using MapsterMapper;
 
-namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostByTags;
+namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostsByTags;
 
 
 public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagQuery, ErrorOr<List<PostResponse>>>
