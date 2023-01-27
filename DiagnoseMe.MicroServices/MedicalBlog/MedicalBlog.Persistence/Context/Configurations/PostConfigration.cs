@@ -13,7 +13,7 @@ public class PostConfigration : BaseConfiguration<Post>
         builder.Property(mr => mr.Content).IsRequired();
         builder.Property(mr => mr.Title).IsRequired().HasMaxLength(50);
         builder.Property(mr => mr.Tags).IsRequired().HasMaxLength(50);
-        builder.Property(mr => mr.ModifiedOn).IsRequired();        
+        builder.Property(mr => mr.ModifiedOn);    
         builder.HasOne(mr => mr.Author).WithMany(u => u.Posts).HasForeignKey(c => c.AuthorId); 
 
 

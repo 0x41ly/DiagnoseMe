@@ -11,9 +11,9 @@ public class PostRatingRepository : BaseRepo<PostRating>, IPostRatingRepository
             .ToListAsync();
     }
 
-    public Task<List<PostRating>> GetByPostsIdAsync(List<string?> postsId)
+    public async Task<List<PostRating>> GetByPostsIdAsync(List<string?> postsId)
     {
-        return table
+        return await table
             .Where(pss => postsId.Contains(pss.PostId!))
             .ToListAsync();
     }

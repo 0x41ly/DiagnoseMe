@@ -13,34 +13,47 @@ public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentsByPost
 {
     private readonly ICommentRepository _commentRepository;
     private readonly IUserRepository _userRepository;
+    private readonly ICommentAgreementRepository _commentAgreementRepository;
     private readonly IMapper _mapper;
     public GetCommentsByPostIdQueryHandler(
         ICommentRepository commentRepository,
+        ICommentAgreementRepository commentAgreementRepository,
         IUserRepository userRepository, 
         IMapper mapper)
     {
         _commentRepository = commentRepository;
+        _commentAgreementRepository = commentAgreementRepository;
         _userRepository = userRepository;
         _mapper = mapper;
     }
-    public async Task<ErrorOr<List<CommentResponse>>> Handle(GetCommentsByPostIdQuery request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<CommentResponse>>> Handle(GetCommentsByPostIdQuery query, CancellationToken cancellationToken)
     {
         var comments = (await _commentRepository
-            .GetCommentsByPostIdAsync(request.PostId))
-            .Skip((request.PageNumber - 1) * 20)
+            .GetCommentsByPostIdAsync(query.PostId))
+            .Skip((query.PageNumber - 1) * 20)
             .Take(20);
+        var commentsId = comments.Select(x => x.Id).ToList();
         var commentAuthorsId = comments.Select(x => x.AuthorId).ToList();
-        var commentAuthors = _mapper.Map<List<UserData>>((await _userRepository.GetAllAsync())
-            .Where(x => commentAuthorsId.Contains(x.Id!)));
+        var allUsers = _mapper.Map<List<UserData>>(await _userRepository.GetAllAsync());
+        var commentsAuthors = allUsers
+            .Where(x => commentAuthorsId.Contains(x.Id!));
+        var commentsAgreements = await _commentAgreementRepository.GetCommentAgreementsByCommentsIdAsync(commentsId!);
         var commentsResponse = new List<CommentResponse>();
         foreach (var comment in comments)
         {
-           var commentUser = commentAuthors.Where(x => x.Id == comment.AuthorId).FirstOrDefault();
+            var commentAgreementCount = commentsAgreements.Select(x => x.CommentId).Count();
+            var commentAuthor = commentsAuthors.Where(x => x.Id == comment.AuthorId).FirstOrDefault();
+            var commentAgreementUsers = allUsers
+                .Where(x => commentsAgreements.Select(y => y.UserId).Contains(x.Id!))
+                .ToList();
             commentsResponse.Add(new CommentResponse(
+                comment.Id!,
                 comment.Content,
-                commentUser!,
-                comment.CreationDate.ToString(),
-                comment.ModifiedOn.ToString()
+                commentAuthor!,
+                comment.CreatedOn.ToString(),
+                comment.ModifiedOn.ToString(),
+                commentAgreementCount,
+                commentAgreementUsers
             )); 
         }
         

@@ -37,19 +37,19 @@ public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagQuery, Er
     {
         var posts = (await _postRepository
             .GetByTagsAsync(query.Tags))
-            .OrderBy(x => x.CreationDate)
+            .OrderBy(x => x.CreatedOn)
             .Skip((query.PageNumber -1 ) * 10)
             .Take(10)
             .ToList();
         var postsId = posts.Select(x => x.Id).ToList();
         var postsViews = await _postViewRepository.GetByPostsIdAsync(postsId);
         var ViewingUsersId = postsViews.Select(x => x.UserId).ToList();
-        var allUsers = await _userRepository.GetAllAsync();
-        var viewingUsers = _mapper.Map<List<UserData>>(allUsers.Where(x => ViewingUsersId.Contains(x.Id!)));
+        var allUsers = _mapper.Map<List<UserData>>(await _userRepository.GetAllAsync());
+        var viewingUsers = allUsers.Where(x => ViewingUsersId.Contains(x.Id!));
         var postsRatings = await _postRatingRepository.GetByPostsIdAsync(postsId);
         var ratingUsersId = postsRatings.Select(x => x.UserId).ToList();
-        var authorsData = _mapper.Map<List<UserData>>(allUsers.Where(x => posts.Select(y => y.AuthorId).Contains(x.Id!)));
-        var ratingUsers = _mapper.Map<List<UserData>>(allUsers.Where(x => ratingUsersId.Contains(x.Id!)));
+        var authorsData = allUsers.Where(x => posts.Select(y => y.AuthorId).Contains(x.Id!));
+        var ratingUsers = allUsers.Where(x => ratingUsersId.Contains(x.Id!));
         var postsResponse = new List<PostResponse>();
         foreach (var post in posts)
         {
@@ -59,7 +59,7 @@ public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagQuery, Er
             var postRatingUsers = ratingUsers
                 .Where(x => postRatings.Select(y => y.UserId).Contains(x.Id))
                 .ToList();
-            var avgRating = postRatings.Count > 0 ? (int) postRatings.Average(x => x.Rating) : 0;
+            var avgRating = postRatings.Count > 0 ? postRatings.Average(x => x.Rating) : 0;
             var postViews = postsViews.Where(x => x.PostId == post.Id)
                 .ToList();
             var postViewingUsers = viewingUsers

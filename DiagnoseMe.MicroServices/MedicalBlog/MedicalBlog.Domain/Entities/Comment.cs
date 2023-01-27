@@ -7,9 +7,9 @@ public class Comment : BaseEntity{
         CommentAgreements= new HashSet<CommentAgreement>();
     }
 
-    public string? ParentId {get; set;}
-    public string? AuthorId {get; set;}
-    public string? PostId {get; set;}
+    public string  ParentId {get; set;} = string.Empty;
+    public string AuthorId {get; set;} = string.Empty;
+    public string PostId {get; set;} = string.Empty;
     public string Content { get; set; } = string.Empty;
     public DateTime? ModifiedOn {get; set;}
     public virtual User Author {get; set;} = new User();

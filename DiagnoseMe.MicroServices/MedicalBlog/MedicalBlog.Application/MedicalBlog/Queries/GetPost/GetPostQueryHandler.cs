@@ -12,6 +12,7 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
 {
     private readonly IPostRepository _postRepository;
     private readonly ICommentRepository _commentRepository;
+    private readonly ICommentAgreementRepository _commentAgreementRepository;
     private readonly IPostRatingRepository _postRatingRepository;
     private readonly IPostViewRepository _postViewRepository;
     private readonly IUserRepository _userRepository;
@@ -20,6 +21,7 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
     public GetPostQueryHandler(
         IPostRepository postRepository,
         ICommentRepository commentRepository,
+        ICommentAgreementRepository commentAgreementRepository,
         IPostRatingRepository postRatingRepository,
         IPostViewRepository postViewRepository,
         IUserRepository userRepository,
@@ -27,6 +29,7 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
     {
         _postRepository = postRepository;
         _commentRepository = commentRepository;
+        _commentAgreementRepository = commentAgreementRepository;
         _postRatingRepository = postRatingRepository;
         _postViewRepository = postViewRepository;
         _userRepository = userRepository;
@@ -44,27 +47,36 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
         var postRatings = await _postRatingRepository.GetByPostIdAsync(post.Id!);
         var ratingUsersId = postRatings.Select(x => x.UserId).ToList();
         var comments = await _commentRepository.GetCommentsByPostIdAsync(post.Id!);
-        var allUsers = await _userRepository.GetAllAsync();
-        var viewingUsers = _mapper.Map<List<UserData>>(allUsers.Where(x => viewingUsersId.Contains(x.Id!)));
-        var authorData = _mapper.Map<UserData>(allUsers.Where(x => x.Id == post.AuthorId).FirstOrDefault()!);
-        var ratingUsers = _mapper.Map<List<UserData>>(allUsers.Where(x => ratingUsersId.Contains(x.Id!)));
+        var commentsId = comments.Select(x => x.Id).ToList();
+        var commentsAgreements = await _commentAgreementRepository.GetCommentAgreementsByCommentsIdAsync(commentsId!);
+        var allUsers = _mapper.Map<List<UserData>>(await _userRepository.GetAllAsync());
+        var viewingUsers = allUsers.Where(x => viewingUsersId.Contains(x.Id!)).ToList();
+        var authorData = allUsers.Where(x => x.Id == post.AuthorId).FirstOrDefault()!;
+        var ratingUsers = allUsers.Where(x => ratingUsersId.Contains(x.Id!)).ToList();
         var commentsResponse = new List<CommentResponse>();
-        int avgRating = postRatings.Count > 0 ? (int) postRatings.Average(x => x.Rating) : 0;
+        var avgRating = postRatings.Count > 0 ? postRatings.Average(x => x.Rating) : 0;
         var reponseComments = comments
-            .OrderBy(x => x.CreationDate)
+            .OrderBy(x => x.CreatedOn)
             .Take(20)
             .ToList();
         var commentAuthorsId = reponseComments.Select(x => x.AuthorId).ToList();
-        var commentAuthors = _mapper.Map<List<UserData>>(allUsers.Where(x => commentAuthorsId.Contains(x.Id!)));
+        var commentAuthors = allUsers.Where(x => commentAuthorsId.Contains(x.Id!));
 
         foreach (var comment in reponseComments)
         {
+            var commentAgreementCount = commentsAgreements.Select(x => x.CommentId).Count();
+            var commentAgreementUsers = allUsers
+                .Where(x => commentsAgreements.Select(y => y.UserId).Contains(x.Id!))
+                .ToList();
             var commentAuthor = commentAuthors.Where(x => x.Id == comment.AuthorId).FirstOrDefault();
             commentsResponse.Add(new CommentResponse(
+                comment.Id!,
                 comment.Content,
                 commentAuthor!,
-                comment.CreationDate.ToString(),
-                comment.ModifiedOn.ToString()
+                comment.CreatedOn.ToString(),
+                comment.ModifiedOn.ToString(),
+                commentAgreementCount,
+                commentAgreementUsers
             ));
         }
         PostResponse postResponse = QueryHelper.MapPostResponse(
@@ -78,8 +90,6 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
             viewingUsers,
             avgRating);
         return postResponse;
-    }
-
-    
+    }  
 }
 

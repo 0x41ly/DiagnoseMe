@@ -13,14 +13,15 @@ public class QueryHelper
         List<CommentResponse>? commentsResponse,
         int viewsCount,
         List<UserData> viewingUsers,
-        int avgRating)
+        double avgRating)
     {
         return new PostResponse(
+                    post.Id!,
                     post.Title,
                     post.Content,
                     authorData,
                     post.Tags.Split(',').ToList(),
-                    post.CreationDate.ToString(),
+                    post.CreatedOn.ToString(),
                     post.ModifiedOn.ToString(),
                     commentsCount,
                     postRatingCount, 

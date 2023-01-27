@@ -12,7 +12,8 @@ public class QuestionsConfigration : BaseConfiguration<Question>
         builder.ToTable("Questions");
         base.Configure(builder);
         builder.Property(c => c.QuestionString).IsRequired();  
-        builder.Property(c => c.UserId).IsRequired();
-        builder.HasOne(c => c.User).WithMany(u => u.Questions).HasForeignKey(c => c.UserId);
+        builder.Property(c => c.AskingUserId).IsRequired();
+        builder.Property(c => c.ModifiedOn);
+        builder.HasOne(c => c.AskingUser).WithMany(u => u.Questions).HasForeignKey(c => c.AskingUserId);
     }
 }

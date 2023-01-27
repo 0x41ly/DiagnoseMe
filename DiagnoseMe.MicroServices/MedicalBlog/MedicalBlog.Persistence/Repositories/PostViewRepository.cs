@@ -12,9 +12,9 @@ public class PostViewRepository : BaseRepo<PostView>, IPostViewRepository
             .ToListAsync();
     }
 
-    public Task<List<PostView>> GetByPostsIdAsync(List<string?> postsId)
+    public async Task<List<PostView>> GetByPostsIdAsync(List<string?> postsId)
     {
-        return table
+        return await table
             .Where(pss => postsId.Contains(pss.PostId!))
             .ToListAsync();
     } 

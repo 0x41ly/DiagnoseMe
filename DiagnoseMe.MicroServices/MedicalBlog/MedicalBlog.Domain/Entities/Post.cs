@@ -13,7 +13,7 @@ public class Post : BaseEntity{
     public DateTime? ModifiedOn {get; set;}
     public virtual ICollection<PostRating> PostRatings {get; set;}
     public virtual ICollection<PostView> PostViews {get; set;}
-    public string? AuthorId {get; set;} 
+    public string AuthorId {get; set;} = string.Empty;
     public virtual ICollection<Comment> Comments {get; set;}
     public virtual User Author {get; set;} = new User(); 
 }

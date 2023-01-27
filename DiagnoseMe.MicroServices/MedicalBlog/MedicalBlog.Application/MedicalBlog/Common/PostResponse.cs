@@ -1,6 +1,7 @@
 namespace MedicalBlog.Application.MedicalBlog.Common;
 
 public record PostResponse(
+    string Id,
     string Title,
     string Content,
     UserData AuthorData,
@@ -13,6 +14,6 @@ public record PostResponse(
     List<CommentResponse>? Comments,
     int ViewsCount,
     List<UserData> ViewingUsers,
-    int AvgRating
+    double AvgRating
 
 );
