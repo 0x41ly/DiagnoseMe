@@ -13,13 +13,13 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["DiagnoseMe.MicroServices/Auth/Auth.Api/Auth.Api.csproj", "DiagnoseMe.MicroServices/Auth/Auth.Api/"]
-RUN dotnet restore "DiagnoseMe.MicroServices/Auth/Auth.Api/Auth.Api.csproj"
+COPY ["Auth/Auth.Api/Auth.Api.csproj", "Auth/Auth.Api/"]
+RUN dotnet restore "Auth/Auth.Api/Auth.Api.csproj"
 COPY . .
-WORKDIR "/src/DiagnoseMe.MicroServices/Auth/Auth.Api"
+WORKDIR "/src/Auth/Auth.Api"
 RUN dotnet build "Auth.Api.csproj" -c Release -o /app/build
 
 FROM build AS final
-WORKDIR /src/DiagnoseMe.MicroServices/Auth/Auth.Api
-COPY --from=build /src/DiagnoseMe.MicroServices/Auth/Auth.Api .
+WORKDIR /src/Auth/Auth.Api
+COPY --from=build /src/Auth/Auth.Api .
 ENTRYPOINT ["dotnet", "run"]

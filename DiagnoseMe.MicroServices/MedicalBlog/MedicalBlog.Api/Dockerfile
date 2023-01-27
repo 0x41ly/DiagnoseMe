@@ -11,13 +11,13 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api/MedicalBlog.Api.csproj", "DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api/"]
-RUN dotnet restore "DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api/MedicalBlog.Api.csproj"
+COPY ["MedicalBlog/MedicalBlog.Api/MedicalBlog.Api.csproj", "MedicalBlog/MedicalBlog.Api/"]
+RUN dotnet restore "MedicalBlog/MedicalBlog.Api/MedicalBlog.Api.csproj"
 COPY . .
-WORKDIR "/src/DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api"
+WORKDIR "/src/MedicalBlog/MedicalBlog.Api"
 RUN dotnet build "MedicalBlog.Api.csproj" -c Release -o /app/build
 
 FROM build AS final
-WORKDIR /src/DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api
-COPY --from=build /src/DiagnoseMe.MicroServices/MedicalBlog/MedicalBlog.Api .
+WORKDIR /src/MedicalBlog/MedicalBlog.Api
+COPY --from=build /src/MedicalBlog/MedicalBlog.Api .
 ENTRYPOINT ["dotnet", "run"]

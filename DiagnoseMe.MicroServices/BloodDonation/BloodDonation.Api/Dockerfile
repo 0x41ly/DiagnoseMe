@@ -11,13 +11,13 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api/BloodDonation.Api.csproj", "DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api/"]
-RUN dotnet restore "DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api/BloodDonation.Api.csproj"
+COPY ["BloodDonation/BloodDonation.Api/BloodDonation.Api.csproj", "BloodDonation/BloodDonation.Api/"]
+RUN dotnet restore "BloodDonation/BloodDonation.Api/BloodDonation.Api.csproj"
 COPY . .
-WORKDIR "/src/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api"
+WORKDIR "/src/BloodDonation/BloodDonation.Api"
 RUN dotnet build "BloodDonation.Api.csproj" -c Release -o /app/build
 
 FROM build AS final
-WORKDIR /src/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api
-COPY --from=publish /src/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Api .
+WORKDIR /src/BloodDonation/BloodDonation.Api
+COPY --from=publish /src/BloodDonation/BloodDonation.Api .
 ENTRYPOINT ["dotnet", "BloodDonation.Api.dll"]
