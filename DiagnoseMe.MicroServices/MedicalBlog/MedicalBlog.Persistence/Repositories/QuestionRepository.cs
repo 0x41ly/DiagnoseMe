@@ -4,6 +4,13 @@ public class QuestionRepository : BaseRepo<Question>, IQuestionRepository
     public QuestionRepository(DbContext db) : base(db)
     {
     }
+    public override async Task<Question> GetByIdAsync(object id)
+    {
+        return (await table
+            .Where(q => q.Id == (string) id)
+            .Include(q => q.AskingUser)
+            .FirstOrDefaultAsync())!;
+    }
     public async override Task<List<Question>> GetAllAsync()
     {
         return await table
