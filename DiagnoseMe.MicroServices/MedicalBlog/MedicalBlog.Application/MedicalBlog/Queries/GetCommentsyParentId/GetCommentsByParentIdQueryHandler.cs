@@ -6,7 +6,7 @@ using MedicalBlog.Application.MedicalBlog.Common;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetCommentsyParentId;
 
-public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentByParentIdQuery, ErrorOr<List<CommentResponse>>>
+public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentsByParentIdQuery, ErrorOr<List<CommentResponse>>>
 {
     private readonly ICommentRepository _commentRepository;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentByParen
         _commentRepository = commentRepository;
         _mapper = mapper;
     }
-    public async Task<ErrorOr<List<CommentResponse>>> Handle(GetCommentByParentIdQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<CommentResponse>>> Handle(GetCommentsByParentIdQuery query, CancellationToken cancellationToken)
     {
         var comments = (await _commentRepository
             .GetByParentIdAsync(query.ParentId))

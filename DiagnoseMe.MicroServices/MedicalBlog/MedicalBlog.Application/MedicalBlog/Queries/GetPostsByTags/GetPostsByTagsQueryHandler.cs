@@ -7,7 +7,7 @@ using MapsterMapper;
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostsByTags;
 
 
-public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagQuery, ErrorOr<List<PostResponse>>>
+public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagsQuery, ErrorOr<List<PostResponse>>>
 {
     private readonly IPostRepository _postRepository;
     private readonly IPostRatingRepository _postRatingRepository;
@@ -26,7 +26,7 @@ public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagQuery, Er
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<List<PostResponse>>> Handle(GetPostsByTagQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<PostResponse>>> Handle(GetPostsByTagsQuery query, CancellationToken cancellationToken)
     {
         var posts = (await _postRepository
             .GetByTagsAsync(query.Tags))

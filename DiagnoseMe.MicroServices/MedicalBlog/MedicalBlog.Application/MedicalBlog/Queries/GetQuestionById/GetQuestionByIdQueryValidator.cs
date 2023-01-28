@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetQuestion;
 
-public class GetQuestionQueryValidator : AbstractValidator<GetQuestionQuery>
+public class GetQuestionByIdQueryValidator : AbstractValidator<GetQuestionByIdQuery>
 {
-    public GetQuestionQueryValidator()
+    public GetQuestionByIdQueryValidator()
     {
         RuleFor(x => x.QuestionId)
             .NotEmpty()

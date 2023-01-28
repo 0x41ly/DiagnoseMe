@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetCommentsyParentId;
 
-public class GetCommentByParentIdQueryValidator : AbstractValidator<GetCommentByParentIdQuery>
+public class GetCommentsByParentIdQueryValidator : AbstractValidator<GetCommentsByParentIdQuery>
 {
-    public GetCommentByParentIdQueryValidator()
+    public GetCommentsByParentIdQueryValidator()
     {
         RuleFor(x => x.ParentId)
             .NotEmpty()

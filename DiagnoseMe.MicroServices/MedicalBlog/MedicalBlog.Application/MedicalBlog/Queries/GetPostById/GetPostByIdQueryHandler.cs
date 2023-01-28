@@ -6,7 +6,7 @@ using MedicalBlog.Domain.Common.Errors;
 using MapsterMapper;
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetPost;
 
-public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostResponse>>
+public class GetPostQueryHandler : IRequestHandler<GetPostByIdQuery, ErrorOr<PostResponse>>
 {
     private readonly IPostRepository _postRepository;
     private readonly IPostRatingRepository _postRatingRepository;
@@ -25,7 +25,7 @@ public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ErrorOr<PostRes
         _postViewRepository = postViewRepository;
         _mapper = mapper;
     }
-    public async Task<ErrorOr<PostResponse>> Handle(GetPostQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<PostResponse>> Handle(GetPostByIdQuery query, CancellationToken cancellationToken)
     {
         var post = await _postRepository.GetByIdAsync(query.Id);
         if (post == null)

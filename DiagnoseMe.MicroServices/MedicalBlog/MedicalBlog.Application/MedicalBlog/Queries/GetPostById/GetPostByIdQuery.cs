@@ -4,6 +4,6 @@ using MedicalBlog.Application.MedicalBlog.Common;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetPost;
 
-public record GetPostQuery(
+public record GetPostByIdQuery(
     string Id
 ) : IRequest<ErrorOr<PostResponse>>;

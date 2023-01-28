@@ -3,9 +3,9 @@ using MediatR;
 using MedicalBlog.Application.Common.Interfaces.Persistence;
 using MedicalBlog.Application.MedicalBlog.Common;
 using MapsterMapper;
-namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostsByAuthorId;
+namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostsByDoctorId;
 
-public class GetPostsByAuthorIdQueryHandler : IRequestHandler<GetPostsByAuthorIdQuery, ErrorOr<List<PostResponse>>>
+public class GetPostsByDoctorIdQueryHandler : IRequestHandler<GetPostsByDoctorIdQuery, ErrorOr<List<PostResponse>>>
 {
     private readonly IPostRepository _postRepository;
     private readonly IPostRatingRepository _postRatingRepository;
@@ -14,7 +14,7 @@ public class GetPostsByAuthorIdQueryHandler : IRequestHandler<GetPostsByAuthorId
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public GetPostsByAuthorIdQueryHandler(
+    public GetPostsByDoctorIdQueryHandler(
         IPostRepository postRepository,
         IPostRatingRepository postRatingRepository,
         ICommentRepository commentRepository,
@@ -30,10 +30,10 @@ public class GetPostsByAuthorIdQueryHandler : IRequestHandler<GetPostsByAuthorId
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<List<PostResponse>>> Handle(GetPostsByAuthorIdQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<PostResponse>>> Handle(GetPostsByDoctorIdQuery query, CancellationToken cancellationToken)
     {
         var posts = (await _postRepository
-            .GetByDocterIdAsync(query.AuthorId))
+            .GetByDocterIdAsync(query.DoctorId))
             .OrderBy(x => x.CreatedOn)
             .Skip((query.PageNumber - 1) * 10)
             .Take(10)

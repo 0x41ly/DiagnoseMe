@@ -4,5 +4,5 @@ using MedicalBlog.Application.MedicalBlog.Common;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetQuestion;
 
-public record GetQuestionQuery(
+public record GetQuestionByIdQuery(
     string QuestionId) : IRequest<ErrorOr<QuestionResponse>>;

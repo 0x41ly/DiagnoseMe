@@ -3,7 +3,7 @@ using FluentValidation;
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetPost;
 
 
-public class GetPostQueryValidator : AbstractValidator<GetPostQuery>
+public class GetPostQueryValidator : AbstractValidator<GetPostByIdQuery>
 {
     public GetPostQueryValidator()
     {

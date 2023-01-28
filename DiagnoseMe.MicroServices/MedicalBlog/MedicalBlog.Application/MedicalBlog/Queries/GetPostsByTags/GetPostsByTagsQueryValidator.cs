@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetPostsByTags;
 
-public class GetPostsByTagQueryValidator : AbstractValidator<GetPostsByTagQuery>
+public class GetPostsByTagsQueryValidator : AbstractValidator<GetPostsByTagsQuery>
 {
-    public GetPostsByTagQueryValidator()
+    public GetPostsByTagsQueryValidator()
     {
         RuleFor(x => x.PageNumber).NotEmpty()
             .WithMessage("Page number cannot be empty.")

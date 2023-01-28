@@ -2,10 +2,11 @@ using MedicalBlog.Application.Common.Interfaces.Persistence;
 using MediatR;
 using MedicalBlog.Application.MedicalBlog.Common;
 using MapsterMapper;
+using ErrorOr;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetPosts;
 
-public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, List<PostResponse>>
+public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, ErrorOr<List<PostResponse>>>
 {
     private readonly IPostRepository _postRepository;
     private readonly ICommentRepository _commentRepository;
@@ -30,7 +31,7 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, List<PostResp
         _mapper = mapper;
     }
 
-    public async Task<List<PostResponse>> Handle(GetPostsQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<PostResponse>>> Handle(GetPostsQuery query, CancellationToken cancellationToken)
     {
         var posts = (await _postRepository
             .GetAllAsync())

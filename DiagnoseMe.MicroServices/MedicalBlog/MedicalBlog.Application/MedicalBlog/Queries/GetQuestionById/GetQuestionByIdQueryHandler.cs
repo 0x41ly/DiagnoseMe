@@ -8,13 +8,13 @@ using MedicalBlog.Domain.Common.Errors;
 
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetQuestion;
 
-public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, ErrorOr<QuestionResponse>>
+public class GetQuestionByIdQueryHandler : IRequestHandler<GetQuestionByIdQuery, ErrorOr<QuestionResponse>>
 {
     private readonly IQuestionRepository _questionRepository;
     private readonly ISender _mediator;
     private readonly IMapper _mapper;
 
-    public GetQuestionQueryHandler(
+    public GetQuestionByIdQueryHandler(
         IQuestionRepository questionRepository, 
         IMapper mapper,
         ISender mediator)
@@ -24,7 +24,7 @@ public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, ErrorOr
         _mediator = mediator;
     }
 
-    public async Task<ErrorOr<QuestionResponse>> Handle(GetQuestionQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<QuestionResponse>> Handle(GetQuestionByIdQuery query, CancellationToken cancellationToken)
     {
         var question = await _questionRepository.GetByIdAsync(query.QuestionId);
         if (question == null)
