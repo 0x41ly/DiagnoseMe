@@ -35,6 +35,6 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
         foreach(var tag in tags){
             posts.AddRange(allPosts.Where(x => x.Tags.Contains(tag)));
         }
-        return posts;
+        return posts.Distinct().ToList();
     }
 }

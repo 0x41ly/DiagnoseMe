@@ -1,8 +1,10 @@
+using System.Security.Claims;
 using Auth.Api.Common.Http;
 using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using MedicalBlog.Domain.Common.Errors;
 
 namespace MedicalBlog.Api.Controllers;
 
@@ -26,7 +28,8 @@ public class ApiController : ControllerBase
     {
         var statusCode = firstError switch
         {
-            // Error error when 
+            Error error when
+                error == Errors.Post.YouCanNotDoThis => StatusCodes.Status403Forbidden,
             _ => firstError.Type switch
             {
                 ErrorType.Conflict => StatusCodes.Status409Conflict,
@@ -50,5 +53,17 @@ public class ApiController : ControllerBase
               error.Description);
         }
         return ValidationProblem(modelStateDictionary);
+    }
+
+    protected string GetUserIdFromToken()
+    {
+        var userId = User.Claims.FirstOrDefault(claim => claim.Type == "sub")?.Value;
+        return userId!;
+    }
+
+    protected string GetUserNameFromToken()
+    {
+        var userName = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+        return userName!;
     }
 }

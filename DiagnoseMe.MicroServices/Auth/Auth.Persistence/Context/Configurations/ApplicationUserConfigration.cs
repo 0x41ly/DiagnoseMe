@@ -19,5 +19,6 @@ public class ApplicationUserConfigration :  IEntityTypeConfiguration<Application
         builder.Property(au => au.LastEmailChangeDate).HasDefaultValue(DateTime.Now);
         builder.Property(au => au.LastUserNameChangeDate).HasDefaultValue(DateTime.Now);
         builder.Property(au => au.IsDoctor).IsRequired();
+        builder.Property(au => au.ProfilePictureUrl).IsRequired().HasMaxLength(150);
     }
 }

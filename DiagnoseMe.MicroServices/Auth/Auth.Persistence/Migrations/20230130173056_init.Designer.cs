@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Auth.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230128124409_init")]
+    [Migration("20230130173056_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,12 +67,12 @@ namespace Auth.Persistence.Migrations
                     b.Property<DateTime>("LastConfirmationSentDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 28, 14, 44, 8, 849, DateTimeKind.Local).AddTicks(3797));
+                        .HasDefaultValue(new DateTime(2023, 1, 30, 19, 30, 56, 339, DateTimeKind.Local).AddTicks(8118));
 
                     b.Property<DateTime>("LastEmailChangeDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 28, 14, 44, 8, 849, DateTimeKind.Local).AddTicks(4532));
+                        .HasDefaultValue(new DateTime(2023, 1, 30, 19, 30, 56, 339, DateTimeKind.Local).AddTicks(9336));
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -82,7 +82,7 @@ namespace Auth.Persistence.Migrations
                     b.Property<DateTime>("LastUserNameChangeDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 28, 14, 44, 8, 849, DateTimeKind.Local).AddTicks(4986));
+                        .HasDefaultValue(new DateTime(2023, 1, 30, 19, 30, 56, 339, DateTimeKind.Local).AddTicks(9925));
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -115,9 +115,10 @@ namespace Auth.Persistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("ProfilePic")
+                    b.Property<string>("ProfilePictureUrl")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -146,7 +147,7 @@ namespace Auth.Persistence.Migrations
                             Id = "00edafe3-b047-5980-d0fa-da10f400c1e5",
                             AccessFailedCount = 0,
                             BloodType = "",
-                            ConcurrencyStamp = "d0c642bd-86af-4356-ac3a-ee9c40593c2d",
+                            ConcurrencyStamp = "48ff889c-79bf-4f2e-bdb1-5eb1de37324e",
                             DateOfBirth = new DateOnly(2000, 4, 26),
                             Email = "alykhaled@diagnoseme.local",
                             EmailConfirmed = true,
@@ -161,10 +162,10 @@ namespace Auth.Persistence.Migrations
                             NationalID = "",
                             NormalizedEmail = "alykhaled@diagnoseme.local",
                             NormalizedUserName = "0x41ly",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGdc709z1ijzVhqMZRTeH9yIrQGppoqW5SvNrKCElaA7PKj5RviA42gpcTXDQJB7LA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMRv2vHPqQuuh74qfpWdrkRocH8krCY5mQkJ9eSYyeU0kmApExCLoTgjryDrw863rQ==",
                             PhoneNumberConfirmed = true,
-                            ProfilePic = "",
-                            SecurityStamp = "67580612-a19e-4c5f-8ad0-7c543cd0c0fe",
+                            ProfilePictureUrl = "",
+                            SecurityStamp = "e0f6fc78-503b-4331-be2d-7314f89ee54b",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -193,7 +194,7 @@ namespace Auth.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 28, 14, 44, 8, 870, DateTimeKind.Local).AddTicks(5036));
+                        .HasDefaultValue(new DateTime(2023, 1, 30, 19, 30, 56, 361, DateTimeKind.Local).AddTicks(2164));
 
                     b.Property<bool>("IsLicenseVerified")
                         .HasColumnType("tinyint(1)");
@@ -232,7 +233,7 @@ namespace Auth.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 28, 14, 44, 8, 870, DateTimeKind.Local).AddTicks(9484));
+                        .HasDefaultValue(new DateTime(2023, 1, 30, 19, 30, 56, 361, DateTimeKind.Local).AddTicks(6396));
 
                     b.Property<string>("DoctorId")
                         .IsRequired()
@@ -268,7 +269,7 @@ namespace Auth.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 28, 14, 44, 8, 871, DateTimeKind.Local).AddTicks(9897));
+                        .HasDefaultValue(new DateTime(2023, 1, 30, 19, 30, 56, 362, DateTimeKind.Local).AddTicks(6222));
 
                     b.Property<float>("Height")
                         .HasColumnType("float");
@@ -335,21 +336,21 @@ namespace Auth.Persistence.Migrations
                         new
                         {
                             Id = "00edafe3-b047-5980-d0fa-da10f400c1e5",
-                            ConcurrencyStamp = "4bdea841-5e4b-4d0f-9a66-27428e31a2e7",
+                            ConcurrencyStamp = "920fcf06-1258-4300-a43e-87b85df65fc0",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "9dfe9b8f-4513-7c23-b3b2-b205864da075",
-                            ConcurrencyStamp = "e635e1f7-c0f4-4564-9ec8-ca3a6259e7aa",
+                            ConcurrencyStamp = "635ee89d-26b4-44d0-86f5-bee36c28b27b",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "657cb6cb-abf2-00d1-5d46-939a7b3aff5f",
-                            ConcurrencyStamp = "152adb57-d572-4b02-bb51-a5e2a2919c49",
+                            ConcurrencyStamp = "db6a90f0-8f18-4c09-949e-702b21420c15",
                             Name = "Doctor",
                             NormalizedName = "Doctor"
                         });

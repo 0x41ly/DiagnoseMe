@@ -45,10 +45,11 @@ public class ConfirmEmailChangeCommandHandler :
         _memoryCache.Remove(command.Id);
         return new AuthenticationResults{
             Message = "Email is successfully confirmed",
-            Token =  new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator.GenerateJwtTokenAsync(
+            Token =  "Bearer " + (new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator
+                .GenerateJwtTokenAsync(
                 user.Id,
                 user.UserName,
-                await GetUserClaims(user))),
+                await GetUserClaims(user)))),
             Username = user.UserName,
         };
     }

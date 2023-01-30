@@ -19,7 +19,7 @@ public class ApplicationUser : IdentityUser
     public DateOnly DateOfBirth {get; set;} 
     public string BloodType {get; set;}  = string.Empty;
     public bool IsDoctor {get; set;}
-    public string ProfilePic {get; set;} = string.Empty;
+    public string ProfilePictureUrl {get; set;} = string.Empty;
 
     public string? DoctorId {get; set;}
     public string? PatientId {get; set;}

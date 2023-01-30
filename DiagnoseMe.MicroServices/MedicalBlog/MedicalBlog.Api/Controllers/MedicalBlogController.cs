@@ -1,5 +1,8 @@
 using MapsterMapper;
 using MediatR;
+using MedicalBlog.Application.MedicalBlog.Commands.CreatePost;
+using MedicalBlog.Application.MedicalBlog.Commands.DeletePost;
+using MedicalBlog.Application.MedicalBlog.Commands.EditPost;
 using MedicalBlog.Application.MedicalBlog.Queries.GetAnswersByQuestionId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsByPostId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsyParentId;
@@ -11,6 +14,7 @@ using MedicalBlog.Application.MedicalBlog.Queries.GetQuestion;
 using MedicalBlog.Application.MedicalBlog.Queries.GetQuestions;
 using MedicalBlog.Application.MedicalBlog.Queries.GetQuestionsByAskingUserId;
 using MedicalBlog.Contracts.MedicalBlog;
+using MedicalBlog.Domain.Common.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -136,5 +140,46 @@ public class MedicalBlogController : ApiController
         result => Ok(result),
         errors => Problem(errors));
     } 
-    
+
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("posts/create")]
+    public async Task<IActionResult> CreatePost(CreatePostRequest request)
+    {
+        var command = new CreatePostCommand(
+            GetUserIdFromToken(),
+            request.Title,
+            request.Content,
+            request.Tags);
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("posts/{postId}/edit")]
+    public async Task<IActionResult> EditPost(EditPostRequest request, string postId)
+    {
+        var command = new EditPostCommand(
+            postId,
+            request.Title,
+            request.Content,
+            request.Tags,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpDelete("posts/{postId}/delete")]
+    public async Task<IActionResult> DeletePost(string postId)
+    {
+        var command = new DeletePostCommand(
+            postId,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
 }

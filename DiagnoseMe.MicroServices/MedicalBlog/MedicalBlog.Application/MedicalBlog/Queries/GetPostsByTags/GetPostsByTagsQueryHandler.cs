@@ -29,7 +29,7 @@ public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagsQuery, E
     public async Task<ErrorOr<List<PostResponse>>> Handle(GetPostsByTagsQuery query, CancellationToken cancellationToken)
     {
         var posts = (await _postRepository
-            .GetByTagsAsync(query.Tags))
+            .GetByTagsAsync(query.Tags.Distinct().ToList()))
             .OrderBy(x => x.CreatedOn)
             .Skip((query.PageNumber -1 ) * 10)
             .Take(10)

@@ -6,7 +6,7 @@ public static partial class Errors
 {
     public static class Question
     {
-        public static Error NotFound => Error.Validation(
+        public static Error NotFound => Error.NotFound(
             code: "Question.NotFound",
             description: "Question not found."
         );

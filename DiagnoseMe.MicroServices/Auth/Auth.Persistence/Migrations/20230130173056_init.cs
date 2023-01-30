@@ -44,16 +44,16 @@ namespace Auth.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NationalID = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastEmailChangeDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 28, 14, 44, 8, 849, DateTimeKind.Local).AddTicks(4532)),
-                    LastUserNameChangeDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 28, 14, 44, 8, 849, DateTimeKind.Local).AddTicks(4986)),
-                    LastConfirmationSentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 28, 14, 44, 8, 849, DateTimeKind.Local).AddTicks(3797)),
+                    LastEmailChangeDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 30, 19, 30, 56, 339, DateTimeKind.Local).AddTicks(9336)),
+                    LastUserNameChangeDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 30, 19, 30, 56, 339, DateTimeKind.Local).AddTicks(9925)),
+                    LastConfirmationSentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 30, 19, 30, 56, 339, DateTimeKind.Local).AddTicks(8118)),
                     Gender = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
                     BloodType = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDoctor = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ProfilePic = table.Column<string>(type: "longtext", nullable: false)
+                    ProfilePictureUrl = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -105,7 +105,7 @@ namespace Auth.Persistence.Migrations
                     IsLicenseVerified = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ClinicId = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 28, 14, 44, 8, 870, DateTimeKind.Local).AddTicks(5036)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 30, 19, 30, 56, 361, DateTimeKind.Local).AddTicks(2164)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -123,7 +123,7 @@ namespace Auth.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Height = table.Column<float>(type: "float", nullable: false),
                     Weight = table.Column<float>(type: "float", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 28, 14, 44, 8, 871, DateTimeKind.Local).AddTicks(9897)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 30, 19, 30, 56, 362, DateTimeKind.Local).AddTicks(6222)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -271,7 +271,7 @@ namespace Auth.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoctorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 28, 14, 44, 8, 870, DateTimeKind.Local).AddTicks(9484)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 30, 19, 30, 56, 361, DateTimeKind.Local).AddTicks(6396)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -330,15 +330,15 @@ namespace Auth.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "00edafe3-b047-5980-d0fa-da10f400c1e5", "4bdea841-5e4b-4d0f-9a66-27428e31a2e7", "Admin", "Admin" },
-                    { "657cb6cb-abf2-00d1-5d46-939a7b3aff5f", "152adb57-d572-4b02-bb51-a5e2a2919c49", "Doctor", "Doctor" },
-                    { "9dfe9b8f-4513-7c23-b3b2-b205864da075", "e635e1f7-c0f4-4564-9ec8-ca3a6259e7aa", "User", "User" }
+                    { "00edafe3-b047-5980-d0fa-da10f400c1e5", "920fcf06-1258-4300-a43e-87b85df65fc0", "Admin", "Admin" },
+                    { "657cb6cb-abf2-00d1-5d46-939a7b3aff5f", "db6a90f0-8f18-4c09-949e-702b21420c15", "Doctor", "Doctor" },
+                    { "9dfe9b8f-4513-7c23-b3b2-b205864da075", "635ee89d-26b4-44d0-86f5-bee36c28b27b", "User", "User" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "BloodType", "ConcurrencyStamp", "DateOfBirth", "DoctorId", "Email", "EmailConfirmed", "FirstName", "Gender", "IsDoctor", "LastName", "LockoutEnabled", "LockoutEnd", "NationalID", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PatientId", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePic", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00edafe3-b047-5980-d0fa-da10f400c1e5", 0, "", "d0c642bd-86af-4356-ac3a-ee9c40593c2d", new DateOnly(2000, 4, 26), null, "alykhaled@diagnoseme.local", true, "Aly", "", false, "Khaled", false, null, "", "alykhaled@diagnoseme.local", "0x41ly", "AQAAAAEAACcQAAAAEGdc709z1ijzVhqMZRTeH9yIrQGppoqW5SvNrKCElaA7PKj5RviA42gpcTXDQJB7LA==", null, null, true, "", "67580612-a19e-4c5f-8ad0-7c543cd0c0fe", false, "Admin" });
+                columns: new[] { "Id", "AccessFailedCount", "BloodType", "ConcurrencyStamp", "DateOfBirth", "DoctorId", "Email", "EmailConfirmed", "FirstName", "Gender", "IsDoctor", "LastName", "LockoutEnabled", "LockoutEnd", "NationalID", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PatientId", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureUrl", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "00edafe3-b047-5980-d0fa-da10f400c1e5", 0, "", "48ff889c-79bf-4f2e-bdb1-5eb1de37324e", new DateOnly(2000, 4, 26), null, "alykhaled@diagnoseme.local", true, "Aly", "", false, "Khaled", false, null, "", "alykhaled@diagnoseme.local", "0x41ly", "AQAAAAEAACcQAAAAEMRv2vHPqQuuh74qfpWdrkRocH8krCY5mQkJ9eSYyeU0kmApExCLoTgjryDrw863rQ==", null, null, true, "", "e0f6fc78-503b-4331-be2d-7314f89ee54b", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

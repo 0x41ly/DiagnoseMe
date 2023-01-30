@@ -23,13 +23,13 @@ public class GetTokenQueryHandler:
         if (!user.EmailConfirmed)
             return Errors.User.Email.NotConfirmed;
             
-        var token = _jwtTokenGenerator.GenerateJwtTokenAsync(
-            user.Id,
-            user.UserName,
-            await GetUserClaims(user));
         results.Message = "Signed in successfully";
         results.Username = user.UserName;
-        results.Token = new JwtSecurityTokenHandler().WriteToken(token);
+        results.Token = "Bearer " + (new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator
+            .GenerateJwtTokenAsync(
+            user.Id,
+            user.UserName,
+            await GetUserClaims(user))));
 
         return results;
     }
