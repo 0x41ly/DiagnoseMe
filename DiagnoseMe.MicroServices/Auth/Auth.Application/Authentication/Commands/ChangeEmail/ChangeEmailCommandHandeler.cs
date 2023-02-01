@@ -2,7 +2,7 @@ namespace Auth.Application.Authentication.Commands.ChangeEmail;
 
 public class ChangeEmailCommandHandeler :
     BaseAuthenticationHandler,
-    IRequestHandler<ChangeEmailCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<ChangeEmailCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly ISmtp _smtp;
     private readonly IMemoryCache _memoryCache;
@@ -16,7 +16,7 @@ public class ChangeEmailCommandHandeler :
         _memoryCache = memoryCache;
     }
 
-    public async Task<ErrorOr<AuthenticationResults>> Handle(ChangeEmailCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(ChangeEmailCommand command, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(command.UserName);
         var changedSince = (int) (user.LastEmailChangeDate).Subtract(DateTime.Now).TotalDays;
@@ -53,7 +53,7 @@ public class ChangeEmailCommandHandeler :
             if(!updateResult.Succeeded)
                 return Errors.User.MapIdentityError(updateResult.Errors.ToList());
                 
-            return new AuthenticationResults
+            return new AuthenticationResult
             {
                 Message = $"We sent you an email to {user.Email}.\nPlease confirm your new email by entering the pin code you received.",
                 Username = user.UserName

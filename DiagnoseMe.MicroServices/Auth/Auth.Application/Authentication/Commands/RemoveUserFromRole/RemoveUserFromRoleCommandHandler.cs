@@ -3,15 +3,15 @@ namespace Auth.Application.Authentication.Commands.RemoveUserFromRole;
 
 public class RemoveUserFromRoleCommandHandler :
     BaseAuthenticationHandler,
-    IRequestHandler<RemoveUserFromRoleCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<RemoveUserFromRoleCommand, ErrorOr<AuthenticationResult>>
 {
     public RemoveUserFromRoleCommandHandler(
         UserManager<ApplicationUser> userManager
     ): base(userManager){}
 
-    public async Task<ErrorOr<AuthenticationResults>> Handle(RemoveUserFromRoleCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(RemoveUserFromRoleCommand command, CancellationToken cancellationToken)
     {
-        var results = new AuthenticationResults();
+        var results = new AuthenticationResult();
         if (!Roles.AvailableRoles.Contains(command.Role))
             return Errors.Role.RoleNotExist;
 

@@ -2,15 +2,15 @@ namespace Auth.Application.Authentication.Commands.AddUserToRole;
 
 public class AddUserToRoleCommandHandler :
     BaseAuthenticationHandler,
-    IRequestHandler<AddUserToRoleCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<AddUserToRoleCommand, ErrorOr<AuthenticationResult>>
 {
     public AddUserToRoleCommandHandler(
         UserManager<ApplicationUser> userManager
     ): base(userManager){}
 
-    public async Task<ErrorOr<AuthenticationResults>> Handle(AddUserToRoleCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(AddUserToRoleCommand command, CancellationToken cancellationToken)
     {
-        var results = new AuthenticationResults();
+        var results = new AuthenticationResult();
         if (!Roles.AvailableRoles.Contains(command.Role))
             return Errors.Role.RoleNotExist;
 

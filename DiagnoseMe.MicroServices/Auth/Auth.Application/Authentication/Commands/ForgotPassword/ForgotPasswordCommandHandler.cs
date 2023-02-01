@@ -6,7 +6,7 @@ namespace Auth.Application.Authentication.Commands.ForgotPassword;
 
 public class ForgotPasswordCommandHandler:
     BaseAuthenticationHandler,
-    IRequestHandler<ForgotPasswordCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<ForgotPasswordCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IMemoryCache _memoryCache;
@@ -23,9 +23,9 @@ public class ForgotPasswordCommandHandler:
         _smtp = smtp;
     }
 
-    public async Task<ErrorOr<AuthenticationResults>> Handle(ForgotPasswordCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(ForgotPasswordCommand command, CancellationToken cancellationToken)
     {
-        var results = new AuthenticationResults();
+        var results = new AuthenticationResult();
         var user = await _userManager.FindByEmailAsync(command.Email);
         if (user == null)
             return Errors.User.Email.NotExist;

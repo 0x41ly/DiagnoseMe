@@ -2,7 +2,7 @@ namespace Auth.Application.Authentication.Commands.ChangeName;
 
 public class ChangeNameCommandHandler :
     BaseAuthenticationHandler,
-    IRequestHandler<ChangeNameCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<ChangeNameCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     public ChangeNameCommandHandler(
@@ -12,7 +12,7 @@ public class ChangeNameCommandHandler :
     {
         _jwtTokenGenerator =jwtTokenGenerator;
     }
-    public async Task<ErrorOr<AuthenticationResults>> Handle(ChangeNameCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(ChangeNameCommand command, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(command.UserName);
 
@@ -26,11 +26,11 @@ public class ChangeNameCommandHandler :
         if (await _userManager.FindByNameAsync(command.NewUserName) != null)
             return Errors.User.Name.Exist;
 
-        var setUserNameResult = await _userManager.SetUserNameAsync(user, command.NewUserName);
-        if (!setUserNameResult.Succeeded)
-            return Errors.User.Name.ChangeFail;
-            
-        return new AuthenticationResults
+        var result = await _userManager.SetUserNameAsync(user, command.NewUserName);
+        if (!result.Succeeded)
+            return Errors.User.MapIdentityError(result.Errors.ToList());
+         
+        return new AuthenticationResult
         {
             Message = "Your username is successfully changed",
             Token = "Bearer " + (new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator

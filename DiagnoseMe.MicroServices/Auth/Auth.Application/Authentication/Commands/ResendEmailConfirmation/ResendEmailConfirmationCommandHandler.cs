@@ -5,7 +5,7 @@ namespace Auth.Application.Authentication.Commands.ResendEmailConfirmation;
 
 public class ResendEmailConfirmationCommandHandler:
     BaseAuthenticationHandler,
-    IRequestHandler<ResendEmailConfirmationCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<ResendEmailConfirmationCommand, ErrorOr<AuthenticationResult>>
 {
 
     private readonly ISmtp _smtp;
@@ -20,7 +20,7 @@ public class ResendEmailConfirmationCommandHandler:
         _memoryCache = memoryCache;
     }
 
-    public async Task<ErrorOr<AuthenticationResults>> Handle(ResendEmailConfirmationCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(ResendEmailConfirmationCommand command, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByEmailAsync(command.Email);
         if(user.EmailConfirmed)
@@ -53,7 +53,7 @@ public class ResendEmailConfirmationCommandHandler:
             if(!updateResult.Succeeded)
                 return Errors.User.MapIdentityError(updateResult.Errors.ToList());
                 
-            return new AuthenticationResults
+            return new AuthenticationResult
             {
                 Message = $"We sent you an email to {user.Email}.\nPlease confirm your new email by entering the pin code you received.",
             };

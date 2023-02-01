@@ -3,7 +3,7 @@ namespace Auth.Application.Authentication.Commands.ResetPassword;
 
 public class ResetPasswordCommandHandle :
     BaseAuthenticationHandler,
-    IRequestHandler<ResetPasswordCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<ResetPasswordCommand, ErrorOr<AuthenticationResult>>
 {
 
     private readonly IMemoryCache _memoryCache;
@@ -15,12 +15,12 @@ public class ResetPasswordCommandHandle :
         _memoryCache = memoryCache;
     }
 
-    public async Task<ErrorOr<AuthenticationResults>> Handle(ResetPasswordCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(ResetPasswordCommand command, CancellationToken cancellationToken)
     {
         if(command.Id == null)
             return Errors.User.Pin.Id.Null;
             
-        var results = new AuthenticationResults();
+        var results = new AuthenticationResult();
         var jsonPin = _memoryCache.Get<string>(command.Id);
         if(jsonPin == null)
             return Errors.User.Pin.Expired;

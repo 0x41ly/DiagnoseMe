@@ -2,7 +2,7 @@ namespace Auth.Application.Authentication.Queries.GetToken;
 
 public class GetTokenQueryHandler: 
     BaseAuthenticationHandler,
-    IRequestHandler<GetTokenQuery, ErrorOr<AuthenticationResults>>
+    IRequestHandler<GetTokenQuery, ErrorOr<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
@@ -13,9 +13,9 @@ public class GetTokenQueryHandler:
     {
         _jwtTokenGenerator = jwtTokenGenerator;
     }
-    public async Task<ErrorOr<AuthenticationResults>> Handle(GetTokenQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(GetTokenQuery query, CancellationToken cancellationToken)
     {
-        AuthenticationResults results = new AuthenticationResults();
+        AuthenticationResult results = new AuthenticationResult();
         var user = await _userManager.FindByEmailAsync(query.Email);
         if (user == null || !await _userManager.CheckPasswordAsync(user, query.Password))
             return Errors.User.Credential.Invalid;

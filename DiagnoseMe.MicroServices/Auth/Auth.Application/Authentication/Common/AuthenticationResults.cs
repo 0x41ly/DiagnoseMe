@@ -3,7 +3,7 @@ namespace Auth.Application.Authentication.Common;
 
 
 
-public record AuthenticationResults
+public record AuthenticationResult
 {
     public string? Message { get; set; } 
     public string? Token { get; set; } 

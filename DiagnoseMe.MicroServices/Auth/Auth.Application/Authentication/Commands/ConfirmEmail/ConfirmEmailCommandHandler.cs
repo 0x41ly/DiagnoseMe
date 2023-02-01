@@ -2,7 +2,7 @@ namespace Auth.Application.Authentication.Commands.ConfirmEmail;
 
 public class ConfirmEmailCommandHandler :
     BaseAuthenticationHandler,
-    IRequestHandler<ConfirmEmailCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<ConfirmEmailCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IMemoryCache _memoryCache;
@@ -16,12 +16,12 @@ public class ConfirmEmailCommandHandler :
         _memoryCache = memoryCache;
     }
 
-    public async Task<ErrorOr<AuthenticationResults>> Handle(ConfirmEmailCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(ConfirmEmailCommand command, CancellationToken cancellationToken)
     {
         if(command.Id == null)
             return Errors.User.Pin.Id.Null;
 
-        var results = new AuthenticationResults{};
+        var results = new AuthenticationResult{};
         var jsonPin = _memoryCache.Get<string>(command.Id);
         if(jsonPin == null)
             return Errors.User.Pin.Expired;
@@ -34,7 +34,7 @@ public class ConfirmEmailCommandHandler :
         var user = await _userManager.FindByNameAsync(username);
         var result = await _userManager.ConfirmEmailAsync(user,pin.Token);
         if (!result.Succeeded)
-            return Errors.User.Pin.Invalid;
+            return Errors.User.MapIdentityError(result.Errors.ToList());;
 
         user.LastEmailChangeDate = DateTime.Now;
         var updateResult = await _userManager.UpdateAsync(user);
@@ -42,7 +42,7 @@ public class ConfirmEmailCommandHandler :
             return Errors.User.MapIdentityError(updateResult.Errors.ToList());
             
         _memoryCache.Remove(command.Id);
-        return new AuthenticationResults{
+        return new AuthenticationResult{
             Message = "Email is successfully confirmed",
             Username = user.UserName
         };

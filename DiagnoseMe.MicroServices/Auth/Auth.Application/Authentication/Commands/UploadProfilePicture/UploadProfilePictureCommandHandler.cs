@@ -5,7 +5,7 @@ namespace Auth.Application.Authentication.Commands.UploadProfilePicture;
 
 public class ResetPasswordCommandHandle :
     BaseAuthenticationHandler,
-    IRequestHandler<UploadProfilePictureCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<UploadProfilePictureCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IFileHandler _fileHandler;
     public ResetPasswordCommandHandle(
@@ -13,7 +13,7 @@ public class ResetPasswordCommandHandle :
         IFileHandler fileHandler): base(userManager){
             _fileHandler = fileHandler;
         }
-    public async Task<ErrorOr<AuthenticationResults>> Handle(UploadProfilePictureCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(UploadProfilePictureCommand command, CancellationToken cancellationToken)
     {
 
 
@@ -30,7 +30,7 @@ public class ResetPasswordCommandHandle :
             var updateResult = await _userManager.UpdateAsync(user);
             
         return (
-            new AuthenticationResults{
+            new AuthenticationResult{
                 Message = "Profile picture have been successfully changed"});
    }
 }

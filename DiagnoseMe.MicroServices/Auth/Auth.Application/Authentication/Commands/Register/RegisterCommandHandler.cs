@@ -2,7 +2,7 @@ namespace Auth.Application.Authentication.Commands.Register;
 
 public class RegisterCommandHandler : 
     BaseAuthenticationHandler,
-    IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResults>>
+    IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
 {
 
     private readonly ISmtp _smtp;
@@ -16,7 +16,7 @@ public class RegisterCommandHandler :
         _smtp = smtp;
         _memoryCache = memoryCache;
     }
-    public async Task<ErrorOr<AuthenticationResults>> Handle(RegisterCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
         command.User.DateOfBirth = DateOnly.ParseExact(command.DateOfBirth,"yyyy-MM-dd");
         var result = await _userManager.CreateAsync(command.User, command.Password);
@@ -45,7 +45,7 @@ public class RegisterCommandHandler :
                 "Email verification",
                 $"Here Is your confirmation token: {pinCode} \n The pin code is only valid for only 1 hour"
                 );
-            return new AuthenticationResults
+            return new AuthenticationResult
             {
                 Message = $"We sent you an email to {command.User.Email}.\nPlease confirm your new email by entering the pin code you received.",
             };
