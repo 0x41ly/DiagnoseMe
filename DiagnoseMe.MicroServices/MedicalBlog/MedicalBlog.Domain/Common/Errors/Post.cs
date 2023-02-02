@@ -14,10 +14,6 @@ public static partial class Errors
             description: "Post creation failed."
         );
 
-        public static Error YouCanNotDoThis => Error.Validation(
-            code: "Post.YouCanNotDoThis",
-            description: "You are not authorized to do this."
-        );
         public static Error DeletionFailed => Error.Failure(
             code: "Post.DeletionFailed",
             description: "Post deletion failed."

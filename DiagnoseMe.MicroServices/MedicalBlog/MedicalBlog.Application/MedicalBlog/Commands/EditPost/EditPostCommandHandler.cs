@@ -38,7 +38,7 @@ public class EditPostCommandHandler : IRequestHandler<EditPostCommand, ErrorOr<C
 
         if (post.AuthorId != user.Id)
         {
-            return Errors.Post.YouCanNotDoThis;
+            return Errors.User.YouCanNotDoThis;
         }
 
         post.Title = command.Title;

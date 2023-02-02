@@ -14,5 +14,10 @@ public static partial class Errors
             code: "User.NotFound",
             description: "User not found."
         );
+
+        public static Error YouCanNotDoThis => Error.Validation(
+            code: "Post.YouCanNotDoThis",
+            description: "You are not authorized to do this."
+        );
     }
 }

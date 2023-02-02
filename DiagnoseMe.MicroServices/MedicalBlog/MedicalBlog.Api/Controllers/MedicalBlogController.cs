@@ -1,8 +1,11 @@
 using MapsterMapper;
 using MediatR;
+using MedicalBlog.Application.MedicalBlog.Commands.Ask;
 using MedicalBlog.Application.MedicalBlog.Commands.CreatePost;
 using MedicalBlog.Application.MedicalBlog.Commands.DeletePost;
+using MedicalBlog.Application.MedicalBlog.Commands.DeleteQuestion;
 using MedicalBlog.Application.MedicalBlog.Commands.EditPost;
+using MedicalBlog.Application.MedicalBlog.Commands.EditQuestion;
 using MedicalBlog.Application.MedicalBlog.Queries.GetAnswersByQuestionId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsByPostId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsyParentId;
@@ -170,13 +173,53 @@ public class MedicalBlogController : ApiController
         result => Ok(result),
         errors => Problem(errors));
     }
-    [Authorize(Roles = Roles.Doctor)]
+    [Authorize(Roles = Roles.Doctor + "," + Roles.Admin)]
     [HttpDelete("posts/{postId}/delete")]
     public async Task<IActionResult> DeletePost(string postId)
     {
         var command = new DeletePostCommand(
             postId,
+            GetUserIdFromToken(),
+            GetUserRolesFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+
+    [Authorize]
+    [HttpPost("questions/create")]
+    public async Task<IActionResult> CreateQuestion(AskRequest request)
+    {
+        var command = new AskCommand(
+            GetUserIdFromToken(),
+            request.QuestionString);
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize]
+    [HttpPost("questions/{questionId}/edit")]
+    public async Task<IActionResult> EditQuestion(EditQuestionRequest request, string questionId)
+    {
+        var command = new EditQuestionCommand(
+            questionId,
+            request.QuestionString,
             GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize]
+    [HttpDelete("questions/{questionId}/delete")]
+    public async Task<IActionResult> DeleteQuestion(string questionId)
+    {
+        var command = new DeleteQuestionCommand(
+            questionId,
+            GetUserIdFromToken(),
+            GetUserRolesFromToken());
         var result = await _mediator.Send(command);
         return result.Match(
         result => Ok(result),

@@ -11,14 +11,11 @@ public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, Error
 {
     private readonly IPostRepository _postRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
 
     public CreatePostCommandHandler(IPostRepository postRepository,
-        IMapper mapper,
         IUserRepository userRepository)
     {
         _postRepository = postRepository;
-        _mapper = mapper;
         _userRepository = userRepository;
     }
 

@@ -6,4 +6,5 @@ namespace MedicalBlog.Application.MedicalBlog.Commands.DeletePost;
 
 public record DeletePostCommand(
     string PostId,
-    string UserId) : IRequest<ErrorOr<CommandResponse>>;
+    string UserId,
+    List<string> Roles) : IRequest<ErrorOr<CommandResponse>>;

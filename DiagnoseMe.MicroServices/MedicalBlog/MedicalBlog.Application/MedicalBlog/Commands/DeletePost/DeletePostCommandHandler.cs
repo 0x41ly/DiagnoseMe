@@ -3,6 +3,7 @@ using MediatR;
 using MedicalBlog.Application.Common.Interfaces.Persistence;
 using MedicalBlog.Application.MedicalBlog.Common;
 using MedicalBlog.Domain.Common.Errors;
+using MedicalBlog.Domain.Common.Roles;
 
 namespace MedicalBlog.Application.MedicalBlog.Commands.DeletePost;
 
@@ -28,8 +29,8 @@ public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Error
         var user = await _userRepository.GetByIdAsync(command.UserId);
         if (user is null)
             return Errors.User.NotFound;
-        if (post.Author.Id != user.Id)
-            return Errors.Post.YouCanNotDoThis;
+        if (post.Author.Id != user.Id || !command.Roles.Contains(Roles.Admin))
+            return Errors.User.YouCanNotDoThis;
 
         try{
             _postRepository.Remove(post);

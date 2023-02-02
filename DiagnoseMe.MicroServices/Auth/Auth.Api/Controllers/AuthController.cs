@@ -1,6 +1,7 @@
 using Auth.Application.Authentication.Commands.AddUserToRole;
 using Auth.Application.Authentication.Commands.ChangeEmail;
 using Auth.Application.Authentication.Commands.ChangeName;
+using Auth.Application.Authentication.Commands.ChangePassword;
 using Auth.Application.Authentication.Commands.ConfirmEmail;
 using Auth.Application.Authentication.Commands.ConfirmEmailChange;
 using Auth.Application.Authentication.Commands.ForgotPassword;
@@ -92,6 +93,18 @@ public class AuthController : ApiController
             authResult => Ok(authResult),
             errors => Problem(errors));
     }
+
+    [Authorize]
+    [HttpPost("password/change")]
+    public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
+    {
+        var command = _mapper.Map<ChangePasswordCommand>((request, User.Identity!.Name!));
+        var authResult = await _mediator.Send(command);
+        return authResult.Match(
+            authResult => Ok(authResult),
+            errors => Problem(errors));
+    }
+
     [AllowAnonymous]
     [HttpPost("email/confirm")]
 

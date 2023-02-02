@@ -29,7 +29,7 @@ public class ApiController : ControllerBase
         var statusCode = firstError switch
         {
             Error error when
-                error == Errors.Post.YouCanNotDoThis => StatusCodes.Status403Forbidden,
+                error == Errors.User.YouCanNotDoThis => StatusCodes.Status403Forbidden,
             _ => firstError.Type switch
             {
                 ErrorType.Conflict => StatusCodes.Status409Conflict,
@@ -65,5 +65,11 @@ public class ApiController : ControllerBase
     {
         var userName = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
         return userName!;
+    }
+
+    protected List<string> GetUserRolesFromToken()
+    {
+        var userRoles = User.Claims.Where(claim => claim.Type == "roles").Select(claim => claim.Value).ToList();
+        return userRoles;
     }
 }

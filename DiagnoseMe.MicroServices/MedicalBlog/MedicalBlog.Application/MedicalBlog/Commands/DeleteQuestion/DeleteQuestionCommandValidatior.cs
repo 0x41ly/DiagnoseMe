@@ -1,14 +1,14 @@
 using FluentValidation;
 
-namespace MedicalBlog.Application.MedicalBlog.Commands.DeletePost;
+namespace MedicalBlog.Application.MedicalBlog.Commands.DeleteQuestion;
 
-public class DeletePostCommandValidator : AbstractValidator<DeletePostCommand>
+public class DeleteQuestionCommandValidator : AbstractValidator<DeleteQuestionCommand>
 {
-    public DeletePostCommandValidator()
+    public DeleteQuestionCommandValidator()
     {
-        RuleFor(command => command.PostId)
+        RuleFor(command => command.QuestionId)
             .NotEmpty()
-            .WithMessage("PostId is required");
+            .WithMessage("QuestionId is required");
         RuleFor(command => command.UserId)
             .NotEmpty()
             .WithMessage("UserId is required")
