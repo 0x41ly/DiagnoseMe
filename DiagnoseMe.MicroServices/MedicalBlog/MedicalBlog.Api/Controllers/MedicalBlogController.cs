@@ -188,8 +188,8 @@ public class MedicalBlogController : ApiController
     }
 
     [Authorize]
-    [HttpPost("questions/create")]
-    public async Task<IActionResult> CreateQuestion(AskRequest request)
+    [HttpPost("questions/ask")]
+    public async Task<IActionResult> AskQuestion(AskRequest request)
     {
         var command = new AskCommand(
             GetUserIdFromToken(),

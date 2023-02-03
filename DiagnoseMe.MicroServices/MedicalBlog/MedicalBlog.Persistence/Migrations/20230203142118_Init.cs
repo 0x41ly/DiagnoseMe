@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MedicalBlog.Persistence.Migrations
 {
-    public partial class init : Migration
+    /// <inheritdoc />
+    public partial class Init : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
@@ -24,7 +26,7 @@ namespace MedicalBlog.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProfilePictureUrl = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 121, DateTimeKind.Local).AddTicks(6537)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 724, DateTimeKind.Local).AddTicks(4108)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -49,7 +51,7 @@ namespace MedicalBlog.Persistence.Migrations
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     AuthorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 118, DateTimeKind.Local).AddTicks(7358)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 722, DateTimeKind.Local).AddTicks(8567)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -76,7 +78,7 @@ namespace MedicalBlog.Persistence.Migrations
                     QuestionString = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 121, DateTimeKind.Local).AddTicks(1315)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 724, DateTimeKind.Local).AddTicks(991)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -107,7 +109,7 @@ namespace MedicalBlog.Persistence.Migrations
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 116, DateTimeKind.Local).AddTicks(7541)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 721, DateTimeKind.Local).AddTicks(7765)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -146,7 +148,7 @@ namespace MedicalBlog.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PostId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 119, DateTimeKind.Local).AddTicks(3729)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 723, DateTimeKind.Local).AddTicks(2585)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -178,7 +180,7 @@ namespace MedicalBlog.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PostId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 120, DateTimeKind.Local).AddTicks(2546)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 723, DateTimeKind.Local).AddTicks(6913)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -213,7 +215,7 @@ namespace MedicalBlog.Persistence.Migrations
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     QuestionId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 114, DateTimeKind.Local).AddTicks(8696)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 720, DateTimeKind.Local).AddTicks(405)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -246,7 +248,7 @@ namespace MedicalBlog.Persistence.Migrations
                     CommentId = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 115, DateTimeKind.Local).AddTicks(6544)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 720, DateTimeKind.Local).AddTicks(4833)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -279,7 +281,7 @@ namespace MedicalBlog.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AnswerId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 1, 27, 18, 11, 3, 114, DateTimeKind.Local).AddTicks(129)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 719, DateTimeKind.Local).AddTicks(5128)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -367,6 +369,7 @@ namespace MedicalBlog.Persistence.Migrations
                 column: "AskingUserId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

@@ -11,14 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalBlog.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230127161103_init")]
-    partial class init
+    [Migration("20230203142118_Init")]
+    partial class Init
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.12")
+                .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("MedicalBlog.Domain.Entities.Answer", b =>
@@ -43,7 +44,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 114, DateTimeKind.Local).AddTicks(8696));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 720, DateTimeKind.Local).AddTicks(405));
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime(6)");
@@ -83,7 +84,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 114, DateTimeKind.Local).AddTicks(129));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 719, DateTimeKind.Local).AddTicks(5128));
 
                     b.Property<bool>("IsAgreed")
                         .HasColumnType("tinyint(1)");
@@ -119,7 +120,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 116, DateTimeKind.Local).AddTicks(7541));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 721, DateTimeKind.Local).AddTicks(7765));
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime(6)");
@@ -159,7 +160,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 115, DateTimeKind.Local).AddTicks(6544));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 720, DateTimeKind.Local).AddTicks(4833));
 
                     b.Property<bool>("IsAgreed")
                         .HasColumnType("tinyint(1)");
@@ -197,7 +198,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 118, DateTimeKind.Local).AddTicks(7358));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 722, DateTimeKind.Local).AddTicks(8567));
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime(6)");
@@ -233,7 +234,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 119, DateTimeKind.Local).AddTicks(3729));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 723, DateTimeKind.Local).AddTicks(2585));
 
                     b.Property<string>("PostId")
                         .IsRequired()
@@ -270,7 +271,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 120, DateTimeKind.Local).AddTicks(2546));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 723, DateTimeKind.Local).AddTicks(6913));
 
                     b.Property<string>("PostId")
                         .IsRequired()
@@ -307,7 +308,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 121, DateTimeKind.Local).AddTicks(1315));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 724, DateTimeKind.Local).AddTicks(991));
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime(6)");
@@ -337,7 +338,7 @@ namespace MedicalBlog.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 1, 27, 18, 11, 3, 121, DateTimeKind.Local).AddTicks(6537));
+                        .HasDefaultValue(new DateTime(2023, 2, 3, 16, 21, 18, 724, DateTimeKind.Local).AddTicks(4108));
 
                     b.Property<string>("FullName")
                         .IsRequired()

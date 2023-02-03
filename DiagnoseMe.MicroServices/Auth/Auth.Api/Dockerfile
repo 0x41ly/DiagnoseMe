@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 7095
 
@@ -11,7 +11,7 @@ ENV ConnectionStrings__DefaultConnection="Server=authdb;Database=AuthDb;;Uid=Dia
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Auth/Auth.Api/Auth.Api.csproj", "Auth/Auth.Api/"]
 RUN dotnet restore "Auth/Auth.Api/Auth.Api.csproj"
