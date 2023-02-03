@@ -24,7 +24,7 @@ public class ChangeNameCommandHandler :
             return Errors.User.Name.WaitToChange(30 - lastChanges);
         
         if (await _userManager.FindByNameAsync(command.NewUserName) != null)
-            return Errors.User.Name.Exist;
+            return Errors.User.Name.Exists;
 
         var result = await _userManager.SetUserNameAsync(user, command.NewUserName);
         if (!result.Succeeded)

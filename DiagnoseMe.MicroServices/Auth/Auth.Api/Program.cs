@@ -5,6 +5,7 @@ using Auth.Infrastructue;
 using Auth.Persistence;
 using Auth.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,16 @@ var builder = WebApplication.CreateBuilder(args);
         .AddApplication(builder.Configuration)
         .AddPersistence(builder.Configuration)
         .AddInfrastrucure(builder.Configuration);
+    Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .WriteTo.File("logs/authapi-.txt", rollingInterval: RollingInterval.Day)
+                    .MinimumLevel.Debug()
+                    .CreateLogger();
+    builder.Logging.ClearProviders();
+    builder.Logging.AddSerilog(Log.Logger);
+    Serilog.ILogger logger = Log.Logger.ForContext<Program>();
+    builder.Services.AddSingleton<Serilog.ILogger>(logger);
+    logger.Information("Starting up");
 }
 
 var app = builder.Build();

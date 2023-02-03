@@ -16,7 +16,7 @@ public class AddUserToRoleCommandHandler :
 
         var user = await _userManager.FindByNameAsync(command.UserName);
         if (user == null)
-            return Errors.User.Name.NotExist;
+            return Errors.User.Name.NotExists;
 
         var result = await _userManager.AddToRoleAsync(user, command.Role);
         if(!result.Succeeded)

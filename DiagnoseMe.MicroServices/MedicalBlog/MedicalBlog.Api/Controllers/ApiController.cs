@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MedicalBlog.Domain.Common.Errors;
+using System.Diagnostics;
 
 namespace MedicalBlog.Api.Controllers;
 
@@ -13,14 +14,31 @@ namespace MedicalBlog.Api.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 public class ApiController : ControllerBase
 {
+    protected readonly Serilog.ILogger _logger;
+    protected ApiController(Serilog.ILogger logger)
+    {
+        _logger = logger;
+    }
     protected IActionResult Problem(List<Error> errors)
     {
-        if (errors.Count is 0)
-            return Problem();
-        if (errors.All(error => error.Type == ErrorType.Validation))
-            return ValidationProblem(errors);
         
-        HttpContext.Items[HttpContextItemKeys.Errors] = errors;
+        if (errors.Count is 0){
+            _logger.Error("An error has been occured");
+            return Problem();
+        }
+        if (errors.All(error => error.Type == ErrorType.Validation)){
+            _logger.Error(@$"Validation errors has been occured.
+                UserId: {GetUserIdFromToken()}
+                TraceId: {Activity.Current?.Id ?? HttpContext?.TraceIdentifier}
+                Errors: [{string.Join(", ", errors.Select(error => error.Description))}]");
+            return ValidationProblem(errors);
+        }
+        
+        _logger.Error(@$"An error has been occured.
+            UserId: {GetUserIdFromToken()}
+            TraceId: {Activity.Current?.Id ?? HttpContext?.TraceIdentifier}
+            Errors: [{string.Join(", ", errors.Select(error => error.Description))}]");
+        HttpContext!.Items[HttpContextItemKeys.Errors] = errors;
         return Problem(errors[0]);
     }
 
@@ -57,19 +75,25 @@ public class ApiController : ControllerBase
 
     protected string GetUserIdFromToken()
     {
-        var userId = User.Claims.FirstOrDefault(claim => claim.Type == "sub")?.Value;
-        return userId!;
+        var nameIdentifierClaims = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).ToList();
+        if(nameIdentifierClaims.Count is 0)
+            return "Anonymous";
+        var userId = nameIdentifierClaims[1].Value;
+        return userId! ?? "Anonymous";
     }
 
     protected string GetUserNameFromToken()
     {
-        var userName = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
-        return userName!;
+        var nameIdentifierClaims = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).ToList();
+        if(nameIdentifierClaims.Count is 0)
+            return "Anonymous";
+        var userName = nameIdentifierClaims[2].Value;
+        return userName! ?? "Anonymous";
     }
 
     protected List<string> GetUserRolesFromToken()
     {
-        var userRoles = User.Claims.Where(claim => claim.Type == "roles").Select(claim => claim.Value).ToList();
+        var userRoles = User.Claims.Where(claim => claim.Type.Contains("role")).Select(claim => claim.Value).ToList();
         return userRoles;
     }
 }

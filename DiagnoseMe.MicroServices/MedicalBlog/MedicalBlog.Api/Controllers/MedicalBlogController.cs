@@ -30,7 +30,8 @@ public class MedicalBlogController : ApiController
     private readonly IMapper _mapper;
     public MedicalBlogController(
         ISender mediator, 
-        IMapper mapper)
+        IMapper mapper,
+        Serilog.ILogger logger) : base(logger)
     {
 
         _mediator = mediator;

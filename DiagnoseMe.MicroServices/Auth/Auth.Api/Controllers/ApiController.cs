@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Security.Claims;
 using Auth.Api.Common.Http;
 using Auth.Domain.Common.Errors;
 using ErrorOr;
@@ -12,14 +14,29 @@ namespace Auth.Api.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 public class ApiController : ControllerBase
 {
+    protected readonly Serilog.ILogger _logger;
+    protected ApiController(Serilog.ILogger logger)
+    {
+        _logger = logger;
+    }
     protected IActionResult Problem(List<Error> errors)
     {
-        if (errors.Count is 0)
+        if (errors.Count is 0){
+            _logger.Error("An error has been occured");
             return Problem();
-        if (errors.All(error => error.Type == ErrorType.Validation))
+        }
+        if (errors.All(error => error.Type == ErrorType.Validation)){
+            _logger.Error(@$"Validation errors has been occured.
+                UserId: {GetUserIdFromToken()}
+                TraceId: {Activity.Current?.Id ?? HttpContext?.TraceIdentifier}
+                Errors: [{string.Join(", ", errors.Select(error => error.Description))}]");
             return ValidationProblem(errors);
-        
-        HttpContext.Items[HttpContextItemKeys.Errors] = errors;
+        }
+        _logger.Error(@$"An error has been occured.
+            UserId: {GetUserIdFromToken()}
+            TraceId: {Activity.Current?.Id ?? HttpContext?.TraceIdentifier}
+            Errors [{string.Join(", ", errors.Select(error => error.Description))}]");
+        HttpContext!.Items[HttpContextItemKeys.Errors] = errors;
         return Problem(errors[0]);
     }
 
@@ -54,5 +71,19 @@ public class ApiController : ControllerBase
               error.Description);
         }
         return ValidationProblem(modelStateDictionary);
+    }
+
+    protected string GetUserIdFromToken()
+    {
+        var nameIdentifierClaims = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).ToList();
+        if(nameIdentifierClaims.Count is 0)
+            return "Anonymous";
+        var userId = nameIdentifierClaims[1].Value;
+        return userId! ?? "Anonymous";
+    }
+    protected List<string> GetUserRolesFromToken()
+    {
+        var userRoles = User.Claims.Where(claim => claim.Type.Contains("role")).Select(claim => claim.Value).ToList();
+        return userRoles;
     }
 }

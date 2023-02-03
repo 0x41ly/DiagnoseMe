@@ -8,11 +8,11 @@ public static partial class Errors
     {
         public static class Name
         {
-            public static Error Exist => Error.Conflict(
-                code: "User.Name.Exist",
+            public static Error Exists => Error.Conflict(
+                code: "User.Name.Exists",
                 description: "Username already exists");
-            public static Error NotExist => Error.NotFound(
-                code: "User.Name.NotExist",
+            public static Error NotExists => Error.NotFound(
+                code: "User.Name.NotExists",
                 description: "Username does not exist");
             public static Error ChangeFail => Error.Failure(
                 code: "User.Name.ChangeFail",
