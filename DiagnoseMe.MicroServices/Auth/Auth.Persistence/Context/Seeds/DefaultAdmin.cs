@@ -1,4 +1,3 @@
-using Auth.Application.Settings;
 using Auth.Domain.Common.Users;
 using Auth.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -24,7 +23,7 @@ public class DefaultAdmin
             NormalizedEmail = "alykhaled@diagnoseme.local",
             NormalizedUserName = "0x41ly"
         };
-        user.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(user,_config.GetValue<string>("AdminPassword"));
+        user.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(user,_config.GetValue<string>("AdminPassword")!);
         return user;
     }
 

@@ -23,7 +23,7 @@ public class ResendEmailConfirmationCommandHandler:
     public async Task<ErrorOr<AuthenticationResult>> Handle(ResendEmailConfirmationCommand command, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByEmailAsync(command.Email);
-        if(user.EmailConfirmed)
+        if(user!.EmailConfirmed)
             return Errors.User.Email.AlreadyConfirmed;
         
         var lastSentSince = (int) (user.LastConfirmationSentDate).Subtract(DateTime.Now).TotalSeconds;
@@ -44,7 +44,7 @@ public class ResendEmailConfirmationCommandHandler:
         try
         {
             await _smtp.SendEmailAsync(
-                new MailAddress(user.Email,user.UserName),
+                new MailAddress(user.Email!,user.UserName),
                 "Email verification",
                 $"Here Is your confirmation token: {pinCode} \n The pin code is only valid for only 1 hour"
                 );

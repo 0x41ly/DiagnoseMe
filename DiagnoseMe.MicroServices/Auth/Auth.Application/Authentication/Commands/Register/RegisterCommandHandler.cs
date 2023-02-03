@@ -41,7 +41,7 @@ public class RegisterCommandHandler :
         try
         {
             await _smtp.SendEmailAsync(
-                new MailAddress(command.User.Email,command.User.UserName),
+                new MailAddress(command.User.Email!,command.User.UserName),
                 "Email verification",
                 $"Here Is your confirmation token: {pinCode} \n The pin code is only valid for only 1 hour"
                 );

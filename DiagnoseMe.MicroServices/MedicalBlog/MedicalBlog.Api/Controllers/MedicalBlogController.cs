@@ -38,7 +38,7 @@ public class MedicalBlogController : ApiController
     }
     
     [Authorize]
-    [HttpGet("posts")]
+    [HttpGet("posts/page-number/{pageNumber}")]
     public async Task<IActionResult> GetPosts(int pageNumber)
     {
         var query = new GetPostsQuery(pageNumber);
@@ -49,7 +49,7 @@ public class MedicalBlogController : ApiController
     }
 
     [Authorize]
-    [HttpGet("posts/{postId}")]
+    [HttpGet("posts/post-id/{postId}")]
     public async Task<IActionResult> GetPostById(string postId)
     {
         var query = new GetPostByIdQuery(postId);
@@ -60,7 +60,7 @@ public class MedicalBlogController : ApiController
     }
 
     [Authorize]
-    [HttpPost("posts/{postId}/comments")]
+    [HttpPost("posts/post-id/{postId}/comments/page-number/{pageNumber}")]
     public async Task<IActionResult> GetCommentsByPostId(string postId, int pageNumber)
     {
         var query = new GetCommentsByPostIdQuery(postId, pageNumber);
@@ -71,7 +71,7 @@ public class MedicalBlogController : ApiController
     }
 
     [Authorize]
-    [HttpGet("posts/{DoctorId}")]
+    [HttpGet("posts/doctor-id/{DoctorId}/page-number/{pageNumber}")]
     public async Task<IActionResult> GetPostsByDoctorId(string DoctorId, int pageNumber)
     {
         var query = new GetPostsByDoctorIdQuery(DoctorId, pageNumber);
@@ -91,7 +91,7 @@ public class MedicalBlogController : ApiController
         errors => Problem(errors));
     }
     [Authorize]
-    [HttpGet("posts/{postId}/comments/{parentId}")]
+    [HttpGet("posts/post-id/{postId}/comments/parent-id/{parentId}/page-number/{pageNumber}")]
     public async Task<IActionResult> GetCommentsByParentId(string postId, string parentId, int pageNumber)
     {
         var query = new GetCommentsByParentIdQuery(parentId, pageNumber);
@@ -102,7 +102,7 @@ public class MedicalBlogController : ApiController
     }
 
     [Authorize]
-    [HttpGet("questions")]
+    [HttpGet("questions/page-number/{pageNumber}")]
     public async Task<IActionResult> GetQuestions(int pageNumber)
     {
         var query = new GetQuestionsQuery(pageNumber);
@@ -112,7 +112,7 @@ public class MedicalBlogController : ApiController
         errors => Problem(errors));
     }
     [Authorize]
-    [HttpGet("questions/{questionId}")]
+    [HttpGet("questions/question-id/{questionId}")]
     public async Task<IActionResult> GetQuestionById(string questionId)
     {
         var query = new GetQuestionByIdQuery(questionId);
@@ -123,7 +123,7 @@ public class MedicalBlogController : ApiController
     }
 
     [Authorize]
-    [HttpGet("questions/{askingUserId}")]
+    [HttpGet("questions/asking-user-id/{askingUserId}/page-number/{pageNumber}")]
     public async Task<IActionResult> GetQuestionsByAskingUserId(string askingUserId, int pageNumber)
     {
         var query = new GetQuestionsByAskingUserIdQuery(pageNumber, askingUserId);
@@ -134,7 +134,7 @@ public class MedicalBlogController : ApiController
     }
 
     [Authorize]
-    [HttpGet("questions/{questionId}/answers}")]
+    [HttpGet("questions/question-id/{questionId}/answers/page-number/{pageNumber}")]
     public async Task<IActionResult> GetAnswersByQuestionId(string questionId, int pageNumber)
     {
         var query = new GetAnswersByQuestionIdQuery(questionId, pageNumber);
@@ -159,7 +159,7 @@ public class MedicalBlogController : ApiController
         errors => Problem(errors));
     }
     [Authorize(Roles = Roles.Doctor)]
-    [HttpPost("posts/{postId}/edit")]
+    [HttpPost("posts/post-id/{postId}/edit")]
     public async Task<IActionResult> EditPost(EditPostRequest request, string postId)
     {
         var command = new EditPostCommand(
@@ -174,7 +174,7 @@ public class MedicalBlogController : ApiController
         errors => Problem(errors));
     }
     [Authorize(Roles = Roles.Doctor + "," + Roles.Admin)]
-    [HttpDelete("posts/{postId}/delete")]
+    [HttpDelete("posts/post-id/{postId}/delete")]
     public async Task<IActionResult> DeletePost(string postId)
     {
         var command = new DeletePostCommand(
@@ -200,7 +200,7 @@ public class MedicalBlogController : ApiController
         errors => Problem(errors));
     }
     [Authorize]
-    [HttpPost("questions/{questionId}/edit")]
+    [HttpPost("questions/question-id/{questionId}/edit")]
     public async Task<IActionResult> EditQuestion(EditQuestionRequest request, string questionId)
     {
         var command = new EditQuestionCommand(
@@ -213,7 +213,7 @@ public class MedicalBlogController : ApiController
         errors => Problem(errors));
     }
     [Authorize]
-    [HttpDelete("questions/{questionId}/delete")]
+    [HttpDelete("questions/question-id/{questionId}/delete")]
     public async Task<IActionResult> DeleteQuestion(string questionId)
     {
         var command = new DeleteQuestionCommand(

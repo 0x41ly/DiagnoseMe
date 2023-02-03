@@ -30,10 +30,10 @@ public class ResetPasswordCommandHandle :
             return Errors.User.AreYouKidding;
         
         var username = pin.UserName;
-        var user = await _userManager.FindByNameAsync(username);
+        var user = await _userManager.FindByNameAsync(username!);
         var result = await _userManager.ResetPasswordAsync(
-            user,
-            pin.Token,
+            user!,
+            pin.Token!,
             command.NewPassword);
         if (!result.Succeeded)
             return Errors.User.Pin.Invalid;

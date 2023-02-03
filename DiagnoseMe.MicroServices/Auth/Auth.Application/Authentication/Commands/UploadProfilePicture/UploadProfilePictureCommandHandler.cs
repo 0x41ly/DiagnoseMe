@@ -26,7 +26,7 @@ public class ResetPasswordCommandHandle :
             if (result.IsError)
                 return (Errors.UnExpected);
             var user = await _userManager.FindByNameAsync(command.UserName);
-            user.ProfilePictureUrl = result.Value;
+            user!.ProfilePictureUrl = result.Value;
             var updateResult = await _userManager.UpdateAsync(user);
             
         return (

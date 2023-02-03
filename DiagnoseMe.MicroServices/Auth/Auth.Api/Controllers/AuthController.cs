@@ -160,7 +160,7 @@ public class AuthController : ApiController
         errors => Problem(errors));
     }
     [Authorize(Roles = Roles.Admin)]
-    [HttpPost("user/{role}/add")]
+    [HttpPost("user/role/{role}/add")]
     public async Task<IActionResult> AddUserToRole(AddUserToRoleRequest request, string role)
     {
         var command = _mapper.Map<AddUserToRoleCommand>((request, role));
@@ -171,7 +171,7 @@ public class AuthController : ApiController
     }
     
     [Authorize(Roles = Roles.Admin)]
-    [HttpDelete("user/{role}/remove")]
+    [HttpDelete("user/role/{role}/remove")]
     public async Task<IActionResult> RemoveUserFromRole(RemoveUserToRoleRequest request, string role)
     {
         var command = _mapper.Map<RemoveUserFromRoleCommand>((request, role));
@@ -182,7 +182,7 @@ public class AuthController : ApiController
     }
 
     [Authorize(Roles = Roles.Admin)]
-    [HttpGet("users/get/{pageNumber}")]
+    [HttpGet("users/get/page-number/{pageNumber}")]
     public async Task<IActionResult> GetUsers(int pageNumber)
     {
         var query = new GetAllUsersQuery(pageNumber);
@@ -191,7 +191,7 @@ public class AuthController : ApiController
     }
 
     [Authorize(Roles = Roles.Admin)]
-    [HttpGet("users/{role}/get/{pageNumber}")]
+    [HttpGet("users/role/{role}/get/page-number/{pageNumber}")]
     public async Task<IActionResult> GetUsersInRoles(string role, int pageNumber)
     {
         var query = new GetUsersInRoleQuery(role, pageNumber);

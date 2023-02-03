@@ -49,7 +49,7 @@ public class ForgotPasswordCommandHandler:
         try
         {
             await _smtp.SendEmailAsync(
-                new MailAddress(user.Email,user.UserName),
+                new MailAddress(user.Email!,user.UserName),
                 "Reset Password",
                 $"Here Is your confirmation token: {pinCode} \n The pin code is only valid for only 1 hour"
                 );

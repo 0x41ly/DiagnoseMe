@@ -28,7 +28,7 @@ public class GetTokenQueryHandler:
         results.Token = "Bearer " + (new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator
             .GenerateJwtTokenAsync(
             user.Id,
-            user.UserName,
+            user.UserName!,
             await GetUserClaims(user))));
 
         return results;

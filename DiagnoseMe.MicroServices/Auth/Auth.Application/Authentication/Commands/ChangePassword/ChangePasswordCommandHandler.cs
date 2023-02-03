@@ -19,7 +19,7 @@ public class ChangePasswordCommandHandler :
     {
         var user = await _userManager.FindByNameAsync(command.UserName);
 
-        if(!user.EmailConfirmed)
+        if(!user!.EmailConfirmed)
             return Errors.User.Email.NotConfirmed;
 
         var result = await _userManager.ChangePasswordAsync(
@@ -31,7 +31,7 @@ public class ChangePasswordCommandHandler :
         
         try{
             await _smtp.SendEmailAsync(
-                new MailAddress(user.Email,user.UserName),
+                new MailAddress(user.Email!,user.UserName),
                 "Password changed",
                 "Your password has been changed successfully");
         }
@@ -46,7 +46,7 @@ public class ChangePasswordCommandHandler :
             Token = "Bearer " + (new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator
                 .GenerateJwtTokenAsync(
                 user.Id,
-                user.UserName,
+                user.UserName!,
                 await GetUserClaims(user)))),
             Username = user.UserName
         };

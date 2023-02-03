@@ -32,12 +32,12 @@ public class ConfirmEmailChangeCommandHandler :
         if(pin!.Type != Pins.Types.Email.Change)
             return Errors.User.AreYouKidding;
         var username = pin.UserName;
-        var user = await _userManager.FindByNameAsync(username);
-        var result = await _userManager.ChangeEmailAsync(user, command.NewEmail, pin.Token);
+        var user = await _userManager.FindByNameAsync(username!);
+        var result = await _userManager.ChangeEmailAsync(user!, command.NewEmail, pin.Token!);
         if (!result.Succeeded)
             return Errors.User.MapIdentityError(result.Errors.ToList());
         
-        user.LastEmailChangeDate = DateTime.Now;
+        user!.LastEmailChangeDate = DateTime.Now;
         var updateResult = await _userManager.UpdateAsync(user);
         if(!updateResult.Succeeded)
             return Errors.User.MapIdentityError(updateResult.Errors.ToList());
@@ -48,7 +48,7 @@ public class ConfirmEmailChangeCommandHandler :
             Token =  "Bearer " + (new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator
                 .GenerateJwtTokenAsync(
                 user.Id,
-                user.UserName,
+                user.UserName!,
                 await GetUserClaims(user)))),
             Username = user.UserName,
         };

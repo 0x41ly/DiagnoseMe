@@ -16,7 +16,7 @@ public class ChangeNameCommandHandler :
     {
         var user = await _userManager.FindByNameAsync(command.UserName);
 
-        if(!user.EmailConfirmed)
+        if(!user!.EmailConfirmed)
             return Errors.User.Email.NotConfirmed;
 
         var lastChanges = (int) user.LastUserNameChangeDate.Subtract(DateTime.Now).TotalDays;
@@ -36,7 +36,7 @@ public class ChangeNameCommandHandler :
             Token = "Bearer " + (new JwtSecurityTokenHandler().WriteToken(_jwtTokenGenerator
                 .GenerateJwtTokenAsync(
                 user.Id,
-                user.UserName,
+                user.UserName!,
                 await GetUserClaims(user)))),
             Username = user.UserName
         };

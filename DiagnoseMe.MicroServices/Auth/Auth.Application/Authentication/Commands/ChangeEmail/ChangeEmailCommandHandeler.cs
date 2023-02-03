@@ -19,7 +19,7 @@ public class ChangeEmailCommandHandeler :
     public async Task<ErrorOr<AuthenticationResult>> Handle(ChangeEmailCommand command, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(command.UserName);
-        var changedSince = (int) (user.LastEmailChangeDate).Subtract(DateTime.Now).TotalDays;
+        var changedSince = (int) (user!.LastEmailChangeDate).Subtract(DateTime.Now).TotalDays;
         if(changedSince < 30)
             return Errors.User.Email.WaitToChange(30 - changedSince);
         
@@ -45,7 +45,7 @@ public class ChangeEmailCommandHandeler :
         try 
         {
             await _smtp.SendEmailAsync(
-                new MailAddress(user.Email,user.UserName),
+                new MailAddress(user.Email!,user.UserName),
                 "Change Email",
                 $"Here Is your confirmation token: {pinCode} \n The pin code is only valid for only 1 hour");
             user.LastConfirmationSentDate = DateTime.Now;

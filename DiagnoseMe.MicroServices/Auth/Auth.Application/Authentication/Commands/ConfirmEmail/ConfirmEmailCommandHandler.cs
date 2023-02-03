@@ -31,12 +31,12 @@ public class ConfirmEmailCommandHandler :
             return Errors.User.AreYouKidding;
         
         var username = pin.UserName;
-        var user = await _userManager.FindByNameAsync(username);
-        var result = await _userManager.ConfirmEmailAsync(user,pin.Token);
+        var user = await _userManager.FindByNameAsync(username!);
+        var result = await _userManager.ConfirmEmailAsync(user!,pin.Token!);
         if (!result.Succeeded)
             return Errors.User.MapIdentityError(result.Errors.ToList());;
 
-        user.LastEmailChangeDate = DateTime.Now;
+        user!.LastEmailChangeDate = DateTime.Now;
         var updateResult = await _userManager.UpdateAsync(user);
         if(!updateResult.Succeeded)
             return Errors.User.MapIdentityError(updateResult.Errors.ToList());
