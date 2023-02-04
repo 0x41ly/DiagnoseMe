@@ -1,1 +1,1 @@
-# DiagnoseMe
+# Auth service
