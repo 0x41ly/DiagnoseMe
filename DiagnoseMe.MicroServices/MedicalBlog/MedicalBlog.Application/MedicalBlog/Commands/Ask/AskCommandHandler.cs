@@ -33,7 +33,7 @@ public class AskCommandHandler : IRequestHandler<AskCommand, ErrorOr<CommandResp
             Id = Guid.NewGuid().ToString(),
             QuestionString = command.QuestionString,
             AskingUserId = command.AskingUserId,
-            CreatedOn = DateTime.Now
+            CreatedOn = DateTime.UtcNow
         };
         try
         {
@@ -47,6 +47,6 @@ public class AskCommandHandler : IRequestHandler<AskCommand, ErrorOr<CommandResp
         return new CommandResponse(
             true,
             "Question created successfully",
-            $"/medical-blog/questions/{question.Id}");
+            $"/api/questions/{question.Id}");
     }
 }

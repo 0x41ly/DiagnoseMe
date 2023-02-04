@@ -17,7 +17,4 @@ public class Comment : BaseEntity{
     public virtual Post Post {get;set;} = new Post();
     public virtual ICollection<Comment> ChildComments {get; set;} 
     public virtual ICollection<CommentAgreement> CommentAgreements {get; set;}
-
-
-
 }

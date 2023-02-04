@@ -27,14 +27,16 @@ public class EditQuestionCommandHandler : IRequestHandler<EditQuestionCommand, E
         if (question is null)
             return Errors.Question.NotFound;
         var user = await _userRepository.GetByIdAsync(command.askingUserId);
-        if (user is null)
+        if (user is null){
+            // TODO: Check user in auth service
             return Errors.User.NotFound;
+        }
         if (question.AskingUser.Id != user.Id)
             return Errors.User.YouCanNotDoThis;
 
         try{
             question.QuestionString = command.QuestionString;
-            question.ModifiedOn = DateTime.Now;
+            question.ModifiedOn = DateTime.UtcNow;
             await _questionRepository.Edit(question);
             await _questionRepository.Save();
         }
@@ -46,7 +48,7 @@ public class EditQuestionCommandHandler : IRequestHandler<EditQuestionCommand, E
         return new CommandResponse(
             true,
             $"Question with id: {question.Id} was edited.",
-            "/medical-blog/questions/{question.Id}"
+            "/api/questions/{question.Id}"
         );
     }
 }

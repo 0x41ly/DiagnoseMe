@@ -27,8 +27,10 @@ public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Error
         if (post is null)
             return Errors.Post.NotFound;
         var user = await _userRepository.GetByIdAsync(command.UserId);
-        if (user is null)
+        if (user is null){
+            // TODO: Check user in auth service
             return Errors.User.NotFound;
+        }
         if (post.Author.Id != user.Id || !command.Roles.Contains(Roles.Admin))
             return Errors.User.YouCanNotDoThis;
 
@@ -44,7 +46,7 @@ public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Error
         return new CommandResponse(
             true,
             $"Post with id: {post.Id} was deleted.",
-            "/medical-blog/posts"
+            "/api/posts"
         );
     }
 }

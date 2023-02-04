@@ -9,7 +9,7 @@ public class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> wher
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).ValueGeneratedOnAdd().HasMaxLength(255);
-        builder.Property(e => e.CreatedOn).HasDefaultValue(DateTime.Now);
+        builder.Property(e => e.CreatedOn).HasDefaultValue(DateTime.UtcNow);
         builder.Property(e => e.ConcurrencyStamp).IsConcurrencyToken();
 
     }

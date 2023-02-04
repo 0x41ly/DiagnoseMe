@@ -1,11 +1,18 @@
 using MapsterMapper;
 using MediatR;
+using MedicalBlog.Application.MedicalBlog.Commands.AddAnswer;
+using MedicalBlog.Application.MedicalBlog.Commands.AddComment;
 using MedicalBlog.Application.MedicalBlog.Commands.Ask;
 using MedicalBlog.Application.MedicalBlog.Commands.CreatePost;
+using MedicalBlog.Application.MedicalBlog.Commands.DeleteAnswer;
+using MedicalBlog.Application.MedicalBlog.Commands.DeleteComment;
 using MedicalBlog.Application.MedicalBlog.Commands.DeletePost;
 using MedicalBlog.Application.MedicalBlog.Commands.DeleteQuestion;
+using MedicalBlog.Application.MedicalBlog.Commands.EditAnswer;
+using MedicalBlog.Application.MedicalBlog.Commands.EditComment;
 using MedicalBlog.Application.MedicalBlog.Commands.EditPost;
 using MedicalBlog.Application.MedicalBlog.Commands.EditQuestion;
+using MedicalBlog.Application.MedicalBlog.Commands.ReplyComment;
 using MedicalBlog.Application.MedicalBlog.Queries.GetAnswersByQuestionId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsByPostId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsyParentId;
@@ -23,7 +30,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalBlog.Api.Controllers;
 
-[Route("medical-blog")]
+[Route("api")]
 public class MedicalBlogController : ApiController
 {
     private readonly ISender _mediator;
@@ -188,6 +195,60 @@ public class MedicalBlogController : ApiController
         errors => Problem(errors));
     }
 
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("posts/post-id/{postId}/comments/Add")]
+    public async Task<IActionResult> AddComment(AddCommentRequest request, string postId)
+    {
+        var command = new AddCommentCommand(
+            request.Content,
+            GetUserIdFromToken(),
+            postId);
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("posts/comments/comment-id/{commentId}/edit")]
+    public async Task<IActionResult> EditComment(EditCommentRequest request, string commentId)
+    {
+        var command = new EditCommentCommand(
+            commentId,
+            request.Content,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize(Roles = Roles.Doctor + "," + Roles.Admin)]
+    [HttpDelete("posts/comments/comment-id/{commentId}/delete")]
+    public async Task<IActionResult> DeleteComment(string commentId)
+    {
+        var command = new DeleteCommentCommand(
+            commentId,
+            GetUserIdFromToken(),
+            GetUserRolesFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpDelete("posts/post-id/{postId}/comments/comment-id/{commentId}/reply")]
+    public async Task<IActionResult> ReplyToComment(ReplyToCommentRequest request, string commentId, string postId)
+    {
+        var command = new ReplyToCommentCommand(
+            postId,
+            commentId,
+            GetUserIdFromToken(),
+            request.Content);
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+
     [Authorize]
     [HttpPost("questions/ask")]
     public async Task<IActionResult> AskQuestion(AskRequest request)
@@ -226,4 +287,44 @@ public class MedicalBlogController : ApiController
         result => Ok(result),
         errors => Problem(errors));
     }
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("questions/question-id/{questionId}/answer")]
+    public async Task<IActionResult> AddAnswerQuestion(AddAnswerRequest request, string questionId)
+    {
+        var command = new AnswerCommand(
+            questionId,
+            request.AnswerString,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("questions/answers/answer-id/{answerId}/edit")]
+    public async Task<IActionResult> EditAnswerQuestion(EditAnswerRequest request, string answerId)
+    {
+        var command = new EditAnswerCommand(
+            GetUserIdFromToken(),
+            answerId,
+            request.AnswerString);
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize(Roles = Roles.Doctor + "," + Roles.Admin)]
+    [HttpDelete("questions/answers/answer-id/{answerId}/delete")]
+    public async Task<IActionResult> DeleteAnswerQuestion(string answerId)
+    {
+        var command = new DeleteAnswerCommand(
+            GetUserIdFromToken(),
+            answerId,
+            GetUserRolesFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    
 }

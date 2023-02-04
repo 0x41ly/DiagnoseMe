@@ -34,7 +34,7 @@ public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, Error
             Content = command.Content,
             Tags = string.Join(',',command.Tags),
             AuthorId = command.AuthorId,
-            CreatedOn = DateTime.Now
+            CreatedOn = DateTime.UtcNow
         };
 
         try
@@ -50,6 +50,6 @@ public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, Error
         return new CommandResponse(
             true,
             "Post created successfully",
-            $"/medical-blog/posts/{post.Id}");
+            $"/api/posts/{post.Id}");
     }
 }

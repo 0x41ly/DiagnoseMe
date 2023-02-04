@@ -29,6 +29,7 @@ public class ApiController : ControllerBase
         if (errors.All(error => error.Type == ErrorType.Validation)){
             _logger.Error(@$"Validation errors has been occured.
                 UserId: {GetUserIdFromToken()}
+                Called Method: {HttpContext?.Request.Method} {HttpContext?.Request.Path}
                 TraceId: {Activity.Current?.Id ?? HttpContext?.TraceIdentifier}
                 Errors: [{string.Join(", ", errors.Select(error => error.Description))}]");
             return ValidationProblem(errors);
@@ -36,6 +37,7 @@ public class ApiController : ControllerBase
         
         _logger.Error(@$"An error has been occured.
             UserId: {GetUserIdFromToken()}
+            Called Method: {HttpContext?.Request.Method} {HttpContext?.Request.Path}
             TraceId: {Activity.Current?.Id ?? HttpContext?.TraceIdentifier}
             Errors: [{string.Join(", ", errors.Select(error => error.Description))}]");
         HttpContext!.Items[HttpContextItemKeys.Errors] = errors;

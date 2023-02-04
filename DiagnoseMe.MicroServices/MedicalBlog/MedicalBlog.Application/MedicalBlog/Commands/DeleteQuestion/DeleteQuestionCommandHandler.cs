@@ -27,8 +27,10 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
         if (question is null)
             return Errors.Question.NotFound;
         var user = await _userRepository.GetByIdAsync(command.UserId);
-        if (user is null)
+        if (user is null){
+            // TODO: Check user in auth service
             return Errors.User.NotFound;
+        }
         if (question.AskingUser.Id != user.Id || !command.Roles.Contains(Roles.Admin))
             return Errors.User.YouCanNotDoThis;
 
@@ -44,7 +46,7 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
         return new CommandResponse(
             true,
             $"Question with id: {question.Id} was deleted.",
-            "/medical-blog/questions"
+            "/api/questions"
         );
     }
 }

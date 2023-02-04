@@ -1,7 +1,7 @@
 namespace MedicalBlog.Domain.Entities;
 
-public class Answer : BaseEntity{
-
+public class Answer : BaseEntity
+{ 
     public string AnswerString {get; set;} = string.Empty;
     public string AnsweringDoctorId {get; set;}  = string.Empty;
     public DateTime? ModifiedOn {get; set;}

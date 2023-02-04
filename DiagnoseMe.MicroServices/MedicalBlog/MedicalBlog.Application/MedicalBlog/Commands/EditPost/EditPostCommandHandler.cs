@@ -44,7 +44,7 @@ public class EditPostCommandHandler : IRequestHandler<EditPostCommand, ErrorOr<C
         post.Title = command.Title;
         post.Content = command.Content;
         post.Tags = string.Join(',', command.Tags);
-        post.ModifiedOn = DateTime.Now;
+        post.ModifiedOn = DateTime.UtcNow;
 
         try
         {
@@ -59,6 +59,6 @@ public class EditPostCommandHandler : IRequestHandler<EditPostCommand, ErrorOr<C
         return new CommandResponse(
             true,
             "Post edited successfully",
-            $"/medical-blog/posts/{post.Id}");
+            $"/api/posts/{post.Id}");
     }
 }
