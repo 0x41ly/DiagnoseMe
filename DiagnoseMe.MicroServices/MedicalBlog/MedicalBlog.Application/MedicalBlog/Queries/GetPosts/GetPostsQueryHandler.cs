@@ -35,7 +35,7 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, ErrorOr<List<
     {
         var posts = (await _postRepository
             .GetAllAsync())
-            .OrderBy(x => x.CreatedOn)
+            .OrderByDescending(x => x.CreatedOn)
             .Skip((query.PageNumber -1)* 10)
             .Take(10)
             .ToList();

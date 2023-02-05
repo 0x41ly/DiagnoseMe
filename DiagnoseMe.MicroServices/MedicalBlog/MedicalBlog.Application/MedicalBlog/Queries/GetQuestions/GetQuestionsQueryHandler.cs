@@ -24,6 +24,7 @@ public class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, Error
     {
         var questions = (await _questionRepository
             .GetAllAsync())
+            .OrderByDescending(x => x.CreatedOn)
             .Skip((query.PageNumber - 1) * 10)
             .ToList();
         var questionsResponse = new List<QuestionResponse>();

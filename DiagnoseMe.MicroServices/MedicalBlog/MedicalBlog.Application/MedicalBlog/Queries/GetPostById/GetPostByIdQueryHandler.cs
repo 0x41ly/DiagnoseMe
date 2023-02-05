@@ -41,7 +41,7 @@ public class GetPostQueryHandler : IRequestHandler<GetPostByIdQuery, ErrorOr<Pos
         var commentsResponse = new List<CommentResponse>();
         var avgRating = postRatings.Count > 0 ? postRatings.Average(x => x.Rating) : 0;
         var reponseComments = comments
-            .OrderBy(x => x.CreatedOn)
+            .OrderByDescending(x => x.CreatedOn)
             .Take(20)
             .ToList();
 

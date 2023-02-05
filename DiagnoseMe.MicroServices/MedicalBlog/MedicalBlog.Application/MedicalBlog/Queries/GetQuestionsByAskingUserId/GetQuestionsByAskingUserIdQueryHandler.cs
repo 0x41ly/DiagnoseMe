@@ -24,6 +24,7 @@ public class GetQuestionsByAskingUserIdQueryHandler :  IRequestHandler<GetQuesti
     {
         var questions = (await _questionRepository
             .GetByAskingUserIdAsync(query.AskingUserId))
+            .OrderByDescending(x => x.CreatedOn)
             .Skip((query.PageNumber - 1) * 10)
             .ToList();
         var questionsResponse = new List<QuestionResponse>();

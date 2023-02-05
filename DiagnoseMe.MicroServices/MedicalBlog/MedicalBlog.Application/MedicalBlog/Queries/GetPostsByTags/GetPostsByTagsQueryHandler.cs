@@ -30,7 +30,7 @@ public class GetPostsByTagsQueryHandler : IRequestHandler<GetPostsByTagsQuery, E
     {
         var posts = (await _postRepository
             .GetByTagsAsync(query.Tags.Distinct().ToList()))
-            .OrderBy(x => x.CreatedOn)
+            .OrderByDescending(x => x.CreatedOn)
             .Skip((query.PageNumber -1 ) * 10)
             .Take(10)
             .ToList();

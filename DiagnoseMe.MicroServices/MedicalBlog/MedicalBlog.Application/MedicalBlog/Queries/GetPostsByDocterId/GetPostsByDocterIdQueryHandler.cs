@@ -34,7 +34,7 @@ public class GetPostsByDoctorIdQueryHandler : IRequestHandler<GetPostsByDoctorId
     {
         var posts = (await _postRepository
             .GetByDocterIdAsync(query.DoctorId))
-            .OrderBy(x => x.CreatedOn)
+            .OrderByDescending(x => x.CreatedOn)
             .Skip((query.PageNumber - 1) * 10)
             .Take(10)
             .ToList();

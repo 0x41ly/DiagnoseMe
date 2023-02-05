@@ -23,6 +23,7 @@ public class GetAnswersByQuestionIdQueryHandler : IRequestHandler<GetAnswersByQu
     {
         var answers = (await _answerRepository
             .GetByQuestionIdAsync(query.QuestionId))
+            .OrderByDescending(x => x.CreatedOn)
             .Skip((query.PageNumber - 1) * 10)
             .Take(10)
             .ToList();

@@ -21,6 +21,7 @@ public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentsByPare
     {
         var comments = (await _commentRepository
             .GetByParentIdAsync(query.ParentId))
+            .OrderByDescending(x => x.CreatedOn)
             .Skip((query.PageNumber - 1) * 20)
             .Take(20);
         var commentsResponse = new List<CommentResponse>();
