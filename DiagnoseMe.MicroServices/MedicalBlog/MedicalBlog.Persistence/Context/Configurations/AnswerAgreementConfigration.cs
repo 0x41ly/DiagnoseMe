@@ -6,7 +6,7 @@ public class AnswerAgreementsConfigration : BaseConfiguration<AnswerAgreement>
     public override void Configure(EntityTypeBuilder<AnswerAgreement> builder=null!)
     {
         builder.ToTable("AnswerAgreements");
-        base.Configure(builder);
+        builder.HasKey(c => new { c.AnsweringUserId, c.AnswerId });
         builder.Property(c => c.IsAgreed).IsRequired(); 
         builder.Property(c => c.AnswerId).IsRequired();
         builder.Property(c => c.AnsweringUserId).IsRequired();

@@ -5,5 +5,5 @@ using MedicalBlog.Application.MedicalBlog.Common;
 namespace MedicalBlog.Application.MedicalBlog.Queries.GetPosts;
 
 public record GetPostsQuery(
-    int PageNumber
-) : IRequest<ErrorOr<List<PostResponse>>>;
+    int PageNumber,
+    string UserId) : IRequest<ErrorOr<List<PostResponse>>>;

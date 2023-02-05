@@ -15,4 +15,6 @@ public class User : BaseEntity
     public virtual ICollection<Post> Posts {get; set;} = new HashSet<Post>();
     public virtual ICollection<PostView> PostViews {get; set;} = new HashSet<PostView>();
     public virtual ICollection<Question> Questions {get; set;} = new HashSet<Question>();
+    public virtual ICollection<UserSubscribedUser> SubscribedUsers {get; set;} = new HashSet<UserSubscribedUser>();
+    public virtual ICollection<UserSubscribedUser> Subscribers {get; set;} = new HashSet<UserSubscribedUser>();
 }

@@ -14,5 +14,8 @@ public class GetPostsByTagsQueryValidator : AbstractValidator<GetPostsByTagsQuer
             .WithMessage("Tags cannot be empty.")
             .Must(x => x.Count >= 1)
             .WithMessage("List of tags must contain at least one tag.");
+        RuleFor(x => x.UserId)
+            .NotNull()
+            .WithMessage("UserId cannot be null.");
     }
 }

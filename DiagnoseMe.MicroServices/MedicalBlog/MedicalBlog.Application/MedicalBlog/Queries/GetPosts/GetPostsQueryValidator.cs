@@ -11,5 +11,8 @@ public class GetPostsQueryValidator : AbstractValidator<GetPostsQuery>
             .WithMessage("Page number cannot be empty.")
             .GreaterThan(0)
             .WithMessage("Page number must be positive.");
+        RuleFor(x => x.UserId)
+            .NotNull()
+            .WithMessage("UserId cannot be null.");
     }
 }

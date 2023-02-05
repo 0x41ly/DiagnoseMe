@@ -41,6 +41,21 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, ErrorOr<List<
             .ToList();
         var postsId = posts.Select(x => x.Id).ToList();
         var postsViews = await _postViewRepository.GetByPostsIdAsync(postsId);
+        var postsIdNotViewedByUser = postsViews
+            .Where(x => x.UserId != query.UserId)
+            .Select(x => x.PostId)
+            .ToList();
+        foreach (var postId in postsIdNotViewedByUser)
+        {
+            var postView = await _postViewRepository.AddAsync(new PostView
+            {
+                PostId = postId,
+                UserId = query.UserId
+            });
+            await _postViewRepository.AddAsync(postView);
+            postsViews.Add(postView);
+        }
+        await _postViewRepository.Save();
         var postsRatings = await _postRatingRepository.GetByPostsIdAsync(postsId);
         var ratingUsers = _mapper.Map<List<UserData>>(postsRatings.Select(x => x.UserId).ToList());
         var postsResponse = new List<PostResponse>();

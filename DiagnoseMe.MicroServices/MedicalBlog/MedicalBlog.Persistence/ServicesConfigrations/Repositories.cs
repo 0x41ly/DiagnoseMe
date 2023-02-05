@@ -17,6 +17,7 @@ public static class Repositories
             services.AddScoped<IPostRatingRepository, PostRatingRepository>();
             services.AddScoped<IPostViewRepository, PostViewRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserSubscribedUserRepository, UserSubscribedUserRepository>();
             return services;
         }
 }

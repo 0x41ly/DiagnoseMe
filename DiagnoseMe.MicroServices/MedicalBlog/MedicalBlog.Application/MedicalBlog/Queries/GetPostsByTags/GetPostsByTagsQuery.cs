@@ -5,4 +5,5 @@ using MediatR;
 
 public record GetPostsByTagsQuery(
     int PageNumber,
-    List<string> Tags) : IRequest<ErrorOr<List<PostResponse>>>;
+    List<string> Tags,
+    string UserId) : IRequest<ErrorOr<List<PostResponse>>>;

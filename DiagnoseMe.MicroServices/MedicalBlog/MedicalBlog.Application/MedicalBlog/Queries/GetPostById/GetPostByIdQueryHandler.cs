@@ -33,6 +33,18 @@ public class GetPostQueryHandler : IRequestHandler<GetPostByIdQuery, ErrorOr<Pos
             return Errors.Post.NotFound;
         }
         var postViews = await _postViewRepository.GetByPostIdAsync(post.Id!);
+        var userViewed = postViews.Any(x => x.UserId == query.UserId);
+        if(!userViewed)
+        {
+            var postView = new PostView{
+                PostId = query.Id,
+                UserId = query.UserId};
+
+            await _postViewRepository.AddAsync(postView);
+            await _postViewRepository.Save();
+            postViews.Add(postView);
+            
+        }
         var postRatings = await _postRatingRepository.GetByPostIdAsync(post.Id!);
         var comments = post.Comments.ToList();
         var viewingUsers = _mapper.Map<List<UserData>>(postViews.Select(x => x.User)); 

@@ -26,7 +26,7 @@ namespace MedicalBlog.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProfilePictureUrl = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 724, DateTimeKind.Local).AddTicks(4108)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 5, 19, 40, 40, 990, DateTimeKind.Utc).AddTicks(3122)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -51,7 +51,7 @@ namespace MedicalBlog.Persistence.Migrations
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     AuthorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 722, DateTimeKind.Local).AddTicks(8567)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 5, 19, 40, 40, 987, DateTimeKind.Utc).AddTicks(762)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -78,7 +78,7 @@ namespace MedicalBlog.Persistence.Migrations
                     QuestionString = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 724, DateTimeKind.Local).AddTicks(991)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 5, 19, 40, 40, 989, DateTimeKind.Utc).AddTicks(7135)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -88,6 +88,38 @@ namespace MedicalBlog.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Questions_Users_AskingUserId",
                         column: x => x.AskingUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "UserSubscribedUsers",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SubscribedUserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSubscribedUsers", x => new { x.UserId, x.SubscribedUserId });
+                    table.ForeignKey(
+                        name: "FK_UserSubscribedUsers_Users_SubscribedUserId",
+                        column: x => x.SubscribedUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserSubscribedUsers_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -109,7 +141,7 @@ namespace MedicalBlog.Persistence.Migrations
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 721, DateTimeKind.Local).AddTicks(7765)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 5, 19, 40, 40, 985, DateTimeKind.Utc).AddTicks(2948)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -141,20 +173,20 @@ namespace MedicalBlog.Persistence.Migrations
                 name: "PostsRating",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Rating = table.Column<int>(type: "int", maxLength: 15, nullable: false),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PostId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 723, DateTimeKind.Local).AddTicks(2585)),
+                    Rating = table.Column<int>(type: "int", maxLength: 15, nullable: false),
+                    Id = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PostsRating", x => x.Id);
+                    table.PrimaryKey("PK_PostsRating", x => new { x.UserId, x.PostId });
                     table.ForeignKey(
                         name: "FK_PostsRating_Posts_PostId",
                         column: x => x.PostId,
@@ -174,19 +206,19 @@ namespace MedicalBlog.Persistence.Migrations
                 name: "PostsView",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PostId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 723, DateTimeKind.Local).AddTicks(6913)),
+                    Id = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PostsView", x => x.Id);
+                    table.PrimaryKey("PK_PostsView", x => new { x.UserId, x.PostId });
                     table.ForeignKey(
                         name: "FK_PostsView_Posts_PostId",
                         column: x => x.PostId,
@@ -215,7 +247,7 @@ namespace MedicalBlog.Persistence.Migrations
                     ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     QuestionId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 720, DateTimeKind.Local).AddTicks(405)),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 5, 19, 40, 40, 983, DateTimeKind.Utc).AddTicks(950)),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -241,26 +273,25 @@ namespace MedicalBlog.Persistence.Migrations
                 name: "CommentAgreements",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CommentId = table.Column<string>(type: "longtext", nullable: false)
+                    CommentId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 720, DateTimeKind.Local).AddTicks(4833)),
+                    Id = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommentAgreements", x => x.Id);
+                    table.PrimaryKey("PK_CommentAgreements", x => new { x.UserId, x.CommentId });
                     table.ForeignKey(
                         name: "FK_CommentAgreements_Comments_Id",
                         column: x => x.Id,
                         principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CommentAgreements_Users_UserId",
                         column: x => x.UserId,
@@ -274,20 +305,20 @@ namespace MedicalBlog.Persistence.Migrations
                 name: "AnswerAgreements",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     AnsweringUserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AnswerId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 2, 3, 16, 21, 18, 719, DateTimeKind.Local).AddTicks(5128)),
+                    IsAgreed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Id = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnswerAgreements", x => x.Id);
+                    table.PrimaryKey("PK_AnswerAgreements", x => new { x.AnsweringUserId, x.AnswerId });
                     table.ForeignKey(
                         name: "FK_AnswerAgreements_Answers_AnswerId",
                         column: x => x.AnswerId,
@@ -309,11 +340,6 @@ namespace MedicalBlog.Persistence.Migrations
                 column: "AnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AnswerAgreements_AnsweringUserId",
-                table: "AnswerAgreements",
-                column: "AnsweringUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Answers_AnsweringDoctorId",
                 table: "Answers",
                 column: "AnsweringDoctorId");
@@ -324,9 +350,9 @@ namespace MedicalBlog.Persistence.Migrations
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommentAgreements_UserId",
+                name: "IX_CommentAgreements_Id",
                 table: "CommentAgreements",
-                column: "UserId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_AuthorId",
@@ -349,24 +375,19 @@ namespace MedicalBlog.Persistence.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostsRating_UserId",
-                table: "PostsRating",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PostsView_PostId",
                 table: "PostsView",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostsView_UserId",
-                table: "PostsView",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Questions_AskingUserId",
                 table: "Questions",
                 column: "AskingUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSubscribedUsers_SubscribedUserId",
+                table: "UserSubscribedUsers",
+                column: "SubscribedUserId");
         }
 
         /// <inheritdoc />
@@ -383,6 +404,9 @@ namespace MedicalBlog.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "PostsView");
+
+            migrationBuilder.DropTable(
+                name: "UserSubscribedUsers");
 
             migrationBuilder.DropTable(
                 name: "Answers");

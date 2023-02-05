@@ -7,7 +7,7 @@ public class CommentAgreementConfigration : BaseConfiguration<CommentAgreement>
     public override void Configure(EntityTypeBuilder<CommentAgreement> builder=null!)
     {
         builder.ToTable("CommentAgreements");
-        base.Configure(builder);
+        builder.HasKey(c => new { c.UserId, c.CommentId });
         builder.Property(c => c.IsAgreed).IsRequired();
         builder.Property(c => c.UserId).IsRequired();
         builder.Property(c => c.CommentId).IsRequired();

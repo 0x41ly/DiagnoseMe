@@ -5,6 +5,10 @@ public static partial class Errors
 {
     public static class Comment
     {
+        public static Error AgreementFailed => Error.Failure(
+            code: "Comment.AgreementFailed",
+            description: "Comment agreement failed."
+        );
         public static Error NotFound => Error.NotFound(
             code: "Comment.NotFound",
             description: "Comment not found."

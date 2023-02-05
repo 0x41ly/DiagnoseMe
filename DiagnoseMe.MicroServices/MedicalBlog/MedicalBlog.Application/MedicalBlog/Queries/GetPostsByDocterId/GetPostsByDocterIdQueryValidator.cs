@@ -14,5 +14,8 @@ public class GetPostsByDoctorIdValidator : AbstractValidator<GetPostsByDoctorIdQ
         RuleFor(x => x.DoctorId)
             .NotEmpty()
             .WithMessage("Docter id cannot be empty.");
+        RuleFor(x => x.UserId)
+            .NotNull()
+            .WithMessage("UserId cannot be null.");
     }
 }

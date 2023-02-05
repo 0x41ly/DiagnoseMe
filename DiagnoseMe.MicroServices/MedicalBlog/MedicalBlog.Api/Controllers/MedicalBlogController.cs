@@ -2,17 +2,22 @@ using MapsterMapper;
 using MediatR;
 using MedicalBlog.Application.MedicalBlog.Commands.AddAnswer;
 using MedicalBlog.Application.MedicalBlog.Commands.AddComment;
+using MedicalBlog.Application.MedicalBlog.Commands.AgreeComment;
 using MedicalBlog.Application.MedicalBlog.Commands.Ask;
 using MedicalBlog.Application.MedicalBlog.Commands.CreatePost;
 using MedicalBlog.Application.MedicalBlog.Commands.DeleteAnswer;
 using MedicalBlog.Application.MedicalBlog.Commands.DeleteComment;
+using MedicalBlog.Application.MedicalBlog.Commands.DeleteCommentAgreement;
 using MedicalBlog.Application.MedicalBlog.Commands.DeletePost;
 using MedicalBlog.Application.MedicalBlog.Commands.DeleteQuestion;
 using MedicalBlog.Application.MedicalBlog.Commands.EditAnswer;
 using MedicalBlog.Application.MedicalBlog.Commands.EditComment;
 using MedicalBlog.Application.MedicalBlog.Commands.EditPost;
 using MedicalBlog.Application.MedicalBlog.Commands.EditQuestion;
+using MedicalBlog.Application.MedicalBlog.Commands.RatePost;
 using MedicalBlog.Application.MedicalBlog.Commands.ReplyComment;
+using MedicalBlog.Application.MedicalBlog.Commands.SubscribeDoctor;
+using MedicalBlog.Application.MedicalBlog.Commands.UnsubscribeDoctor;
 using MedicalBlog.Application.MedicalBlog.Queries.GetAnswersByQuestionId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsByPostId;
 using MedicalBlog.Application.MedicalBlog.Queries.GetCommentsyParentId;
@@ -49,7 +54,9 @@ public class MedicalBlogController : ApiController
     [HttpGet("posts/page-number/{pageNumber}")]
     public async Task<IActionResult> GetPosts(int pageNumber)
     {
-        var query = new GetPostsQuery(pageNumber);
+        var query = new GetPostsQuery(
+            pageNumber,
+            GetUserIdFromToken());
         var result = await _mediator.Send(query);
         return result.Match(
         result => Ok(result),
@@ -60,7 +67,9 @@ public class MedicalBlogController : ApiController
     [HttpGet("posts/post-id/{postId}")]
     public async Task<IActionResult> GetPostById(string postId)
     {
-        var query = new GetPostByIdQuery(postId);
+        var query = new GetPostByIdQuery(
+            postId,
+            GetUserIdFromToken());
         var result = await _mediator.Send(query);
         return result.Match(
         result => Ok(result),
@@ -82,7 +91,10 @@ public class MedicalBlogController : ApiController
     [HttpGet("posts/doctor-id/{DoctorId}/page-number/{pageNumber}")]
     public async Task<IActionResult> GetPostsByDoctorId(string DoctorId, int pageNumber)
     {
-        var query = new GetPostsByDoctorIdQuery(DoctorId, pageNumber);
+        var query = new GetPostsByDoctorIdQuery(
+            DoctorId, 
+            pageNumber,
+            GetUserIdFromToken());
         var result = await _mediator.Send(query);
         return result.Match(
         result => Ok(result),
@@ -92,7 +104,10 @@ public class MedicalBlogController : ApiController
     [HttpPost("posts/tags")]
     public async Task<IActionResult> GetPostsByTags(GetPostsByTagsRequest request)
     {
-        var query = _mapper.Map<GetPostsByTagsQuery>(request);
+        var query = new GetPostsByTagsQuery(
+            request.PageNumber,
+            request.Tags,
+            GetUserIdFromToken());
         var result = await _mediator.Send(query);
         return result.Match(
         result => Ok(result),
@@ -326,5 +341,67 @@ public class MedicalBlogController : ApiController
         result => Ok(result),
         errors => Problem(errors));
     }
-    
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("posts/comments/comment-id/{commentId}/agreement")]
+    public async Task<IActionResult> AgreeComment(string commentId)
+    {
+        var command = new AgreeCommentCommand(
+            commentId,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("posts/comments/comment-id/{commentId}/agreement/delete")]
+    public async Task<IActionResult> DeleteAgreeComment(string commentId)
+    {
+        var command = new DeleteCommentAgreementCommand(
+            commentId,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+
+    [Authorize(Roles = Roles.Doctor)]
+    [HttpPost("posts/post-id/{postId}/rating")]
+    public async Task<IActionResult> RatePost(RatePostRequest request, string postId)
+    {
+        var command = new RatePostCommand(
+            postId,
+            request.Rating,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize]
+    [HttpPost("subscribe/Doctor-id/{doctorId}")]
+    public async Task<IActionResult> Subscribe(string doctorId)
+    {
+        var command = new SubscribeDoctorCommand(
+            doctorId,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
+    [Authorize]
+    [HttpPost("unsubscribe/Doctor-id/{doctorId}")]
+    public async Task<IActionResult> Unsubscribe(string doctorId)
+    {
+        var command = new UnsubscribeDoctorCommand(
+            doctorId,
+            GetUserIdFromToken());
+        var result = await _mediator.Send(command);
+        return result.Match(
+        result => Ok(result),
+        errors => Problem(errors));
+    }
 }
