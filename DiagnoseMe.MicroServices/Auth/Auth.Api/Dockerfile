@@ -4,7 +4,7 @@ EXPOSE 7095
 
 ENV ASPNETCORE_URLS=http://+:7095
 ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ConnectionStrings__DefaultConnection="Server=authdb;Database=AuthDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
+ENV ConnectionStrings__DefaultConnection="Server=authdb;Database=AuthDb;Uid=DiagnoseMe;Pwd=DiagnoseMe"
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers

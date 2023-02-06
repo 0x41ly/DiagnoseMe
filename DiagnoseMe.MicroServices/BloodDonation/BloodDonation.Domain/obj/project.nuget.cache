@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NFph/g5pxKFoTbSnqYzvrF5nmfumH2RirJzuQ3/Q//0gTZU9r1GCG9FptgXsA+ThJal00dpYwyUFykyTuhX2TQ==",
+  "dgSpecHash": "gyfHfg7D/amD8JzbiptRu3liGO6c0VWUkrJt174/eBXmpbGEFec/diuT6LHgI0fTS3FFGYKzVc0VBvKwRlKX1Q==",
   "success": true,
   "projectFilePath": "/media/x41ly/FIles/Projects/dotnet/DiagnoseMe.MicroServices/DiagnoseMe.MicroServices/BloodDonation/BloodDonation.Domain/BloodDonation.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/x41ly/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512"
+  ],
   "logs": []
 }

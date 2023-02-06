@@ -30,7 +30,7 @@ services:
     ports:
       - 7095:7095
     environment:
-      - ConnectionStrings__DefaultConnection="Server=authdb;Database=AuthDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
+      - ConnectionStrings__DefaultConnection="Server=authdb;Database=AuthDb;Uid=DiagnoseMe;Pwd=DiagnoseMe"
       - Debug:ShowHost=true
     depends_on:
       - authdb
@@ -73,7 +73,7 @@ services:
     ports:
       - 7131:7131
     environment:
-      - ConnectionStrings__DefaultConnection="Server=medicalblogdb;Database=MedicalBlogDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
+      - ConnectionStrings__DefaultConnection="Server=medicalblogdb;Database=MedicalBlogDb;Uid=DiagnoseMe;Pwd=DiagnoseMe"
       - Debug:ShowHost=true
     depends_on:
       - medicalblogdb
@@ -116,7 +116,7 @@ services:
     ports:
       - 7234:7234
     environment:
-      - ConnectionStrings__DefaultConnection="Server=blooddonationdb;Database=BloodDonationDb;;Uid=DiagnoseMe;Pwd=DiagnoseMe"
+      - ConnectionStrings__DefaultConnection="Server=blooddonationdb;Database=BloodDonationDb;Uid=DiagnoseMe;Pwd=DiagnoseMe"
       - Debug:ShowHost=true
     depends_on:
       - blooddonationdb

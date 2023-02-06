@@ -1,4 +1,4 @@
-namespace Auth.Api.Common.Http;
+namespace MedicalBlog.Api.Common.Http;
 
 public static class HttpContextItemKeys
 {

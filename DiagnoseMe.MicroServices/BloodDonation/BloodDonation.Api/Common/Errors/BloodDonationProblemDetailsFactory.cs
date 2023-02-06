@@ -1,18 +1,18 @@
 using System.Diagnostics;
-using Auth.Api.Common.Http;
+using BloodDonation.Api.Common.Http;
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 
-namespace MedicalBlog.Api.Common.Errors;
+namespace BloodDonation.Api.Common.Errors;
 
-public class AuthProblemDetailsFactory : ProblemDetailsFactory
+public class BloodDonationProblemDetailsFactory : ProblemDetailsFactory
 {
     private readonly ApiBehaviorOptions _options;
 
-    public AuthProblemDetailsFactory(IOptions<ApiBehaviorOptions> options)
+    public BloodDonationProblemDetailsFactory(IOptions<ApiBehaviorOptions> options)
     {
         _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
     }

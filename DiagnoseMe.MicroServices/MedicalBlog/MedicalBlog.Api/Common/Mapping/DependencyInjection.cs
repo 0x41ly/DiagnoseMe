@@ -2,7 +2,7 @@ using System.Reflection;
 using Mapster;
 using MapsterMapper;
 
-namespace Auth.Api.Common.Mapping;
+namespace MedicalBlog.Api.Common.Mapping;
 
 public static class DependencyInjection
 {

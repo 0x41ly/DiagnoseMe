@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
         .AddInfrastrucure(builder.Configuration);
     Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
-                    .WriteTo.File("logs/authapi-.txt", rollingInterval: RollingInterval.Day)
+                    .WriteTo.File("logs/medical_blog_api-.txt", rollingInterval: RollingInterval.Day)
                     .MinimumLevel.Debug()
                     .CreateLogger();
     builder.Logging.ClearProviders();

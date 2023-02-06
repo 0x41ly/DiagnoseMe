@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using Auth.Api.Common.Http;
+using MedicalBlog.Api.Common.Http;
 using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
